@@ -4,8 +4,6 @@
       | |  __/ (_| | | | | | |  ___) | | |\ V /  __/ |     ___) |  __/ |  | |_) |  __/ | | | |_ 
       |_|\___|\__,_|_| |_| |_| |____/|_|_| \_/ \___|_|    |____/ \___|_|  | .__/ \___|_| |_|\__|
                                                                           |_|                   
-<ccover|cs602>
-
 
 # project
 This repository contains Team Silver Serpent's class project for BU Met College CS672 (Spring 2018).
