@@ -1,9 +1,21 @@
 {
-  "name": "project_portal",
-  "version": "0.1.0",
-  "description": "A single-page webapp that helps students and instructors to manage their software development projects.",
-  "main": "index.js",
+  "name": "project-portal",
+  "version": "1.0.0-beta",
+  "description": "A portal app to manage software development projects",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "mongoose": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0"
+  },
   "scripts": {
+    "start": "node app",
     "test": "mocha"
   },
   "repository": {
@@ -12,19 +24,15 @@
   },
   "keywords": [
     "CS673",
+    "project portal",
     "SPA",
-    "webapp",
-    "project",
-    "portan"
+    "'web app",
+    "software development"
   ],
   "author": "Team Silver Serpent",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cs673-team-silver-serpent/project/issues"
   },
-  "homepage": "https://github.com/cs673-team-silver-serpent/project#readme",
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.0.0"
-  }
+  "homepage": "https://github.com/cs673-team-silver-serpent/project#readme"
 }
