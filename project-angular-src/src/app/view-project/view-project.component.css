@@ -1,0 +1,22 @@
+/* TODO: Install bootstrap */
+
+table {
+  width: 60%;
+}
+
+th {
+  background-color: darkBlue;
+  color: white;
+  font-size: 20px;
+  align: left;
+}
+
+tr {
+  background: aliceBlue;
+  color: darkBlue;
+  font-size: 18px;
+}
+
+td {
+  align: left;
+}

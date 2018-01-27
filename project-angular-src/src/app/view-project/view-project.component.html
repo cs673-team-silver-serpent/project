@@ -1,0 +1,22 @@
+<table id="projects">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let list of lists">
+      <td>{{list.title}}</td>
+      <td>{{list.category}}</td>
+      <td>
+        <button type="button"
+        (click)="deleteList(list);
+        $event.stopPropagation();">
+        Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-add-project></app-add-project>
