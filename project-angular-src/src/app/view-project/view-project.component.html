@@ -7,16 +7,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let list of lists">
-      <td>{{list.title}}</td>
-      <td>{{list.category}}</td>
+    <tr *ngFor="let project of projects">
+      <td>{{project.title}}</td>
+      <td>{{project.description}}</td>
       <td>
         <button type="button"
-        (click)="deleteList(list);
+        (click)="deleteProject(project);
         $event.stopPropagation();">
         Delete</button>
       </td>
     </tr>
   </tbody>
 </table>
-<app-add-project></app-add-project>
+<app-add-project (addProject)='onAddProject($event)'></app-add-project>

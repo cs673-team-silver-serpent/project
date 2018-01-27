@@ -27,12 +27,16 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // routes
 
-app.get('/', (req,res) => {
-  res.send("Hello, world!");
-});
+// for testing purposes during setup
+// app.get('/', (req,res) => {
+//   res.send("Hello, world!");
+// });
 
-
+// app.use('/',portalControl);
+// KEEP the following: postman instructions depend upon it
+// TODO change postman instructions
 app.use('/portal',portalControl);
+
 
 // start server
 app.listen(port, () => {

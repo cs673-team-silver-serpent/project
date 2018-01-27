@@ -16,7 +16,7 @@ export class ProjectService {
     let URI = `${this.serverApi}/portal/`;
     return this.http.get(URI)
       .map(response => response.json())
-      .map(response => <Project[]>response.lists);
+      .map(response => <Project[]>response.projects);
   }
 
   public deleteProject(projectId: string) {
@@ -25,6 +25,14 @@ export class ProjectService {
     headers.append('Content-Type','application/json');
     return this.http.delete(URI, {headers})
        .map(response => response.json());
+  }
+
+  public addProject(project: Project) {
+    let URI = `${this.serverApi}/portal/`;
+    let headers = new Headers;
+    let body = JSON.stringify({title: project.title, description: project.description});
+    headers.append('Content-type','application/json');
+    return this.http.post(URI,body,{headers:headers}).map(response => response.json);
   }
 
 }

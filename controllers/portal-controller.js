@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const project = require('../models/portal-model');
 
-// GET HTTP method to /portal
+// GET HTTP method to /
 router.get('/',(request,response) => {
    // response.send("GET");
    project.getAllProjects( (error,projects) => {
@@ -15,7 +15,7 @@ router.get('/',(request,response) => {
    });
 });
 
-// POST HTTP method to /portal
+// POST HTTP method to /
 router.post('/',(request,response,next) => {
    // response.send("POST");
    let newProject = new project({
@@ -31,7 +31,7 @@ router.post('/',(request,response,next) => {
    });
 });
 
-// DELETE HTTP method to /portal
+// DELETE HTTP method to /
 router.delete('/:id',(request,response,next) => {
   // res.send("DELETE");
   let id = request.params.id;
