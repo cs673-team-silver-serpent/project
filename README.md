@@ -41,13 +41,13 @@
 6. ### Clone the [Projects Portal] repository in your project folder
    Both Han and Chewie, from the command line, type `git clone https://github.com/cs673-team-silver-serpent/project.git`.  
 7. ### Install npm dependencies
-   After the repository cloning finishes, our fearless heroes type `npm install` from inside of his project folder. This will download all of dependent modules that the project currently uses. He will then change directory to `project-angular-src`, and do another `npm install`.
+   After the repository cloning finishes, our fearless heroes type `npm install` from inside of their project folders. This will download all of dependent modules that the backend currently uses. They'll then change directory into `project-angular-src`, and do another `npm install` to install the frontend dependencies.
 8. ### Start MongoDB
    Until this step is automated, you must start MongoDB manually or at startup on your machine. See [MongoDB] for platform-specific instructions.
 9. ### Start the backend server
-   Inside of his project folder, Chewie types 'npm start'. If all goes well, Chewie will see the obligatory "Hello, world!" message when he types `http:\\127.0.0.1:3000\hello` into his browser's address bar. (`http:\\127.0.0.1\` will display the test data imported in Step 3 above.)
+   Inside of his project folder, Chewie types `npm start`. If all goes well, he will see the obligatory "Hello, world!" message from `http:\\127.0.0.1:3000\hello`. (`http:\\127.0.0.1\` will display the test data imported in Step 3 above.)
 10. ### Start the frontend server
-    Chewie changes directory into `project-angular-src` from within your project folder, and fires up the dev server by typing `ng serve`. He can then see the project portal&mdash;with its two records and admittedly simple stylesheets&mdash;on `http://localhost:4200`.
+    Chewie changes directory into `project-angular-src`, and fires up the dev server by typing `ng serve`. He can then see the project portal&mdash;with its two records and admittedly simple stylesheet&mdash;on `http://localhost:4200`.
 
 <!-- links -->
 [AngularJS Material]: https://material.angular.io/
