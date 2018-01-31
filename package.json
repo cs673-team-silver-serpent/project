@@ -3,12 +3,20 @@
   "version": "1.0.0-beta",
   "description": "A portal app to manage software development projects",
   "main": "app.js",
+  "start": "./project-angular-src/ng serve --port 8181 && node app",
   "dependencies": {
+    "@angular/cdk": "^5.1.1",
+    "@angular/common": "^5.2.2",
+    "@angular/compiler": "^5.2.2",
+    "@angular/core": "^5.2.2",
+    "@angular/material": "^5.1.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "lodash": "^4.17.4",
-    "mongoose": "^5.0.1"
+    "mongoose": "^5.0.1",
+    "typescript": "^2.6.2",
+    "zone.js": "^0.8.20"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.6",

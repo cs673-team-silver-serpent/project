@@ -19,19 +19,21 @@
    Node.js
 5. ### Testing Framework
    Mocha + Chai
+6. ### UI Component Framework
+   AngularJS Material
 
 ## Software Installation
 
-### [NOTE]: Angular is not yet set up. Detailed instructions to follow . . . .
-
 1. ### Create a local project folder
-   For example, Han Solo, a Windows 10 user, might create a folder at `C:\Users\hsolo\Documents\projects_portal`, whereas Chewbacca, a Mac enthusiast, decides to create his at `/Users/chewie/Desktop/project_portal`.
+   For example, Han Solo, a Windows 10 user, might create a folder at `C:\Users\hsolo\Documents\project_portal`, whereas Chewbacca, a Mac enthusiast, decides to create his at `/Users/chewie/Desktop/project_portal`.
 2. ### Install Node.js & NPM
    Requires Node 8.9.4. (NPM is bundled with Node.)
    See [Node.js].
 3. ### Install MongoDB
    Requires MongoDB ^3.6.0. (_^_ means  "_at least_ version 3.6.0.")
    See [MongoDB]. Use all defaults, including port 27017.
+   After starting the mongo server, load the test data by typing
+   `mongoimport --db project-portal-test --collection projects -file project-portal-test.data.json`.
 4. ### Install Git
    See [Atlassian Git Tutorial].
 5. ### Change directory into your project folder from the command line.
@@ -39,25 +41,17 @@
 6. ### Clone the [Projects Portal] repository in your project folder
    Both Han and Chewie, from the command line, type `git clone https://github.com/cs673-team-silver-serpent/project.git`.  
 7. ### Install npm dependencies
-   After the repository cloning finishes, our fearless heroes type `npm install`. This will download all of dependent modules that the project currently uses.
-8. ### Test that the server is running
-   If all goes well, Chewie will see the obligatory "Hello, world!" message when he types `http:\\127.0.0.1:3000` into his browser's address bar.
-9. ### Start MongoDB
+   After the repository cloning finishes, our fearless heroes type `npm install` from inside of his project folder. This will download all of dependent modules that the project currently uses. He will then change directory to `project-angular-src`, and do another `npm install`.
+8. ### Start MongoDB
    Until this step is automated, you must start MongoDB manually or at startup on your machine. See [MongoDB] for platform-specific instructions.
-10. ### (OPTIONAL) Test MongoDB / Express integration
-    Download and install [Postman]. You should be able to POST a test product into the database and GET all of the projects in the database, using Postman and the URL `127.0.0.1:3000`. PUSH requires one key, `title`, in the body and takes an optional `description` key.
-
-![GET in Postman][GET]
-**Image 1: Using GET in Postman**
-
-![POST in Postman][POST]
-**Image 2: Using POST in Postman**
+9. ### Start the backend server
+   Inside of his project folder, Chewie types 'npm start'. If all goes well, Chewie will see the obligatory "Hello, world!" message when he types `http:\\127.0.0.1:3000\hello` into his browser's address bar. (`http:\\127.0.0.1\` will display the test data imported in Step 3 above.)
+10. ### Start the frontend server
+    Chewie changes directory into `project-angular-src` from within your project folder, and fires up the dev server by typing `ng serve`. He can then see the project portal&mdash;with its two records and admittedly simple stylesheets&mdash;on `http://localhost:4200`.
 
 <!-- links -->
+[AngularJS Material]: https://material.angular.io/
 [Atlassian Git Tutorial]: https://www.atlassian.com/git/tutorials/install-git
 [MongoDB]: https://docs.mongodb.com/manual/administration/install-community/
 [Node.js]: https://nodejs.org/en/
 [Projects Portal]: https://github.com/cs673-team-silver-serpent/project.git
-[GET]: images/GET.png
-[POST]: images/POST.png
-[Postman]: https://www.getpostman.com/

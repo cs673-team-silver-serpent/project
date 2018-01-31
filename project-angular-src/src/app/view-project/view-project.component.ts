@@ -31,4 +31,8 @@ export class ViewProjectComponent implements OnInit {
        response => this.projects = this.projects.filter(projects => projects !== project),)
  }
 
+ public onAddProject(newProject) {
+   this.projects = this.projects.concat(newProject);
+ }
+
 }

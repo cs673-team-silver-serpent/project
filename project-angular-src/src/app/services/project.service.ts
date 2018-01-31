@@ -13,14 +13,14 @@ export class ProjectService {
   private serverApi = 'http://localhost:3000';
 
   public getAllProjects():Observable<Project[]> {
-    let URI = `${this.serverApi}/portal/`;
+    let URI = `${this.serverApi}/`;
     return this.http.get(URI)
       .map(response => response.json())
       .map(response => <Project[]>response.projects);
   }
 
   public deleteProject(projectId: string) {
-    let URI = `${this.serverApi}/portal/${projectId}`;
+    let URI = `${this.serverApi}/${projectId}`;
     let headers = new Headers;
     headers.append('Content-Type','application/json');
     return this.http.delete(URI, {headers})
@@ -28,7 +28,7 @@ export class ProjectService {
   }
 
   public addProject(project: Project) {
-    let URI = `${this.serverApi}/portal/`;
+    let URI = `${this.serverApi}/`;
     let headers = new Headers;
     let body = JSON.stringify({title: project.title, description: project.description});
     headers.append('Content-type','application/json');
