@@ -15,17 +15,19 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {
     this.newProject = {
       _id: '',
-      title: '',
-      description: ''
-    }
+      projectName: '',
+      projectDescription: '',
+      repositoryLink: ''
+    };
   }
 
   public onSubmit() {
-    console.log(this.newProject.title);
+    console.log(this.newProject.projectName);
     this.projectServ.addProject(this.newProject).subscribe(
       response => {
-          if (response)
+          if (response) {
             this.addProject.emit(this.newProject);
+          }
       },
     );
   }

@@ -19,8 +19,10 @@ router.get('/',(request,response) => {
 router.post('/',(request,response,next) => {
    // response.send("POST");
    let newProject = new project({
-      title: request.body.title,
-      description: request.body.description
+      projectName: request.body.projectName,
+      projectDescription: request.body.projectDescription,
+      repositoryLink: request.body.repositoryLink
+
    });
    project.addProject(newProject, (error,project) => {
       if (error) {

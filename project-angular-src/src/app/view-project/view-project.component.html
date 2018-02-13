@@ -3,13 +3,15 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Repository</th>
       <th>Delete</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let project of projects">
-      <td>{{project.title}}</td>
-      <td>{{project.description}}</td>
+      <td>{{project.projectName}}</td>
+      <td>{{project.projectDescription}}</td>
+      <td>{{project.repositoryLink}}</td>
       <td>
         <button type="button"
         (click)="deleteProject(project);

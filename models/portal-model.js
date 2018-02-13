@@ -1,13 +1,68 @@
 // require mongoose
 const mongo = require('mongoose');
 
-// define ProjectPortalSchema with title, description
-const ProjectPortalSchema = mongo.Schema({
-   title: {
+// Users schema
+const Users = mongo.Schema({
+    firstName: {
+        type: String,
+        required: true 
+    },
+    middleName: String,
+    lastName: {
+        type: String,
+        required: true
+    },
+    title: String,
+    email: String,
+    role: {
+        type: String,
+        enum: ['admin','user','visitor']
+    }
+});
+
+// Comments schema
+const Comments = mongo.Schema({
+  author: String,
+  title: String,
+  body: {
       type: String,
       required: true
-   },
-   description: String
+    },
+  date: {
+      type: Date,
+      default: Date.now,
+      required: true
+  }
+});
+
+// define ProjectPortalSchema
+const ProjectPortalSchema = mongo.Schema({
+    dateCreated: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    dateModified: {
+        type: Date,
+        default: Date.now,
+    },
+    projectName: {
+        type: String,
+        required: true
+    },
+    projectDescription: {
+        type: String,
+        required: true
+    },
+    projectMembers: {
+        type: [Users]
+    },
+    techStack: [String],
+    repositoryLink: String,
+    projectManger: String,
+    projectDemo: String,
+    comments: [Comments],
+    labels: [String],
 });
 
 // convert schema to project model and export

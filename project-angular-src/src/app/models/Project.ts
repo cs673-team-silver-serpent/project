@@ -1,5 +1,6 @@
 export interface Project {
    _id?: string;
-   title: string;
-   description: string;
+   projectName: string;
+   projectDescription: string;
+   repositoryLink: string;
 }
