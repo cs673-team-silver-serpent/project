@@ -1,39 +1,14 @@
 // require mongoose
-const mongo = require('mongoose');
+let mongo = require('mongoose');
 
-// Users schema
-const Users = mongo.Schema({
-    firstName: {
-        type: String,
-        required: true 
-    },
-    middleName: String,
-    lastName: {
-        type: String,
-        required: true
-    },
-    title: String,
-    email: String,
-    role: {
-        type: String,
-        enum: ['admin','user','visitor']
-    }
-});
-
-// Comments schema
-const Comments = mongo.Schema({
-  author: String,
-  title: String,
-  body: {
-      type: String,
-      required: true
-    },
-  date: {
-      type: Date,
-      default: Date.now,
-      required: true
-  }
-});
+// TODO Install Babel transpiler in order to use imports
+// import { Users } from '../models/users';
+// import { Comments } from '../models/comments';
+// then get rid of the following four lines
+let users = require('../models/users');
+let comments = require('../models/comments');
+Users = users.Users;
+Comments = comments.Comments;
 
 // define ProjectPortalSchema
 const ProjectPortalSchema = mongo.Schema({
@@ -61,7 +36,9 @@ const ProjectPortalSchema = mongo.Schema({
     repositoryLink: String,
     projectManger: String,
     projectDemo: String,
-    comments: [Comments],
+    comments: {
+        type: [Comments]
+    },
     labels: [String],
 });
 
@@ -72,7 +49,7 @@ const Project = module.exports = mongo.model('Project',ProjectPortalSchema);
 // database query functions
 ///////////////////////////
 
-// getAllProjects() is ues to return all projects from MongoDB
+// getAllProjects() is used to return all projects from MongoDB
 module.exports.getAllProjects = (callback) => {
    Project.find(callback);
 };
