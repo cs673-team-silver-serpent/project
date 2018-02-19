@@ -1,14 +1,14 @@
 let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
-let cors = require('cors');
+// let cors = require('cors');
 let mongo = require('mongoose');
 let morgan = require("morgan");
 let config = require('config');
-const portalControl = require('./controllers/portal-controller');
+const projects = require('./controllers/portal-controller');
 
 // initialize app variable
-const app = express();
+let app = express();
 
 // declare port
 const port = 3000;
@@ -26,11 +26,13 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
 }
 
 // middleware
-app.use(cors());
+// app.use(cors());
 
 // middleware for bodypasrsing using json and urlencoding
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(bodyParser.json({type:'application/json'}));
+app.use(bodyParser.text());
 
 // declare public folder
 app.use(express.static(path.join(__dirname,'public')));
@@ -42,8 +44,15 @@ app.get('/hello', (req,res) => {
    res.send("Welcome to Projects Portal!");
 });
 
-app.use('/',portalControl);
+// refactoring
+// app.use('/',projects);
 
+app.route('/')
+   .get(projects.getAllProjects)
+   .post(projects.addProject);
+
+app.route('/:id')
+    .post(projects.deleteProjectById);
 
 // start server
 app.listen(port, () => {

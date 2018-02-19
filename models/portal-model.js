@@ -1,7 +1,7 @@
 // require mongoose
 let mongo = require('mongoose');
 
-// TODO Install Babel transpiler in order to use imports
+// TODO: Install Babel transpiler in order to use imports
 // import { Users } from '../models/users';
 // import { Comments } from '../models/comments';
 // then get rid of the following four lines
@@ -45,22 +45,24 @@ const ProjectPortalSchema = mongo.Schema({
 // convert schema to project model and export
 const Project = module.exports = mongo.model('Project',ProjectPortalSchema);
 
+
+// moved these functions to the controller, portal-controller.js
 ///////////////////////////
 // database query functions
 ///////////////////////////
 
-// getAllProjects() is used to return all projects from MongoDB
-module.exports.getAllProjects = (callback) => {
-   Project.find(callback);
-};
+// getAllProjects() is ues to return all projects from MongoDB
+// module.exports.getAllProjects = (callback) => {
+//    Project.find(callback);
+// };
 
 // addProject() is used to insert new project into MongoDB
-module.exports.addProject = (newProject,callback) => {
-   newProject.save(callback);
-};
+// module.exports.addProject = (newProject,callback) => {
+//    newProject.save(callback);
+// };
 
 // deleteById() uses an id parameter to remove a project from MongoDB
-module.exports.deleteProjectById = (id,callback) => {
-   let query = {_id: id};
-   Project.remove(query,callback);
-};
+// module.exports.deleteProjectById = (id,callback) => {
+//    let query = {_id: id};
+//    Project.remove(query,callback);
+// };

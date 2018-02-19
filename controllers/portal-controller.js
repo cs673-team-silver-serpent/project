@@ -1,52 +1,51 @@
-const express = require('express');
-const router = express.Router();
-const project = require('../models/portal-model');
+let express = require('express');
+let Project = require('../models/portal-model');
 
-// GET HTTP method to /
-router.get('/',(request,response) => {
-   // response.send("GET");
-   project.getAllProjects( (error,projects) => {
+getAllProjects = (request, response) => {
+    // query db; if no errors, send all books
+    let query = Project.find({});
+    query.exec((error, projects) => {
       if (error) {
-        response.json({success:false,message:`Failed to load all projects. Error: ${error}`});
-     } else {
-        response.write(JSON.stringify({success:true, projects:projects},null,2));
-        response.end();
-     }
-   });
-});
-
-// POST HTTP method to /
-router.post('/',(request,response,next) => {
-   // response.send("POST");
-   let newProject = new project({
-      projectName: request.body.projectName,
-      projectDescription: request.body.projectDescription,
-      repositoryLink: request.body.repositoryLink
-
-   });
-   project.addProject(newProject, (error,project) => {
-      if (error) {
-         response.json({success:false,message:`Failed to create a new list. Error: ${error}`});
-      } else {
-         response.json({success:true, message: "Project added successfully."});
+        response.send(error);
       }
-   });
-});
+      response.json(projects);
+    });
+}
 
-// DELETE HTTP method to /
-router.delete('/:id',(request,response,next) => {
-  // res.send("DELETE");
-  let id = request.params.id;
-  // call the deleteProjectById function
-  project.deleteProjectById(id, (error,project) => {
-     if (error) {
-        response.json({success:false,message: `Failed to delete the list. Error: ${error}`});
-     } else if (project) {
-        response.json({success:true,message: "Project deleted successfully."});
-     } else {
-        response.json({success:false});
-     }
+addProject = (request, response) => {
+  let newProject = new Project({
+    projectName: request.body.projectName,
+    projectDescription: request.body.projectDescription,
+    repositoryLink: request.body.repositoryLink
   });
-});
+  newProject.save((error, project) => {
+    if (error) {
+      response.json({success: false, message: `Failed to create a new list. Error: ${error}`});
+    } else {
+      response.json({success: true, message: "Project added successfully."});
+    }
+  });
+}
 
-module.exports = router;
+deleteProjectById = (request,response) => {
+  let id = request.params.id;
+  let query = {_id: id};
+  Project.remove(query, (error, project) => {
+      if (error) {
+        response.json({
+          success: false,
+          message: `Failed to delete the list. Error: ${error}`
+        });
+      } else if (project) {
+         response.json({
+           success: true,
+           message: "Project deleted successfully."
+         });
+      } 
+      else {
+        response.json({ success: false });
+      }
+  });
+}
+
+module.exports = { addProject, deleteProjectById, getAllProjects };

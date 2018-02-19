@@ -32,8 +32,8 @@ describe('Projects', () => {
             .get('/')
             .end((error,response) => {
                 response.should.have.status(200);
-                response.body.should.be.a('array');
-                response.body.length.should.be.eql(3);
+                response.should.be.json;
+                response.body.should.be.a('object');
             });
         });
     });
