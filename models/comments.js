@@ -1,18 +1,28 @@
 // require mongoose
 let mongo = require("mongoose");
+let ObjectId = mongo.Schema.Types.ObjectId;
+let users = require('../models/users');
+Users = users.Users;
 
 // Comments schema
 const CommentsSchema = mongo.Schema({
-  author: String,
+  author: {
+    type: ObjectId,
+    ref: 'Users'
+  },
   title: String,
   body: {
     type: String,
     required: true
   },
-  date: {
+  dateCreated: {
     type: Date,
     default: Date.now,
     required: true
+  },
+  dateModified: {
+    type: Date,
+    default: Date.now
   }
 });
 
