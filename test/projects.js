@@ -2,11 +2,11 @@
 process.env.NODE_ENV = 'test';
 
 let mongo = require('mongoose');
-let Projects = require('../models/portal-model');
+let Project = require('../models/portal-model');
 
 // require dev-dependencies
 let chai = require('chai');
-let chaiHttp = require('chai-http'); // needed for routing
+let chaiHttp = require('chai-http'); // needed for REST calls
 let server = require('../app');
 let should = chai.should();
 
@@ -23,14 +23,14 @@ describe('Projects', () => {
     // });
 
 
-    /*
-    * Test POST route
-    */
+    /************************************/
+    // TEST POST route
+    /************************************/
     describe('POST project', () => {
         it('it should POST a new project with title & description', (done) => {
             let project = {
-                projectName: "Yadda yadda yadda",
-                projectDescription: "An app devoted to bosco"
+                projectName: "Projects Portal",
+                projectDescription: "A portal app to manage software development projects"
             }
             chai.request(server)
             .post('/')
@@ -47,11 +47,11 @@ describe('Projects', () => {
     });
 
 
-    /*
-    * Test GET route
-    */
+    /************************************/
+    // TEST GET route
+    /************************************/
     describe('GET project', () => {
-        it('it should GET all projects', (done) => {
+        it('it should GET last project', (done) => {
             chai.request(server)
             .get('/')
             .end((error,response) => {
@@ -61,14 +61,38 @@ describe('Projects', () => {
                 response.body[1].should.have.property('_id');
                 response.body[1].should.have
                   .property("projectName")
-                  .and.to.be.eql("Yadda yadda yadda");
+                  .and.to.be.eql("Projects Portal");
                 response.body[1].should.have
                   .property("projectDescription")
-                  .and.to.be.eql("An app devoted to bosco");
+                  .and.to.be.eql("A portal app to manage software development projects");
                 done();
             });
         });
     });
+
+    /************************************/
+    // TEST DELETE route
+    /************************************/
+   describe('DELETE project', () => {
+    it('should DELETE last project', (done) => {
+        let project = new Project({ 
+            projectName: "Yadda Yadda Yadda", 
+            projectDescription: "An app devoted to Bosco" 
+        });
+        project.save((error,project) => {
+            chai.request(server)
+            .delete('/' + project.id)
+            .end((error, response) => {
+                response.should.have.status(200);
+                response.body.should.be.a('object');
+                response.body.should.have.property('message')
+                    .and.to.be.eql('Project deleted successfully.');
+                response.body.should.have.property('success');
+                done();
+            });
+        });
+    });
+   });
 
 
 });
