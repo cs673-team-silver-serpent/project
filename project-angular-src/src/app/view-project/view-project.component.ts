@@ -23,7 +23,7 @@ export class ViewProjectComponent implements OnInit {
  public loadProjects() {
     // get projects from server and update list of projects
     this.projectServ.getAllProjects().subscribe(
-        response => this.projects = response,)
+        response => this.projects = response, );
  }
 
  public deleteProject(project: Project) {
