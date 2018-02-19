@@ -1,0 +1,12 @@
+mat-grid-tile {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    background-color: lightgreen;
+}
+
+div {
+    width: 250px;
+    height: 40px;
+    background-color: lightgray;
+}

@@ -1,4 +1,21 @@
 <app-toolbar></app-toolbar>
-<p>
-  profile works!
-</p>
+
+
+<mat-grid-list cols="4" rowHeight="200px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Welcome {{ user.firstName }} {{ user.lastName }}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="3">
+      
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-list>
+        <mat-list-item>
+            emai: {{ user.email }}
+        </mat-list-item>
+        <mat-list-item>
+            Join Date: {{ user.joinDate }}
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+</mat-grid-list>

@@ -14,14 +14,18 @@ import { AppRoutingModule } from './/app-routing.module';
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { HomeComponent } from './home/home.component';
 import { ProjectSearchComponent } from './project-search/project-search.component';
 import { ProfileComponent } from './profile/profile.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { ProfileComponent } from './profile/profile.component';
     MatGridListModule,
     MatToolbarModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSidenavModule,
+    MatSelectModule,
+    MatListModule
   ],
   providers: [
     ProjectService
