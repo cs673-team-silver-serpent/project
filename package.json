@@ -3,7 +3,7 @@
   "version": "1.0.0-beta",
   "description": "A portal app to manage software development projects",
   "main": "app.js",
-  "start": "./project-angular-src/ng serve --port 8181 && node app",
+  "start": "./project-angular-src/ng serve && node app",
   "dependencies": {
     "@angular/cdk": "^5.1.1",
     "@angular/common": "^5.2.2",
