@@ -13,15 +13,15 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 // Projects parent block
-describe('Projects', () => {
-    // empty test database before each test
-    
-    // beforeEach((done) => {
-    //     Projects.remove({}, (err) => {
-    //         done();
-    //     });
-    // });
-
+describe('Project Tests', () => {
+    /************************************/
+    // clear test DB before every test
+    /************************************/
+    beforeEach((done) => {
+         Project.remove({}, (err) => {
+             done();
+         });
+    });
 
     /************************************/
     // TEST POST route
@@ -46,7 +46,6 @@ describe('Projects', () => {
         });
     });
 
-
     /************************************/
     // TEST GET route
     /************************************/
@@ -57,14 +56,7 @@ describe('Projects', () => {
             .end((error,response) => {
                 response.should.have.status(200);
                 response.should.be.a('object');
-                response.body.length.should.be.eql(2);
-                response.body[1].should.have.property('_id');
-                response.body[1].should.have
-                  .property("projectName")
-                  .and.to.be.eql("Projects Portal");
-                response.body[1].should.have
-                  .property("projectDescription")
-                  .and.to.be.eql("A portal app to manage software development projects");
+                response.body.length.should.be.eql(0);
                 done();
             });
         });
