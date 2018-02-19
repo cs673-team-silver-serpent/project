@@ -13,13 +13,26 @@ import { AppRoutingModule } from './/app-routing.module';
 
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import { HomeComponent } from './home/home.component';
+import { ProjectSearchComponent } from './project-search/project-search.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddProjectComponent,
     ViewProjectComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ToolbarComponent,
+    HomeComponent,
+    ProjectSearchComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +41,12 @@ import { MatInputModule } from '@angular/material/input';
     AppRoutingModule,
     MatButtonModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [
     ProjectService
