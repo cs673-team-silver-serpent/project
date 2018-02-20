@@ -18,6 +18,10 @@ const ProjectPortalSchema = mongo.Schema({
         default: Date.now,
         required: true
     },
+    owner: {
+        type: ObjectId,
+        ref: 'Users'
+    },
     dateModified: {
         type: Date,
         default: Date.now,
