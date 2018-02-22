@@ -25,8 +25,8 @@ app.use(bodyParser.json());
 // declare public folder
 app.use(express.static(path.join(__dirname,'public')));
 
-// routes
 
+// routes
 // for testing purposes during setup
 app.get('/hello', (req,res) => {
    res.send("Hello, world!");
