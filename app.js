@@ -5,7 +5,7 @@ let cors = require('cors');
 let mongo = require('mongoose');
 let morgan = require("morgan");
 let config = require('config');
-const projects = require('./controllers/portal-controller');
+const projects = require('./controllers/projects-controller');
 
 // initialize app variable
 let app = express();
@@ -39,20 +39,18 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // routes
 
-// for testing purposes during setup
-app.get('/hello', (req,res) => {
+app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
 });
 
-// refactoring
-// app.use('/',projects);
+app.route('/view').get(projects.getAllProjects);
 
-app.route('/')
-   .get(projects.getAllProjects)
-   .post(projects.addProject);
+app.route("/view/:id").get(projects.getProjectById);
 
-app.route('/:id')
-    .delete(projects.deleteProjectById);
+app.route("/add").post(projects.addProject);
+
+app.route('/delete/:id').delete(projects.deleteProjectById);
+
 
 // start server
 app.listen(port, () => {

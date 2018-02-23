@@ -1,5 +1,8 @@
 // require mongoose
 let mongo = require("mongoose");
+let ObjectId = mongo.Schema.Types.ObjectId;
+let project = require("../models/projects-model");
+Project = project.Project; 
 
 // Users schema
 const UsersSchema = mongo.Schema({
@@ -14,6 +17,10 @@ const UsersSchema = mongo.Schema({
   },
   title: String,
   email: String,
+  favorites: {
+    type: ObjectId,
+    ref: 'Project'
+  },
   role: {
     type: String,
     enum: ["admin", "user", "visitor"]

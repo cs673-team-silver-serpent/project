@@ -1,15 +1,11 @@
 // require mongoose
 let mongo = require("mongoose");
 let ObjectId = mongo.Schema.Types.ObjectId;
-let users = require('../models/users');
+let users = require('../models/users-model');
 Users = users.Users;
 
 // Comments schema
 const CommentsSchema = mongo.Schema({
-  author: {
-    type: ObjectId,
-    ref: 'Users'
-  },
   title: String,
   body: {
     type: String,

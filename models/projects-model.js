@@ -6,13 +6,13 @@ let ObjectId = mongo.Schema.Types.ObjectId;
 // import { Users } from '../models/users';
 // import { Comments } from '../models/comments';
 // then get rid of the following four lines
-let users = require('../models/users');
-let comments = require('../models/comments');
+let users = require('../models/users-model');
+let comments = require('../models/comments-model');
 Users = users.Users;
 Comments = comments.Comments;
 
 // define ProjectPortalSchema
-const ProjectPortalSchema = mongo.Schema({
+const ProjectsSchema = mongo.Schema({
     dateCreated: {
         type: Date,
         default: Date.now,
@@ -40,7 +40,6 @@ const ProjectPortalSchema = mongo.Schema({
     },
     techStack: [String],
     repositoryLink: String,
-    projectManger: String,
     projectDemo: String,
     comments: {
         type: [Comments]
@@ -49,7 +48,7 @@ const ProjectPortalSchema = mongo.Schema({
 });
 
 // convert schema to project model and export
-const Project = module.exports = mongo.model('Project',ProjectPortalSchema);
+const Project = module.exports = mongo.model('Project',ProjectsSchema);
 
 
 // moved these functions to the controller, portal-controller.js

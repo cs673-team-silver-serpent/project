@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'test';
 
 let mongo = require('mongoose');
-let Project = require('../models/portal-model');
+let Project = require('../models/projects-model');
 
 // require dev-dependencies
 let chai = require('chai');
@@ -14,13 +14,15 @@ chai.use(chaiHttp);
 
 // Projects parent block
 describe('Project Tests', () => {
+    
     /************************************/
     // clear test DB before every test
     /************************************/
-    beforeEach((done) => {
-         Project.remove({}, (err) => {
-             done();
-         });
+
+    after((done) => {
+        Project.remove({}, (err) => {
+            done();
+        });
     });
 
     /************************************/
@@ -33,7 +35,7 @@ describe('Project Tests', () => {
                 projectDescription: "A portal app to manage software development projects"
             }
             chai.request(server)
-            .post('/')
+            .post('/add')
             .send(project)
             .end((error,response) => {
                 response.should.have.status(200);
@@ -47,16 +49,23 @@ describe('Project Tests', () => {
     });
 
     /************************************/
-    // TEST GET route
+    // TEST GET All Projects
     /************************************/
     describe('GET project', () => {
-        it('it should GET last project', (done) => {
+        it('it should GET all projects', (done) => {
             chai.request(server)
-            .get('/')
+            .get('/view')
             .end((error,response) => {
                 response.should.have.status(200);
                 response.should.be.a('object');
-                response.body.length.should.be.eql(0);
+                response.body.length.should.be.eql(1);
+                response.body[0].should.have.property('projectName')
+                    .and.to.eql('Projects Portal');
+                response.body[0].should.have
+                  .property("projectDescription")
+                  .and.to.eql(
+                    "A portal app to manage software development projects"
+                  );
                 done();
             });
         });
@@ -73,7 +82,7 @@ describe('Project Tests', () => {
         });
         project.save((error,project) => {
             chai.request(server)
-            .delete('/' + project.id)
+            .delete('/delete/' + project.id)
             .end((error, response) => {
                 response.should.have.status(200);
                 response.body.should.be.a('object');
@@ -85,6 +94,7 @@ describe('Project Tests', () => {
         });
     });
    });
+
 
 
 });
