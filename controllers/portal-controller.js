@@ -2,17 +2,19 @@ const express = require('express');
 const router = express.Router();
 const project = require('../models/portal-model');
 
+
+
 // GET HTTP method to /
 router.get('/',(request,response) => {
-   // response.send("GET");
-   project.getAllProjects( (error,projects) => {
-      if (error) {
-        response.json({success:false,message:`Failed to load all projects. Error: ${error}`});
-     } else {
-        response.write(JSON.stringify({success:true, projects:projects},null,2));
-        response.end();
-     }
-   });
+  // response.send("GET");
+  project.getAllProjects( (error,projects) => {
+    if (error) {
+      response.json({success:false,message:`Failed to load all projects. Error: ${error}`});
+    } else {
+      response.write(JSON.stringify({success:true, projects:projects}, null, 2));
+      response.end();
+    }
+  });
 });
 
 // POST HTTP method to /
