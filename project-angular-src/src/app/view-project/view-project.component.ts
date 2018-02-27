@@ -11,28 +11,49 @@ import { Project } from '../models/Project';
 export class ViewProjectComponent implements OnInit {
 
  // an array of projects
- private projects: Project[] = [];
+ projects: Project[] = [];
 
- constructor(private projectServ: ProjectService) { }
+ constructor(private projectService: ProjectService) { }
 
  ngOnInit() {
      // Load projects on init
-     this.loadProjects();
+     this.projectService.getAllProjects().subscribe(
+       response => {
+         this.projects = response;
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
+
  }
 
- public loadProjects() {
-    // get projects from server and update list of projects
-    this.projectServ.getAllProjects().subscribe(
-        response => this.projects = response, );
- }
 
  public deleteProject(project: Project) {
-    this.projectServ.deleteProject(project._id).subscribe(
-       response => this.projects = this.projects.filter(projects => projects !== project),)
- }
+    this.projectService.deleteProject(project._id).subscribe(
+       response => {
+         this.projects = this.projects.filter(projects => projects !== project)
 
- public onAddProject(newProject) {
-   this.projects = this.projects.concat(newProject);
+         this.projectService.getAllProjects().subscribe(
+          response => {
+            this.projects = response;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    });
+  }
+
+  public onNewProjectAddedRefreshList(newProject) {
+    this.projectService.getAllProjects().subscribe(
+      response => {
+        this.projects = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
  }
 
 }

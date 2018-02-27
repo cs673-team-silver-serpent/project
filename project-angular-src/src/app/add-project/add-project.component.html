@@ -1,5 +1,9 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onCreateNewProject()">
+    <div>
+      <label for="owner">Owner</label>
+      <input type="text" [(ngModel)]="newProject.owner" name="owner">
+    </div>
     <div>
       <label for="projectName">Project name</label>
       <input type="text" [(ngModel)]="newProject.projectName" name="projectName" required>
@@ -9,11 +13,16 @@
       <input type="text" [(ngModel)]="newProject.projectDescription" name="projectDescription" required>
     </div>
     <div>
-      <label for="repository">Repository</label>
+      <label for="repositoryLink">Repository Link</label>
       <input type="text" [(ngModel)]="newProject.repositoryLink" name="repositoryLink">
     </div>
-    <button type="submit">Submit</button>
+    <div>
+      <label for="projectDemo">Project Demo</label>
+      <input type="text" [(ngModel)]="newProject.projectDemo" name="projectDemo">
+    </div>
+
+
+    <button >Submit</button>
   </form>
 </div>
-
 

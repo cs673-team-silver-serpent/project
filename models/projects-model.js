@@ -19,8 +19,7 @@ const ProjectsSchema = mongo.Schema({
         required: true
     },
     owner: {
-        type: ObjectId,
-        ref: 'Users'
+        type: String,
     },
     dateModified: {
         type: Date,
@@ -35,15 +34,11 @@ const ProjectsSchema = mongo.Schema({
         required: true
     },
     projectMembers: {
-        type: ObjectId,
-        ref: 'Users'
+        type: [String],
     },
     techStack: [String],
     repositoryLink: String,
     projectDemo: String,
-    comments: {
-        type: [Comments]
-    },
     labels: [String],
 });
 

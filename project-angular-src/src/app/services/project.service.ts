@@ -1,39 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Project } from '../models/Project';
+import { NewProject, Project } from '../models/Project';
 
 import 'rxjs/add/operator/map';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable()
 export class ProjectService {
 
-  constructor(private http: Http) { }
-  private serverApi = 'http://localhost:3000';
+  baseURL = 'http://localhost:3000';
+
+  constructor(private http: HttpClient) { }
 
   public getAllProjects(): Observable<Project[]> {
-    const URI = `${this.serverApi}/`;
-    return this.http.get(URI)
-      .map(response => response.json())
-      .map(response => <Project[]>response.projects);
+    const url = `${this.baseURL}/view`;
+    return this.http.get<Project[]>(url);
   }
 
-  public deleteProject(projectId: string) {
-    const URI = `${this.serverApi}/${projectId}`;
-    const headers = new Headers;
-    headers.append('Content-Type', 'application/json');
-    return this.http.delete(URI, {headers})
-       .map(response => response.json());
+  // public deleteProject(projectId: string) {
+  //   const URI = `${this.serverApi}/${projectId}`;
+  //   const headers = new Headers;
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.delete(URI, {headers})
+  //      .map(response => response.json());
+  // }
+
+  public deleteProject(projectID: string): Observable<any>{
+    const url = `${this.baseURL}/delete/${projectID}`
+    return this.http.delete(url);
   }
 
-  public addProject(project: Project) {
-    const URI = `${this.serverApi}/`;
-    const headers = new Headers;
-    const body = JSON.stringify({projectName: project.projectName, projectDescription: project.projectDescription,
-      repositoryLink: project.repositoryLink});
-    headers.append('Content-type', 'application/json');
-    return this.http.post(URI, body, {headers: headers}).map(response => response.json);
+  public addProject(project: NewProject): Observable<NewProject> {
+    const url = `${this.baseURL}/add`
+    return this.http.post<NewProject>(url, project, httpOptions);
   }
 
 }
