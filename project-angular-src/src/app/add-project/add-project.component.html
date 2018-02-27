@@ -1,12 +1,16 @@
 <div class="container">
   <form (ngSubmit)="onSubmit()">
     <div>
-      <label for="title">Title</label>
-      <input type="text" [(ngModel)]="newProject.title" name="title" required>
+      <label for="projectName">Project name</label>
+      <input type="text" [(ngModel)]="newProject.projectName" name="projectName" required>
     </div>
     <div>
-      <label for="description">description</label>
-      <input type="text" [(ngModel)]="newProject.description" name="description" required>
+      <label for="projectDescription">Project Description</label>
+      <input type="text" [(ngModel)]="newProject.projectDescription" name="projectDescription" required>
+    </div>
+    <div>
+      <label for="repository">Repository</label>
+      <input type="text" [(ngModel)]="newProject.repositoryLink" name="repositoryLink">
     </div>
     <button type="submit">Submit</button>
   </form>
