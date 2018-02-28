@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/Project';
-
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-view-project',
@@ -12,6 +12,8 @@ export class ViewProjectComponent implements OnInit {
 
  // an array of projects
  projects: Project[] = [];
+ displayedColumns = ['dateCreated', 'projectName', 'projectDescription', 'delete'];
+ dataSource = new MatTableDataSource<Project>(this.projects);
 
  constructor(private projectService: ProjectService) { }
 
@@ -20,16 +22,16 @@ export class ViewProjectComponent implements OnInit {
      this.projectService.getAllProjects().subscribe(
        response => {
          this.projects = response;
+         this.dataSource = new MatTableDataSource<Project>(this.projects);
        },
        (error) => {
          console.log(error);
        }
      );
-
  }
 
-
  public deleteProject(project: Project) {
+   console.log(project);
     this.projectService.deleteProject(project._id).subscribe(
        response => {
          this.projects = this.projects.filter(projects => projects !== project)
@@ -37,6 +39,7 @@ export class ViewProjectComponent implements OnInit {
          this.projectService.getAllProjects().subscribe(
           response => {
             this.projects = response;
+            this.dataSource = new MatTableDataSource<Project>(this.projects);
           },
           (error) => {
             console.log(error);
@@ -49,6 +52,7 @@ export class ViewProjectComponent implements OnInit {
     this.projectService.getAllProjects().subscribe(
       response => {
         this.projects = response;
+        this.dataSource = new MatTableDataSource<Project>(this.projects);
       },
       (error) => {
         console.log(error);

@@ -1,22 +1,14 @@
-/* TODO: Install bootstrap */
-
-table {
-  width: 60%;
+div.example-container {
+  width: 90%;
+  margin: auto;
 }
 
-th {
-  background-color: darkBlue;
-  color: white;
-  font-size: 20px;
-  align: left;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-tr {
-  background: aliceBlue;
-  color: darkBlue;
-  font-size: 18px;
-}
-
-td {
-  align: left;
+.example-full-width {
+  width: 100%;
 }

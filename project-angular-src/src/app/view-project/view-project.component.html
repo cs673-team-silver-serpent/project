@@ -1,25 +1,39 @@
 <app-toolbar></app-toolbar>
 
-<table id="projects">
-  <thead>
-    <tr>
-      <th>Create Date</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Repository</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let project of projects">
-      <td>{{project.dateCreated}}</td>
-      <td>{{project.projectName}}</td>
-      <td>{{project.projectDescription}}</td>
-      <td>{{project.repositoryLink}}</td>
-      <td>
-        <button type="button" (click)="deleteProject(project);">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+  
+      <!-- dateCreated -->
+      <ng-container matColumnDef="dateCreated">
+        <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateCreated}} </mat-cell>
+      </ng-container>
+  
+      <!-- projectName -->
+      <ng-container matColumnDef="projectName">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+      </ng-container>
+
+      <!-- projectDescription -->
+      <ng-container matColumnDef="projectDescription">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
+      </ng-container>
+
+      <!-- delete -->
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button mat-raised-button color="warn" (click)="deleteProject(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
 <app-add-project (projectAdded)="onNewProjectAddedRefreshList()"></app-add-project>

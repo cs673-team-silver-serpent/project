@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NewProject } from '../models/Project';
 import { ProjectService } from '../services/project.service';
+import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
   selector: 'app-add-project',
@@ -10,6 +11,7 @@ import { ProjectService } from '../services/project.service';
 export class AddProjectComponent implements OnInit {
   private newProject: NewProject;
   @Output() projectAdded: EventEmitter<NewProject> = new EventEmitter<NewProject>();
+
 
 
   constructor(private projectService: ProjectService) { }
@@ -33,6 +35,17 @@ export class AddProjectComponent implements OnInit {
       response => {
         console.log(response);
         this.projectAdded.emit(this.newProject);
+        this.newProject = {
+          owner: '',
+          projectName: '',
+          projectDescription: '',
+          projectMembers: '',
+          techStack: [],
+          repositoryLink: '',
+          projectDemo: '',
+          labels: []
+        };
+        
     });
   }
 }
