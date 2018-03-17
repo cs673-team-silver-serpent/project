@@ -24,14 +24,6 @@ export class ProjectService {
     return this.http.get<Project[]>(url);
   }
 
-  // public deleteProject(projectId: string) {
-  //   const URI = `${this.serverApi}/${projectId}`;
-  //   const headers = new Headers;
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.delete(URI, {headers})
-  //      .map(response => response.json());
-  // }
-
   public deleteProject(projectID: string): Observable<any>{
     const url = `${this.baseURL}/delete/${projectID}`
     return this.http.delete(url);

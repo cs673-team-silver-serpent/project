@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 
 
-
+//Services
+import { ProjectService } from './services/project.service';
+import { UserSessionService } from './services/user-session.service';
 
 //COMPONENTS
 import { AddProjectComponent } from './add-project/add-project.component';
 import { ViewProjectComponent } from './view-project/view-project.component';
-import { ProjectService } from './services/project.service';
+
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectSearchComponent } from './project-search/project-search.component';
@@ -120,7 +122,8 @@ export class DemoMaterialModule {}
 
   ],
   providers: [
-    ProjectService
+    ProjectService,
+    UserSessionService
   ],
   bootstrap: [AppComponent]
 })
