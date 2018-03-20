@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
+});
 
 app.route('/view').get(projects.getAllProjects);
 
