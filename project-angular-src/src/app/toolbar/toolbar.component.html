@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+    <span>BU Project Tracker</span>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/projectSearch">Project Search</button>
+    <button mat-button routerLink="/viewProject">Manage Projects</button>
+    <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon >account_box</mat-icon>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item routerLink="/profile">Profile</button>
+            <button mat-menu-item routerLink="/login">Logout</button>
+        </mat-menu>
+    </button>
+</mat-toolbar>

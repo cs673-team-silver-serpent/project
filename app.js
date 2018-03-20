@@ -37,11 +37,8 @@ app.use(bodyParser.text());
 // declare public folder
 app.use(express.static(path.join(__dirname,'public')));
 
-// routes
-
 app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
-});
 
 app.route('/view').get(projects.getAllProjects);
 
