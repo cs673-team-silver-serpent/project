@@ -37,7 +37,6 @@ app.use(bodyParser.text());
 // declare public folder
 app.use(express.static(path.join(__dirname,'public')));
 
-
 app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
 });
