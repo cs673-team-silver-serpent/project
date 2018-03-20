@@ -14,9 +14,7 @@ Comments = comments.Comments;
 // define ProjectPortalSchema
 const ProjectsSchema = mongo.Schema({
     dateCreated: {
-        type: Date,
-        default: Date.now,
-        required: true
+        type: Date
     },
     owner: {
         type: ObjectId,
@@ -41,9 +39,6 @@ const ProjectsSchema = mongo.Schema({
     techStack: [String],
     repositoryLink: String,
     projectDemo: String,
-    comments: {
-        type: [Comments]
-    },
     labels: [String],
 });
 
