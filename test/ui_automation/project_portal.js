@@ -9,7 +9,7 @@ describe('Project Portal ', function() {
       //var greeting = element(by.binding('yourName'));
   
       expect(heading.getText()).toBe('Boston University Project Tracker');
-        console.log("It worked: " + headingText);
+
     });
   
     //Check if the user is directed to the Homepage on clicking Login
@@ -19,9 +19,7 @@ describe('Project Portal ', function() {
         let submitButton=element(by.css('.mat-raised-button')).click();
         browser.sleep(5000);
         expect(browser.getCurrentUrl()).toBe('http://localhost:4200/home');
-        element.browser.getCurrentUrl.then(function(text) {
-            console.log(text);
-        });
+
         //console.log("Current UrL: " + browser.getCurrentUrl());
     })
    
