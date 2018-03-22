@@ -1,21 +1,25 @@
 <app-toolbar></app-toolbar>
 
 
-<mat-grid-list cols="4" rowHeight="100px">
-  <mat-grid-tile [colspan]="4" [rowspan]="1">
-    <mat-form-field>
-      <input matInput placeholder="Project Keywords">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Specific Class">
-        <mat-option *ngFor="let class of classes" [value]="class.id">
-          {{ class.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-raised-button color="primary">Search</button>
+<mat-grid-list cols="12" rowHeight="100px">
+  <mat-grid-tile [colspan]="2" [rowspan]="7">
+    <form (ngSubmit)="onSearch()" #searchForm="ngForm">
+      <mat-form-field>
+        <input matInput placeholder="Project Keywords" [(value)]="search">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select id="class" placeholder="Specific Class">
+          <mat-option *ngFor="let class of classes" [value]="class.id">
+            {{ class.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Search</button>
+    </form>
+    
+
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="4" [rowspan]="5">
+  <mat-grid-tile [colspan]="10" [rowspan]="7">
     Material Table with results from search.  Will be empty until user searches something.  Will signify if no results were returned
   </mat-grid-tile>
 </mat-grid-list>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserSessionService } from '../services/user-session.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userSessionService: UserSessionService) { }
 
   ngOnInit() {
+    console.log(this.userSessionService.user);
   }
-
 }

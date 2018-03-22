@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/Project';
-
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-view-project',
@@ -11,28 +11,53 @@ import { Project } from '../models/Project';
 export class ViewProjectComponent implements OnInit {
 
  // an array of projects
- private projects: Project[] = [];
+ projects: Project[] = [];
+ displayedColumns = ['dateCreated', 'projectName', 'projectDescription', 'delete'];
+ dataSource = new MatTableDataSource<Project>(this.projects);
 
- constructor(private projectServ: ProjectService) { }
+ constructor(private projectService: ProjectService) { }
 
  ngOnInit() {
      // Load projects on init
-     this.loadProjects();
- }
-
- public loadProjects() {
-    // get projects from server and update list of projects
-    this.projectServ.getAllProjects().subscribe(
-        response => this.projects = response, );
+     this.projectService.getAllProjects().subscribe(
+       response => {
+         this.projects = response;
+         this.dataSource = new MatTableDataSource<Project>(this.projects);
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
  }
 
  public deleteProject(project: Project) {
-    this.projectServ.deleteProject(project._id).subscribe(
-       response => this.projects = this.projects.filter(projects => projects !== project),)
- }
+   console.log(project);
+    this.projectService.deleteProject(project._id).subscribe(
+       response => {
+         this.projects = this.projects.filter(projects => projects !== project)
 
- public onAddProject(newProject) {
-   this.projects = this.projects.concat(newProject);
+         this.projectService.getAllProjects().subscribe(
+          response => {
+            this.projects = response;
+            this.dataSource = new MatTableDataSource<Project>(this.projects);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    });
+  }
+
+  public onNewProjectAddedRefreshList(newProject) {
+    this.projectService.getAllProjects().subscribe(
+      response => {
+        this.projects = response;
+        this.dataSource = new MatTableDataSource<Project>(this.projects);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
  }
 
 }

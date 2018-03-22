@@ -24,18 +24,17 @@ getProjectById = (request, response) => {
       response.json(project);
     }
   });
-
 }
 
 addProject = (request, response) => {
   let newProject = new Project({
     projectName: request.body.projectName,
     projectDescription: request.body.projectDescription,
+    projectMembers: request.body.projectMembers,
     repositoryLink: request.body.repositoryLink,
-    owner: request.body.id,
+    owner: request.body.owner,
     techStack: request.body.techStack,
     projectDemo: request.body.projectDemo,
-    comments: request.body.comments,
     labels: request.body.labels
   });
   newProject.save((error, project) => {
