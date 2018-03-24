@@ -2,7 +2,6 @@ let express = require('express');
 let Project = require('../models/projects-model');
 
 getAllProjects = (request, response) => {
-    // query db; if no errors, send all books
     let query = Project.find();
     query.exec((error, projects) => {
       if (error) {
