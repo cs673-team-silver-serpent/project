@@ -5,4 +5,11 @@
     <mat-grid-tile [colspan]="3" [rowspan]="1">Material Table showing your current projects.  User should be able to click on each one to take you to the details view</mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="2">Show projects recent projects created by other users.  Or trending projects?</mat-grid-tile>
 </mat-grid-list>
+
+<p *ngIf="isLoggedIn">
+    The User is logged in
+</p>
+<p *ngIf="!isLoggedIn">
+    User is not logged in
+</p>
 </div>

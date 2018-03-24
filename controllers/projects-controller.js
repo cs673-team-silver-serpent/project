@@ -27,6 +27,9 @@ getProjectById = (request, response) => {
 }
 
 addProject = (request, response) => {
+  // check the header for a token and check mongodb to make sure it's an active session
+
+  //if it's an active session
   let newProject = new Project({
     projectName: request.body.projectName,
     projectDescription: request.body.projectDescription,
@@ -44,10 +47,14 @@ addProject = (request, response) => {
       response.json({success: true, message: "Project added successfully."});
     }
   });
+
+  // else 
+  // return unauth
 }
 
 deleteProjectById = (request,response) => {
   let id = request.params.id;
+  // request.headers['sessionid'] 
   let query = {_id: id};
   Project.remove(query, (error, project) => {
       if (error) {
@@ -66,5 +73,6 @@ deleteProjectById = (request,response) => {
       }
   });
 }
+
 
 module.exports = { addProject, deleteProjectById, getAllProjects, getProjectById };
