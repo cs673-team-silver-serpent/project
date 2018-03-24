@@ -26,7 +26,10 @@ getProjectById = (request, response) => {
 }
 
 addProject = (request, response) => {
-  let newProject = new Project({
+  let dateCreated = new Date(Date.now());
+  let newProject = new Project(
+    {
+    dateCreated: dateCreated,
     projectName: request.body.projectName,
     projectDescription: request.body.projectDescription,
     projectMembers: request.body.projectMembers,
@@ -35,7 +38,9 @@ addProject = (request, response) => {
     techStack: request.body.techStack,
     projectDemo: request.body.projectDemo,
     labels: request.body.labels
-  });
+    }
+  );
+
   newProject.save((error, project) => {
     if (error) {
       response.json({success: false, message: `Failed to create a new list. Error: ${error}`});
@@ -50,15 +55,19 @@ deleteProjectById = (request,response) => {
   let query = {_id: id};
   Project.remove(query, (error, project) => {
       if (error) {
-        response.json({
+        response.json(
+          {
           success: false,
           message: `Failed to delete the list. Error: ${error}`
-        });
+          }
+        );
       } else if (project) {
-         response.json({
+         response.json(
+           {
            success: true,
            message: "Project deleted successfully."
-         });
+          }
+        );
       } 
       else {
         response.json({ success: false });

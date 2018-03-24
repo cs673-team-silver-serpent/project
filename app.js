@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const config = require('config');
 const projects = require('./controllers/projects-controller');
 const users = require('./controllers/users-controller');
+const sessions = require('./controllers/sessions-controlller');
 
 // initialize app variable
 let app = express();
@@ -49,7 +50,7 @@ app.get('/', (req,res) => {
 app.route('/view').get(projects.getAllProjects);
 
 // TODO: refactor route
-app.route("/viewOne/:id").get(projects.getProjectById);
+app.route("/view/:id").get(projects.getProjectById);
 
 // TODO: refactor route
 app.route("/add").post(projects.addProject);
@@ -63,6 +64,14 @@ app.route('/delete/:id').delete(projects.deleteProjectById);
 app.route("/addUser").post(users.addUser);
 app.route("/viewUsers").get(users.getAllUsers);
 app.route("/viewUser/:id").get(users.getUserById);
+
+
+/////////////////
+// Session Routes
+/////////////////
+app.route('/getSession/:userId').get(sessions.getSessionByUserId);
+app.route('/addSession').post(sessions.addSession);
+
 
 // start server
 app.listen(port, () => {

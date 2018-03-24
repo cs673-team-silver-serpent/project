@@ -1,5 +1,7 @@
 const express = require('express');
 const User = require('../models/users-model');
+// TODO
+// const apiQuery = require('api-query-params');
 
 getAllUsers = (request, response) => {
     let query = User.find();
@@ -14,7 +16,7 @@ getAllUsers = (request, response) => {
 
 getUserById = (request, response) => {
     let id = request.params.id;
-    let query = User.find({ _id: id });
+    let query = User.find({_id: id});
     query.exec((error,user) => {
       if (error) { 
         response.send(error);
@@ -24,6 +26,18 @@ getUserById = (request, response) => {
     });
   }
 
+// TODO: figure out how to query by parameters
+// getUserByFilter = (request, response) => {
+//   let filter = JSON.stringify(request.params.filter);
+//   let query = User.find({filter});
+//   query.exec((error,user) => {
+//     if (error) { 
+//       response.send(error);
+//     } else {
+//       response.json(user);
+//     }
+//   });
+// }
 
 // TODO: figure out how to instantiate Project Id and reference them as an array
 addUser = (request, response) => {

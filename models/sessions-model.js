@@ -1,7 +1,7 @@
 // require mongoose
 let mongo = require("mongoose");
 let ObjectId = mongo.Schema.Types.ObjectId;
-let users = require("../models/Users-model");
+let users = require("../models/users-model");
 User = users.Users; 
 
 // Sessions schema
@@ -17,8 +17,7 @@ const SessionsSchema = mongo.Schema({
   },
   expirationDate: {
     type: Date,
-    required: true,
-    default: Date.now + 2*24*60*60*1000   
+    required: true  
   }
   
 });
