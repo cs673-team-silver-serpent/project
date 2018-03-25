@@ -195,6 +195,7 @@ describe('Project Tests', () => {
  //Test case id:
    //Test Case summary: Delete a project that doesn't exist
    //Test Case type:
+
 //*** Uncomment when the code is fixed ***//
 //    describe('DELETE project', () => {
 //     it('Delete a project that doesnt exist', (done) => {

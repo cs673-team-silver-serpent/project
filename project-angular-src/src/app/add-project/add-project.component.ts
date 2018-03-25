@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Project } from '../models/Project';
+import { NewProject } from '../models/Project';
 import { ProjectService } from '../services/project.service';
+import { ViewChild } from '@angular/core/src/metadata/di';
 
 @Component({
   selector: 'app-add-project',
@@ -8,28 +9,43 @@ import { ProjectService } from '../services/project.service';
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent implements OnInit {
-  private newProject: Project;
-  @Output() addProject: EventEmitter<Project> = new EventEmitter<Project>();
-  constructor(private projectServ: ProjectService) { }
+  private newProject: NewProject;
+  @Output() projectAdded: EventEmitter<NewProject> = new EventEmitter<NewProject>();
+
+
+
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
     this.newProject = {
-      _id: '',
+      owner: '',
       projectName: '',
       projectDescription: '',
-      repositoryLink: ''
+      projectMembers: '',
+      techStack: [],
+      repositoryLink: '',
+      projectDemo: '',
+      labels: []
     };
   }
 
-  public onSubmit() {
-    console.log(this.newProject.projectName);
-    this.projectServ.addProject(this.newProject).subscribe(
+  public onCreateNewProject() {
+    console.log(this.newProject);
+    this.projectService.addProject(this.newProject).subscribe(
       response => {
-          if (response) {
-            this.addProject.emit(this.newProject);
-          }
-      },
-    );
+        console.log(response);
+        this.projectAdded.emit(this.newProject);
+        this.newProject = {
+          owner: '',
+          projectName: '',
+          projectDescription: '',
+          projectMembers: '',
+          techStack: [],
+          repositoryLink: '',
+          projectDemo: '',
+          labels: []
+        };
+        
+    });
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-project-search',
@@ -12,10 +12,15 @@ export class ProjectSearchComponent implements OnInit {
     {id: 'CS566', department: 'MET', name: 'Analysis of Algorithms'},
     {id: 'CS575', department: 'MET', name: 'Operating Systems'}
   ]
+  search: String = 'test';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSearch() {
+    console.log("SUBMITTED", this.search);
   }
 
 }
