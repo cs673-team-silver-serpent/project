@@ -68,6 +68,7 @@ app.route("/users").get(users.getAllUsers);
 app.route("/user/id/:id").get(users.getUserById);
 app.route("/user/firstName/:firstName").get(users.getUserByFirstName);
 app.route("/user/lastName/:lastName").get(users.getUserByLastName);
+app.route("/user/token/:email").get(users.getUserTokenByUserEmail);
 
 /////////////////
 // Session Routes

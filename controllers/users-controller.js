@@ -1,17 +1,19 @@
 const express = require('express');
 const User = require('../models/users-model');
+const Session = require('../models/sessions-model');
+
 // TODO
 // const apiQuery = require('api-query-params');
 
 getAllUsers = (request, response) => {
-    let query = User.find();
-    query.exec((error, users) => {
+    User.find( {}, { _id: 0, password: 0} )
+        .exec((error, users) => {
       if (error) {
         response.send(error);
       } else if (users) {
         response.json(users);
       } else {
-        response.json({ success: false });
+        response.json( {success: false} );
       }
     });
 }
@@ -19,20 +21,39 @@ getAllUsers = (request, response) => {
 // TODO
 // Get user by email, check that passwords match
 // send OK or No-go response along with new token
-// getUserTokenByUserEmail = 
+getUserTokenByUserEmail = (request, response) => {
+  const email = request.params.email;
+  let query = User.find({ email: email}, { password: 0 });
+  query.exec();
+  query.then ( (user) => {
+      let userId = user[0]._id;
+      Session.find({userId: userId}, {_id: 0, userId: 0} )
+      .exec(
+        (error,session) => {
+          if (error) {
+            response.send(error);
+          } else if (session) {
+            response.json({session});
+          } else {
+            response.json( {success: false} );
+          }
+      } 
+      );
 
+  });
+}
 
 getUserById = (request, response) => {
     let id = request.params.id;
-    let query = User.find({_id: id});
-    query.exec((error,user) => {
-      if (error) { 
-        response.send(error);
-      } else if (user) {
-        response.json(user);
-      } else {
-        response.json({ success: false });
-      }
+    User.find( { _id: id}, { _id: 0, password: 0 } )
+        .exec((error,user) => {
+          if (error) { 
+            response.send(error);
+          } else if (user) {
+            response.json(user);
+          } else {
+            response.json( {success: false} );
+          }
     });
   }
 
@@ -40,14 +61,14 @@ getUserById = (request, response) => {
 getUserByFirstName = (request, response) => {
   let firstName = request.params.firstName;
   let firstNameRegEx = new RegExp('.*' + firstName + '.*','i')
-  let query = User.find({ firstName : firstNameRegEx });
-  query.exec((error,user) => {
+  User.find( {firstName: firstNameRegEx }, {_id:0,password:0} )
+      .exec((error,user) => {
     if (error) { 
       response.send(error);
     } else if (user) {
       response.json(user);
     } else {
-      response.json({ success: false });
+      response.json( {success: false} );
     }
   });
 }
@@ -55,8 +76,8 @@ getUserByFirstName = (request, response) => {
 getUserByLastName = (request, response) => {
   let lastName = request.params.lastName;
   let lastNameRegEx = new RegExp('.*' + lastName + '.*','i')
-  let query = User.find({ lastName : lastNameRegEx });
-  query.exec((error,user) => {
+  User.find({ lastName : lastNameRegEx }, {_id: 0, password: 0} )
+      .exec((error,user) => {
     if (error) { 
       response.send(error);
     } else if (user) {
@@ -102,4 +123,5 @@ addUser = (request, response) => {
     });
   }
 
-  module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers };
+  module.exports = { addUser, getUserById, getUserByFirstName, 
+    getUserByLastName, getAllUsers, getUserTokenByUserEmail };

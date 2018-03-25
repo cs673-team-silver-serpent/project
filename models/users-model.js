@@ -6,6 +6,9 @@ Project = project.Project;
 
 // Users schema
 const UsersSchema = mongo.Schema({
+  _id: {
+    type: ObjectId
+  },
   firstName: {
     type: String,
     required: true

@@ -16,8 +16,8 @@ getSessionByUserId = (request, response) => {
 
 //         });
 
-    let query = Session.find({userId: userId});
-    query.exec((error,sessions) => {
+    Session.find({userId: userId})
+            .exec((error,sessions) => {
         if (error) {
             response.send(error);
         } else if (sessions) {

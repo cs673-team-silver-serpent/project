@@ -15,11 +15,17 @@ Comments = comments.Comments;
 // TODO: owner should be of type: Users._id
 // define ProjectPortalSchema
 const ProjectsSchema = mongo.Schema({
+    _id: {
+        type: ObjectId,
+        required: true
+    },
     dateCreated: {
-        type: Date
+        type: Date,
+        required: true
     },
     owner: {
-        type: String
+        type: String,
+        required: true
     },
     dateModified: {
         type: Date

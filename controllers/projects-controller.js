@@ -2,8 +2,8 @@ let express = require('express');
 let Project = require('../models/projects-model');
 
 getAllProjects = (request, response) => {
-    let query = Project.find();
-    query.exec((error, projects) => {
+    Project.find({},{_id: 0})
+           .exec((error, projects) => {
       if (error) {
         response.send(error);
       } else if (projects) {
@@ -16,8 +16,8 @@ getAllProjects = (request, response) => {
 
 getProjectById = (request, response) => {
   let id = request.params.id;
-  let query = Project.find({ _id: id });
-  query.exec((error,project) => {
+  Project.find({ _id: id },{_id: 0})
+         .exec((error,project) => {
     if (error) { 
       response.send(error);
     } else if (project) {
@@ -33,8 +33,8 @@ getProjectByProjectName = (request, response) => {
   let projectName = request.params.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
   console.log(projectNameRegEx);
-  let query = Project.find({ projectName: projectNameRegEx });
-  query.exec((error,project) => {
+  Project.find({ projectName: projectNameRegEx },{_id: 0})
+         .exec((error,project) => {
     if (error) { 
       response.send(error);
     } else if (project) {
@@ -48,8 +48,8 @@ getProjectByProjectName = (request, response) => {
 getProjectByProjectDescription = (request, response) => {
   let projectDescription = request.params.projectDescription;
   let projectDescriptionRegEx = new RegExp('.*' + projectDescription + '.*','i');
-  let query = Project.find({ projectDescription: projectDescriptionRegEx } );
-  query.exec((error,project) => {
+  Project.find({ projectDescription: projectDescriptionRegEx }, {_id: 0} )
+         .exec((error,project) => {
     if (error) { 
       response.send(error);
     } else if (project) {
@@ -64,7 +64,7 @@ getProjectByProjectDescription = (request, response) => {
 
 addProject = (request, response) => {
   let dateCreated = new Date(Date.now());
-  let newProject = new Project(
+  new Project(
     {
     dateCreated: dateCreated,
     projectName: request.body.projectName,
@@ -76,9 +76,7 @@ addProject = (request, response) => {
     projectDemo: request.body.projectDemo,
     labels: request.body.labels
     }
-  );
-
-  newProject.save((error, project) => {
+  ).save((error, project) => {
     if (error) {
       response.json({success: false, message: `Failed to create a new list. Error: ${error}`});
     } else {
@@ -92,22 +90,11 @@ deleteProjectById = (request,response) => {
   let query = {_id: id};
   Project.remove(query, (error, project) => {
       if (error) {
-        response.json(
-          {
-          success: false,
-          message: `Failed to delete the list. Error: ${error}`
-          }
-        );
+        response.json({success: false, message: `Failed to delete the project. Error: ${error}`});
       } else if (project) {
-         response.json(
-           {
-           success: true,
-           message: "Project deleted successfully."
-          }
-        );
-      } 
-      else {
-        response.json({ success: false });
+         response.json({success: true, message: "Project deleted successfully."});
+      } else { 
+        response.json({ success: false }); 
       }
   });
 }
