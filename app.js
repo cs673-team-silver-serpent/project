@@ -46,8 +46,10 @@ app.get('/', (req,res) => {
 //////////////////
 // Project Routes
 /////////////////
-// TODO: refactor route
+// TODO: refactor routes
 app.route('/view').get(projects.getAllProjects);
+app.route('/project/name/:projectName').get(projects.getProjectByProjectName);
+app.route('/project/description/:projectDescription').get(projects.getProjectByProjectDescription);
 
 // TODO: refactor route
 app.route("/view/:id").get(projects.getProjectById);
@@ -61,16 +63,17 @@ app.route('/delete/:id').delete(projects.deleteProjectById);
 ///////////////
 // User Routes
 ///////////////
-app.route("/addUser").post(users.addUser);
-app.route("/viewUsers").get(users.getAllUsers);
-app.route("/viewUser/:id").get(users.getUserById);
-
+app.route("/user").post(users.addUser);
+app.route("/users").get(users.getAllUsers);
+app.route("/user/id/:id").get(users.getUserById);
+app.route("/user/firstName/:firstName").get(users.getUserByFirstName);
+app.route("/user/lastName/:lastName").get(users.getUserByLastName);
 
 /////////////////
 // Session Routes
 /////////////////
-app.route('/getSession/:userId').get(sessions.getSessionByUserId);
-app.route('/addSession').post(sessions.addSession);
+app.route('/session/userId/:userId').get(sessions.getSessionByUserId);
+app.route('/session').post(sessions.addSession);
 
 
 // start server

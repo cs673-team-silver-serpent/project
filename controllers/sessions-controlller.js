@@ -20,8 +20,10 @@ getSessionByUserId = (request, response) => {
     query.exec((error,sessions) => {
         if (error) {
             response.send(error);
-        } else {
+        } else if (sessions) {
             response.json(sessions);
+        } else {
+            response.json({ success: false });
         }
     });
 }

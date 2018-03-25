@@ -8,8 +8,10 @@ getAllUsers = (request, response) => {
     query.exec((error, users) => {
       if (error) {
         response.send(error);
-      } else {
+      } else if (users) {
         response.json(users);
+      } else {
+        response.json({ success: false });
       }
     });
 }
@@ -20,11 +22,46 @@ getUserById = (request, response) => {
     query.exec((error,user) => {
       if (error) { 
         response.send(error);
-      } else {
+      } else if (user) {
         response.json(user);
+      } else {
+        response.json({ success: false });
       }
     });
   }
+
+// Temporary functions for Iteration 2 presentation only
+getUserByFirstName = (request, response) => {
+  let firstName = request.params.firstName;
+  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i')
+  let query = User.find({ firstName : firstNameRegEx });
+  query.exec((error,user) => {
+    if (error) { 
+      response.send(error);
+    } else if (user) {
+      response.json(user);
+    } else {
+      response.json({ success: false });
+    }
+  });
+}
+
+getUserByLastName = (request, response) => {
+  let lastName = request.params.lastName;
+  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i')
+  let query = User.find({ lastName : lastNameRegEx });
+  query.exec((error,user) => {
+    if (error) { 
+      response.send(error);
+    } else if (user) {
+      response.json(user);
+    } else {
+      response.json({ success: false });
+    }
+  });
+}
+// end of temporary functions
+
 
 // TODO: figure out how to query by parameters
 // getUserByFilter = (request, response) => {
@@ -58,4 +95,4 @@ addUser = (request, response) => {
     });
   }
 
-  module.exports = { addUser, getUserById, getAllUsers };
+  module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers };

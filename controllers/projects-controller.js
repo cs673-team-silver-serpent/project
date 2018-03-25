@@ -6,10 +6,11 @@ getAllProjects = (request, response) => {
     query.exec((error, projects) => {
       if (error) {
         response.send(error);
-      } else {
+      } else if (projects) {
         response.json(projects);
+      } else {
+        response.json({ success: false });
       }
-      
     });
 }
 
@@ -19,11 +20,47 @@ getProjectById = (request, response) => {
   query.exec((error,project) => {
     if (error) { 
       response.send(error);
-    } else {
+    } else if (project) {
       response.json(project);
+    } else {
+      response.json({ success: false });
     }
   });
 }
+
+// Temporary functions for Iteration 2 Presentation
+getProjectByProjectName = (request, response) => {
+  let projectName = request.params.projectName;
+  let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
+  console.log(projectNameRegEx);
+  let query = Project.find({ projectName: projectNameRegEx });
+  query.exec((error,project) => {
+    if (error) { 
+      response.send(error);
+    } else if (project) {
+      response.json(project);
+    } else {
+      response.json({ success: false });
+    }
+  });
+}
+
+getProjectByProjectDescription = (request, response) => {
+  let projectDescription = request.params.projectDescription;
+  let projectDescriptionRegEx = new RegExp('.*' + projectDescription + '.*','i');
+  let query = Project.find({ projectDescription: projectDescriptionRegEx } );
+  query.exec((error,project) => {
+    if (error) { 
+      response.send(error);
+    } else if (project) {
+      response.json(project);
+    } else {
+      response.json({ success: false });
+    }
+  });
+}
+// end temporary functions
+
 
 addProject = (request, response) => {
   let dateCreated = new Date(Date.now());
@@ -75,4 +112,5 @@ deleteProjectById = (request,response) => {
   });
 }
 
-module.exports = { addProject, deleteProjectById, getAllProjects, getProjectById };
+module.exports = { addProject, deleteProjectById, getAllProjects, getProjectById,
+  getProjectByProjectName, getProjectByProjectDescription };
