@@ -4,3 +4,11 @@ node_modules/
 project.iml
 .DS_Store
 npm-debug.log
+*.json
+*.css
+*.html
+*.png
+*.info
+test/coverage/lcov-report/sorter.js
+test/coverage/lcov-report/prettify.js
+package.json
