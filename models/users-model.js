@@ -19,6 +19,10 @@ const UsersSchema = mongo.Schema({
     type: String,
     required: true
   },
+  password: {
+    type: String,
+    required: true
+  },
   favorites: {
      type: ObjectId,
      ref: 'Project'
