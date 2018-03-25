@@ -16,6 +16,11 @@ getAllUsers = (request, response) => {
     });
 }
 
+// TODO
+// Get user by email, check that passwords match
+// send OK or No-go response
+// getUserByEmail = 
+
 getUserById = (request, response) => {
     let id = request.params.id;
     let query = User.find({_id: id});
