@@ -19,12 +19,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   authenticateUser() {
-    console.log("Authenticating");
-    this.userSessionService.signInUser();
-    console.log(this.userSessionService.user);
+    var email = 'ben@foundingfathers.com';
+    var password = 'password';
 
+    this.userSessionService.signInUser(email, password);
     this.router.navigate(['/home']);
 
   }
+
+
+
 
 }

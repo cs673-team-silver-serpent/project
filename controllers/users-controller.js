@@ -102,4 +102,47 @@ addUser = (request, response) => {
     });
   }
 
-  module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers };
+authenticateUser = (request, response) => {
+  // given a email and passwordHash
+  let _email = request.body.email;
+  let _password = request.body.password;
+  var userSession = {
+    user: '',
+    session: ''
+  };
+  console.log("1.  _email: ", _email, " _password: ", _password);
+  let query = User.find({ email : _email });
+  query.exec((error,user) => {
+    if (error) { 
+      response.send(error);
+    } else if (user) {
+      user = user[0];  // mongo seems to return a list of objects even if there is only one object
+      if (user.password === _password) {
+        userSession.user = user;
+
+
+
+        response.json(user);
+      }
+      else {
+        response.send(401, "Wrong Password");
+      }
+      
+
+    } else {
+      response.json({ success: false });
+    }
+  });
+  
+  
+  // check to see that the passwordHash matches what is in the database
+
+  // if passwordHash is equal to password in the database
+    // create new session 
+    //return user object and session object
+
+  // if passwordHash is not equal
+    // return 401
+}
+
+  module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };

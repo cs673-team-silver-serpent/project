@@ -7,13 +7,11 @@ getSessionByUserId = (request, response) => {
 //     let cursor = Session.find({userId:userId}).cursor();
 //     cursor
 //         .on('data',(doc) => {
-
 //         })
 //         .on('error', () => {
 //             response.send(error);
 //         })
 //         .on('close', () => {
-
 //         });
 
     let query = Session.find({userId: userId});
@@ -35,7 +33,7 @@ addSession = (request, response) => {
     expirationDate.setDate(now.getDate() + 2);
     
     let newSession = new Session(
-        { 
+        {
         userId: request.body.userId,
         sessionToken: request.body.token,
         expirationDate: expirationDate 

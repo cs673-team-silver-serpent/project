@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User, Roles } from '../models/User';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -7,52 +9,27 @@ export class UserSessionService {
   user: User;
   isLoggedIn: Boolean= false;
   userToken: String;
+  baseURL = 'http://localhost:3000';
 
-  //password: String;
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  signInUser(email: String, passwordHash: String): Observable<any> {
+    var userAuth = {
+      email: email,
+      password: passwordHash
+    };
+    return this.http.get(`${this.baseURL}/`)
+    //send email and password hash to check if correct
 
-  // Signs the user in and updates the service
-  signInUser() {
-
-
-    // submitted an email and password
-
-    // hash the password
-
-    // auth with backend user session service
-      // back end will check to see that the hash of submitted is the same 
-      //get a token back (based off of hash of password)
-    // store that token in this.userToken
-
-    var andy: User = {
-      firstName: 'Andy',
-      lastName: 'OConnell',
-      title: 'titleStudent',
-      email: 'aoconnel@bu.edu',
-      role: Roles.user,
-    }
-    this.user = andy;
-    this.userToken = '1234kjh457ljhkg5436mn23456j2hg';
-    //this.password = this.hashPassword("Very Secure Password")  //Post Hashed Password
-    
-    // after getting a token from express
-    this.isLoggedIn = true;
-  }
-
-
-  hashPassword(password: String): String {
-    //Some funtions that does the hash and return it
-    return 'ThisIsThePostPasswordHashThatWillBeStoredInMongo';
+    // succ will either get success with user and session 
+    // fail will get an error
   }
 
   signOutUser() {
-    //sign out user from express
+  }
 
-    //clear the user information
-    this.user = null;
-    this.userToken = null;
-
-    
+  hashPassword(password: String): String {
+    //Some funtions that does the hash and return it
+    return '5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8';
   }
 }
