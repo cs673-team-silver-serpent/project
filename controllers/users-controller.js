@@ -18,8 +18,9 @@ getAllUsers = (request, response) => {
 
 // TODO
 // Get user by email, check that passwords match
-// send OK or No-go response
-// getUserByEmail = 
+// send OK or No-go response along with new token
+// getUserTokenByUserEmail = 
+
 
 getUserById = (request, response) => {
     let id = request.params.id;
@@ -88,6 +89,7 @@ addUser = (request, response) => {
       lastName: request.body.lastName,
       title: request.body.title,
       email: request.body.email,
+      password: request.body.password,
       favorites: request.body.favorites,
       role: request.body.role,
     });
