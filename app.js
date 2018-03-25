@@ -1,11 +1,13 @@
-let express = require('express');
-let path = require('path');
-let bodyParser = require('body-parser');
-let cors = require('cors');
-let mongo = require('mongoose');
-let morgan = require("morgan");
-let config = require('config');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongo = require('mongoose');
+const morgan = require("morgan");
+const config = require('config');
 const projects = require('./controllers/projects-controller');
+const users = require('./controllers/users-controller');
+const sessions = require('./controllers/sessions-controlller');
 
 // initialize app variable
 let app = express();
@@ -41,13 +43,37 @@ app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
 });
 
+//////////////////
+// Project Routes
+/////////////////
+// TODO: refactor routes
 app.route('/view').get(projects.getAllProjects);
+app.route('/project/name/:projectName').get(projects.getProjectByProjectName);
+app.route('/project/description/:projectDescription').get(projects.getProjectByProjectDescription);
 
+// TODO: refactor route
 app.route("/view/:id").get(projects.getProjectById);
 
+// TODO: refactor route
 app.route("/add").post(projects.addProject);
 
+// TODO: refactor route
 app.route('/delete/:id').delete(projects.deleteProjectById);
+
+///////////////
+// User Routes
+///////////////
+app.route("/user").post(users.addUser);
+app.route("/users").get(users.getAllUsers);
+app.route("/user/id/:id").get(users.getUserById);
+app.route("/user/firstName/:firstName").get(users.getUserByFirstName);
+app.route("/user/lastName/:lastName").get(users.getUserByLastName);
+
+/////////////////
+// Session Routes
+/////////////////
+app.route('/session/userId/:userId').get(sessions.getSessionByUserId);
+app.route('/session').post(sessions.addSession);
 
 
 // start server
