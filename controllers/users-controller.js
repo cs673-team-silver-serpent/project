@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/users-model');
+const hash = require('hash.js');
 // TODO
 // const apiQuery = require('api-query-params');
 
@@ -103,9 +104,8 @@ addUser = (request, response) => {
   }
 
 authenticateUser = (request, response) => {
-  // given a email and passwordHash
   let _email = request.body.email;
-  let _password = request.body.password;
+  let _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
   var userSession = {
     user: '',
     session: ''
@@ -119,16 +119,11 @@ authenticateUser = (request, response) => {
       user = user[0];  // mongo seems to return a list of objects even if there is only one object
       if (user.password === _password) {
         userSession.user = user;
-
-
-
         response.json(user);
       }
       else {
         response.send(401, "Wrong Password");
       }
-      
-
     } else {
       response.json({ success: false });
     }
