@@ -1,7 +1,6 @@
 const express = require('express');
 const User = require('../models/users-model');
 const Session = require('../models/sessions-model');
-
 // TODO
 // const apiQuery = require('api-query-params');
 
@@ -18,33 +17,30 @@ getAllUsers = (request, response) => {
     });
 }
 
-// TODO
-// Get user by email, check that passwords match
-// send OK or No-go response along with new token
-getUserTokenByUserEmail = (request, response) => {
-  const email = request.params.email;
-  let query = User.find({ email: email}, { password: 0 });
-  query.exec();
-  query.then ( (user) => {
-      let userId = user[0]._id;
-      Session.find({userId: userId}, {_id: 0, userId: 0} )
-      .exec(
-        (error,session) => {
-          if (error) {
-            response.send(error);
-          } else if (session) {
-            response.json({session});
-          } else {
-            response.json( {success: false} );
-          }
-      } 
-      );
-
-  });
-}
+// This function may be irrelevant, given Andy's implemntation of authenticateUser
+// getUserToken = (request, response) => {
+//   const email = request.params.email;
+//   let query = User.find({ email: email}, {_id: 0, password: 0 });
+//   query.exec();
+//   query.then ( (user) => {
+//       let userId = user[0]._id;
+//       Session.find({userId: userId}, {_id: 0, userId: 0} )
+//       .exec(
+//         (error,session) => {
+//           if (error) {
+//             response.send(error);
+//           } else if (session) {
+//             response.json({session});
+//           } else {
+//             response.json( {success: false} );
+//           }
+//       } 
+//       );
+//   });
+// }
 
 getUserById = (request, response) => {
-    let id = request.params.id;
+    let id = request.body.id;
     User.find( { _id: id}, { _id: 0, password: 0 } )
         .exec((error,user) => {
           if (error) { 
@@ -59,9 +55,9 @@ getUserById = (request, response) => {
 
 // Temporary functions for Iteration 2 presentation only
 getUserByFirstName = (request, response) => {
-  let firstName = request.params.firstName;
+  let firstName = request.body.firstName;
   let firstNameRegEx = new RegExp('.*' + firstName + '.*','i')
-  User.find( {firstName: firstNameRegEx }, {_id:0,password:0} )
+  User.find( {firstName: firstNameRegEx }, { _id: 0, password: 0 } )
       .exec((error,user) => {
     if (error) { 
       response.send(error);
@@ -74,7 +70,7 @@ getUserByFirstName = (request, response) => {
 }
 
 getUserByLastName = (request, response) => {
-  let lastName = request.params.lastName;
+  let lastName = request.body.lastName;
   let lastNameRegEx = new RegExp('.*' + lastName + '.*','i')
   User.find({ lastName : lastNameRegEx }, {_id: 0, password: 0} )
       .exec((error,user) => {
@@ -89,21 +85,6 @@ getUserByLastName = (request, response) => {
 }
 // end of temporary functions
 
-
-// TODO: figure out how to query by parameters
-// getUserByFilter = (request, response) => {
-//   let filter = JSON.stringify(request.params.filter);
-//   let query = User.find({filter});
-//   query.exec((error,user) => {
-//     if (error) { 
-//       response.send(error);
-//     } else {
-//       response.json(user);
-//     }
-//   });
-// }
-
-// TODO: figure out how to instantiate Project Id and reference them as an array
 addUser = (request, response) => {
     let newUser = new User({
       firstName: request.body.firstName,

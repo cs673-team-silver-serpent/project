@@ -46,34 +46,32 @@ app.get('/', (req,res) => {
 //////////////////
 // Project Routes
 /////////////////
+// administrative routes
+app.route('/projects').get(projects.getAllProjects);
+app.route('/delete/:id').delete(projects.deleteProjectById); // administrative at the moment
 // TODO: refactor routes
-app.route('/view').get(projects.getAllProjects);
+// user-facing routes
 app.route('/project/name/:projectName').get(projects.getProjectByProjectName);
 app.route('/project/description/:projectDescription').get(projects.getProjectByProjectDescription);
-
-// TODO: refactor route
 app.route("/view/:id").get(projects.getProjectById);
-
-// TODO: refactor route
 app.route("/add").post(projects.addProject);
-
-// TODO: refactor route
-app.route('/delete/:id').delete(projects.deleteProjectById);
 
 ///////////////
 // User Routes
 ///////////////
-app.route("/user").post(users.addUser);
+// administrative route
 app.route("/users").get(users.getAllUsers);
-app.route("/user/id/:id").get(users.getUserById);
-app.route("/user/firstName/:firstName").get(users.getUserByFirstName);
-app.route("/user/lastName/:lastName").get(users.getUserByLastName);
-app.route("/user/token/:email").get(users.getUserTokenByUserEmail);
+// user-facing routes
+app.route("/user").post(users.addUser);
+app.route("/user/id").post(users.getUserById);
+app.route("/user/firstName").post(users.getUserByFirstName);
+app.route("/user/lastName").post(users.getUserByLastName);
 
 /////////////////
 // Session Routes
 /////////////////
-app.route('/session/userId/:userId').get(sessions.getSessionByUserId);
+// user-facing routes
+app.route('/session/userId').post(sessions.getSessionByUserId);
 app.route('/session').post(sessions.addSession);
 
 

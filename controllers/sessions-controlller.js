@@ -3,7 +3,7 @@ const Session = require('../models/sessions-model');
 
 // TODO: figure out mongoose cursors interface
 getSessionByUserId = (request, response) => {
-     let userId = request.params.userId;
+     let userId = request.body.userId;
 //     let cursor = Session.find({userId:userId}).cursor();
 //     cursor
 //         .on('data',(doc) => {
@@ -16,7 +16,7 @@ getSessionByUserId = (request, response) => {
 
 //         });
 
-    Session.find({userId: userId})
+    Session.find({userId: userId},{ _id: 0})
             .exec((error,sessions) => {
         if (error) {
             response.send(error);
