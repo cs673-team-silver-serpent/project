@@ -15,41 +15,25 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     console.log("test",this.userSessionService.user);
-
   }
 
   authenticateUser() {
+    var email = 'ben@foundingfathers.com';
+    var password = 'password';
 
+    this.userSessionService.authenticate(email, password).subscribe(
+      (user) => {
+        console.log("login-page response: ", user);
+        this.userSessionService.logInUser(user);
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        console.log("Error: ", error);
+      });
 
-    /*
-    1. Check is username is valid (present in the database)
-    2. If 1 is true, user enters password
-    3. Verify the password and provide access token
-    4. Create session with a timeout (ask the team about cookies security)
-    5.
-
-    */ 
-
-    /*myvar=false;
-   setTimeout(()=>{
-     this.myvar=true;
-   },2000);*/
-
-    console.log("Authenticating");
-    this.userSessionService.signInUser();
-    console.log(this.userSessionService.user);
-
-    this.router.navigate(['/home']);
+    // if ( result ) {
+    //   this.router.navigate(['/home']);
+    // }
 
   }
-
-  redirect_register(){
-    this.router.navigate(['/register'])
-  }
-
-
-  loginwithGoogle(){
-    
-  }
-
 }

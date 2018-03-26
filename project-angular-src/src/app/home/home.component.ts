@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSessionService } from '../services/user-session.service';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,11 @@ import { UserSessionService } from '../services/user-session.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn: Boolean;
+  user = this.userSessionService.user;
 
   constructor(private userSessionService: UserSessionService) { }
 
   ngOnInit() {
-    console.log(this.userSessionService.user);
-    if(this.userSessionService.isLoggedIn){
-      this.isLoggedIn = true;
-    }
+    console.log("home.component user: ", this.user);
   }
 }
