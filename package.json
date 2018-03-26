@@ -12,6 +12,7 @@
     "@angular/material": "^5.1.1",
     "ajv": "^6.1.1",
     "api-query-params": "^4.5.1",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "config": "^1.29.4",
     "cors": "^2.8.4",

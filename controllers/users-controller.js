@@ -1,8 +1,7 @@
 const express = require('express');
 const User = require('../models/users-model');
-const Session = require('../models/sessions-model');
+const session = require('../controllers/sessions-controlller');
 const hash = require('hash.js');
-const randonWord = require('random-word');
 
 // TODO
 // const apiQuery = require('api-query-params');
@@ -89,42 +88,30 @@ addUser = (request, response) => {
 authenticateUser = (request, response) => {
   const _email = request.body.email;
   const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
-  let query = User.find({ email : _email });
-  query.exec((error,user) => {
-    if (error) { 
-      response.send(error);
-    } else if (user) {
-      user = user[0];  // mongo seems to return a list of objects even if there is only one object
-      if (user.password === _password) {
-        response.json(user);
-      }
-      else {
-        response.send(401, "Wrong Password");
-      }
+  let query = User.find({ email : _email },{__v: 0}).exec();
+  query.then( (user) => {                                   // wait for query promise to return
+    return user                                             // then return user
+  })
+  .then( (user)  => {                                       // handle user after it's returned
+    if (user[0].password == _password) { // mongo queries return cursors; only one object in this cursor so user[0].
+      let newSession = session.createSession(user[0]._id);  // create user session
+      newSession.save();                                    // save  session
+      var userReturned = {                                  // user object has id & password
+        firstName: user[0].firstName,                       // so remove them by constructing userReturned
+        lastName: user[0].lastName,                         // object, which is what is returned
+        email: user[0].email,
+        title: user[0].title,
+        favorites: user[0].favorites,
+        role: user[0].role
+      };
+      response.json(userReturned);  
     } else {
-      response.json({ success: false });
+      response.status(401).send("Wrong Password");    
     }
-  });
-  query.then ( (user) => {
-    const userId = user[0]._id;
-    const token = hash.sha256().update(randonWord()).digest('hex').toUpperCase();
-    let newSession = new Session(
-      {
-      userId: userId,
-      sessionToken: token,
-      expirationDate: expirationDate 
-      }
-    );
-    newSession.save((error,session) => {
-        if (error) {
-            response.json({success: false, message: `Failed to create new session. Error: ${error}`});
-        } else {
-            response.json({success: true, message: 'Session created successfully.'});
-        }
-    });
+  })
+  .catch( (error) => {
+    response.send(error);
   });
 }
 
-
-
-  module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };
+module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };
