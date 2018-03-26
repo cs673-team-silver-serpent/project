@@ -96,7 +96,7 @@ authenticateUser = (request, response) => {
     if (user[0].password == _password) { // mongo queries return cursors; only one object in this cursor so user[0].
       let newSession = session.createSession(user[0]._id);  // create user session
       newSession.save();                                    // save  session
-      var userReturned = {                                  // user object has id & password
+      let userReturned = {                                  // user object has id & password
         firstName: user[0].firstName,                       // so remove them by constructing userReturned
         lastName: user[0].lastName,                         // object, which is what is returned
         email: user[0].email,
