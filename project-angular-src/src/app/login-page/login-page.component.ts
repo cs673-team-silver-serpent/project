@@ -18,22 +18,27 @@ export class LoginPageComponent implements OnInit {
   }
 
   authenticateUser() {
-    var email = 'ben@foundingfathers.com';
+   var email = 'ben@foundingfathers.com';
     var password = 'password';
 
     this.userSessionService.authenticate(email, password).subscribe(
       (user) => {
         console.log("login-page response: ", user);
         this.userSessionService.logInUser(user);
-        this.router.navigate(['/home']);
       },
       (error) => {
         console.log("Error: ", error);
-      });
+      });                            
 
-    // if ( result ) {
-    //   this.router.navigate(['/home']);
-    // }
+    //  if ( result ) {
+    //    this.router.navigate(['/home']);
+    //  }
 
+  }
+
+
+  //Redirect the flow to Register page
+  redirect_register(){
+    this.router.navigate(['/register']);
   }
 }
