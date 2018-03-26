@@ -83,10 +83,14 @@ addProject = (request, response) => {
       response.json({success: true, message: "Project added successfully."});
     }
   });
+
+  // else 
+  // return unauth
 }
 
 deleteProjectById = (request,response) => {
   let id = request.params.id;
+  // request.headers['sessionid'] 
   let query = {_id: id};
   Project.remove(query, (error, project) => {
       if (error) {

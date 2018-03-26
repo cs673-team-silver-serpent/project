@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
 import { User, Roles } from '../models/User';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserSessionService {
   user: User;
-  userToken: String;
+  baseURL = 'http://localhost:3000';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  // Signs the user in and updates the service
-  signInUser() {
-    var andy: User = {
-      firstName: 'Andy',
-      middleName: 'J',
-      lastName: 'OConnell',
-      title: 'titleStudent',
-      email: 'aoconnel@bu.edu',
-      role: Roles.user,
-    }
-    this.user = andy;
-    this.userToken = '1234kjh457ljhkg5436mn23456j2hg';
+  authenticate(email: String, password: String): Observable<any> {
+    var userAuth = {
+      email: email,
+      password: password
+    };
+    
+    return this.http.post(`${this.baseURL}/user/auth`, userAuth);
   }
 
-  signOutUser() {
-    this.user = null;
-    this.userToken = null;
+  logInUser(user: User) {
+    this.user = user;
+  }
+
+  logOutUser() {
+    this.user = undefined;
   }
 
 
