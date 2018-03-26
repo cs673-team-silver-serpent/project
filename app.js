@@ -80,9 +80,3 @@ module.exports = app; // for teting purposes
 
 
 
-//ROUTE FOR LOCAL AUTH PASSPORT
-app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
-);

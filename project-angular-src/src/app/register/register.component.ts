@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import { Router } from '@angular/router';
-import { UserSessionService } from '../services/user-session.service';
+//import {MatFormFieldModule} from '@angular/material/form-field';
+//import {MatInputModule} from '@angular/material/input';
+//import {MatButtonModule} from '@angular/material/button';
+// import { Router } from '@angular/router';
+// import { UserSessionService } from '../services/user-session.service';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +12,7 @@ import { UserSessionService } from '../services/user-session.service';
 })
 export class RegisterComponent implements OnInit {
   status="";
-  constructor(private userSessionService: UserSessionService,
-    private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     
@@ -31,15 +30,7 @@ export class RegisterComponent implements OnInit {
     }
 */
 
-createNewAccount(){
-    
-    this.status="Account Created. Redirecting to the Login page...";
-    setTimeout(()=>{
-      this.router.navigate(['/login'])
-    },4000);
-
-
-    
+createNewAccount(){    
   }
 
 }
