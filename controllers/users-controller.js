@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/users-model');
 const Session = require('../models/sessions-model');
 const hash = require('hash.js');
+const randonWord = require('random-word');
 
 // TODO
 // const apiQuery = require('api-query-params');
@@ -66,12 +67,13 @@ getUserByLastName = (request, response) => {
 // end of temporary functions
 
 addUser = (request, response) => {
+    const passwordHash = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
     let newUser = new User({
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       title: request.body.title,
       email: request.body.email,
-      password: request.body.password,
+      password: passwordHash,
       favorites: request.body.favorites,
       role: request.body.role,
     });
@@ -85,13 +87,8 @@ addUser = (request, response) => {
   }
 
 authenticateUser = (request, response) => {
-  let _email = request.body.email;
-  let _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
-  var userSession = {
-    user: '',
-    session: ''
-  };
-  console.log("1.  _email: ", _email, " _password: ", _password);
+  const _email = request.body.email;
+  const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
   let query = User.find({ email : _email });
   query.exec((error,user) => {
     if (error) { 
@@ -99,7 +96,6 @@ authenticateUser = (request, response) => {
     } else if (user) {
       user = user[0];  // mongo seems to return a list of objects even if there is only one object
       if (user.password === _password) {
-        userSession.user = user;
         response.json(user);
       }
       else {
@@ -109,16 +105,26 @@ authenticateUser = (request, response) => {
       response.json({ success: false });
     }
   });
-  
-  
-  // check to see that the passwordHash matches what is in the database
-
-  // if passwordHash is equal to password in the database
-    // create new session 
-    //return user object and session object
-
-  // if passwordHash is not equal
-    // return 401
+  query.then ( (user) => {
+    const userId = user[0]._id;
+    const token = hash.sha256().update(randonWord()).digest('hex').toUpperCase();
+    let newSession = new Session(
+      {
+      userId: userId,
+      sessionToken: token,
+      expirationDate: expirationDate 
+      }
+    );
+    newSession.save((error,session) => {
+        if (error) {
+            response.json({success: false, message: `Failed to create new session. Error: ${error}`});
+        } else {
+            response.json({success: true, message: 'Session created successfully.'});
+        }
+    });
+  });
 }
+
+
 
   module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };
