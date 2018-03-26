@@ -56,6 +56,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
   ],
+  declarations: [RegisterComponent],
 })
 export class DemoMaterialModule {}
 

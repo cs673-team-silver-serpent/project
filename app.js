@@ -56,3 +56,33 @@ app.listen(port, () => {
 });
 
 module.exports = app; // for teting purposes
+
+
+
+//-------------------------------GOOGLE APP LOGIN------------------------------------
+// app.get('/login',(req, res)=>{
+//     res.send('login');
+// });
+
+// //register
+// app.get('/register',(req, res)=>{
+//     res.send('This is the register page');
+// });
+// //-----------------------------------------------------------------------------------
+
+//--------------GOOGLE LOGIN---------------------------------------------------------
+// const ideas= require('./routes/login');
+
+
+
+//link register.js to app.js
+
+
+
+
+//ROUTE FOR LOCAL AUTH PASSPORT
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);

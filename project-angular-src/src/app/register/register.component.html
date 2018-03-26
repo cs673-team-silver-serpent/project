@@ -1,0 +1,50 @@
+<!-- 
+
+
+<div class="container">
+  <mat-form-field>
+    <input matInput placeholder="Enter username">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter First Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter Last Name">
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Enter Email">
+    </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Enter Password">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Re-enter Password">
+  </mat-form-field>
+</div>
+
+<button mat-raised-button color="primary" (click)='createNewAccount()'>Create Account</button> -->
+
+<div class="container" style="text-align:center">
+  <div>
+    <input id="FName" placeholder="First Name" class="form-control">
+  </div>
+
+  <div>
+      <input id="LName" placeholder="Last Name" class="form-control">
+    </div>
+
+    <div>
+        <input id="Email" type="email" placeholder="Email Name" class="form-control">
+      </div>
+
+
+      <div>
+          <input id="Password" type="password" placeholder="Password" class="form-control">
+        </div>
+        <div>
+          <button (click)='createNewAccount()'>Create Accounts</button>
+        </div>
+<div class="container" style="color:green">
+      <b>{{status}}</b>
+    </div>
+</div>
