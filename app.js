@@ -48,13 +48,14 @@ app.get('/', (req,res) => {
 /////////////////
 // administrative routes
 app.route('/projects').get(projects.getAllProjects);
-app.route('/delete/:id').delete(projects.deleteProjectById); // administrative at the moment
+app.route('/project/id').delete(projects.deleteProjectById); // administrative at the moment
 // TODO: refactor routes
 // user-facing routes
-app.route('/project/name/:projectName').get(projects.getProjectByProjectName);
-app.route('/project/description/:projectDescription').get(projects.getProjectByProjectDescription);
-app.route("/view/:id").get(projects.getProjectById);
-app.route("/add").post(projects.addProject);
+app.route("/project").post(projects.addProject);
+app.route('/project/name/projectName').post(projects.getProjectByProjectName);
+app.route('/project/description/projectDescription').post(projects.getProjectByProjectDescription);
+app.route("/project/id").post(projects.getProjectById);
+
 
 ///////////////
 // User Routes

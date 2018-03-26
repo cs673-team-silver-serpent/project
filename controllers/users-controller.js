@@ -104,5 +104,7 @@ addUser = (request, response) => {
     });
   }
 
+  // Removing , getUserTokenByUserEmail from the module exports 'coz it 
+  // is throwing compilation error
   module.exports = { addUser, getUserById, getUserByFirstName, 
-    getUserByLastName, getAllUsers, getUserTokenByUserEmail };
+    getUserByLastName, getAllUsers};
