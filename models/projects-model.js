@@ -21,7 +21,7 @@ const ProjectsSchema = mongo.Schema({
     },
     owner: {
         type: String,
-        required: true
+        required: false
     },
     dateModified: {
         type: Date
