@@ -27,5 +27,7 @@ export class UserSessionService {
     this.user = undefined;
   }
 
-
+  addUser(user: User) {
+    return this.http.post(`${this.baseURL}/user`, user);
+  }
 }

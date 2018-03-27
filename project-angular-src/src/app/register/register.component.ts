@@ -24,19 +24,25 @@ export class RegisterComponent implements OnInit {
 
   //create new account
 
-  createNewAccount() {                 // This is what runs when we click the CreateAccount button.
-    
-    /*createNewAccount(){
-      
-      /*check if the username already exist
-      validate the data...show error messages if any
-      
-      if(all is well){
-        1. save the user details
-        2. redirect to login page for user to login using new credentials
+  createNewAccount() {            
+    //check if the email already exists in the database--------------TO DO ITEM
+
+    //saving the user credentials
+    var user:User;
+
+    this.userSessionService.addUser(user).subscribe(
+      (response) => {
+        console.log("USER has been created", response);
+        this.router.navigate(['/login'])
+      },
+      (error) => {
+        console.log("Error", error)
       }
-  */
+    )
+
+    
   }
+
 
 
   getPassword1(event: Event) {
