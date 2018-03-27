@@ -84,7 +84,7 @@ addUser = (request, response) => {
       }
     });
   }
-  
+
 authenticateUser = (request, response) => {
   const _email = request.body.email;
   const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
