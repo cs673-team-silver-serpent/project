@@ -2,7 +2,7 @@ let express = require('express');
 let Project = require('../models/projects-model');
 
 getAllProjects = (request, response) => {
-    Project.find({},{_id: 0})
+    Project.find({})
            .exec((error, projects) => {
       if (error) {
         response.send(error);
@@ -15,7 +15,7 @@ getAllProjects = (request, response) => {
 }
 
 getProjectById = (request, response) => {
-  let id = request.params.id;
+  let id = request.body.id;
   Project.find({ _id: id },{_id: 0})
          .exec((error,project) => {
     if (error) { 
@@ -30,7 +30,7 @@ getProjectById = (request, response) => {
 
 // Temporary functions for Iteration 2 Presentation
 getProjectByProjectName = (request, response) => {
-  let projectName = request.params.projectName;
+  let projectName = request.body.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
   console.log(projectNameRegEx);
   Project.find({ projectName: projectNameRegEx },{_id: 0})
@@ -46,7 +46,7 @@ getProjectByProjectName = (request, response) => {
 }
 
 getProjectByProjectDescription = (request, response) => {
-  let projectDescription = request.params.projectDescription;
+  let projectDescription = request.body.projectDescription;
   let projectDescriptionRegEx = new RegExp('.*' + projectDescription + '.*','i');
   Project.find({ projectDescription: projectDescriptionRegEx }, {_id: 0} )
          .exec((error,project) => {
@@ -89,8 +89,7 @@ addProject = (request, response) => {
 }
 
 deleteProjectById = (request,response) => {
-  let id = request.params.id;
-  // request.headers['sessionid'] 
+  let id = request.body.id;
   let query = {_id: id};
   Project.remove(query, (error, project) => {
       if (error) {
