@@ -27,5 +27,4 @@ export class UserSessionService {
     this.user = undefined;
   }
 
-
 }

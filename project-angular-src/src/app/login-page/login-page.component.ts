@@ -17,14 +17,20 @@ export class LoginPageComponent implements OnInit {
     console.log("test",this.userSessionService.user);
   }
 
+
   authenticateUser() {
+    this.router.navigate(['/home']);
+  }
+
+  /************************authenticateUser() {
    var email = 'ben@foundingfathers.com';
     var password = 'password';
 
     this.userSessionService.authenticate(email, password).subscribe(
       (user) => {
-        console.log("login-page response: ", user);
+        console.log("login-page response: ", user); 
         this.userSessionService.logInUser(user);
+        this.router.navigate(['/home']);
       },
       (error) => {
         console.log("Error: ", error);
@@ -34,7 +40,7 @@ export class LoginPageComponent implements OnInit {
     //    this.router.navigate(['/home']);
     //  }
 
-  }
+  }*****************************************************************/
 
 
   //Redirect the flow to Register page

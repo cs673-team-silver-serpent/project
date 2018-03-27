@@ -1,6 +1,9 @@
+<hr>
 <div class="container" style="text-align:center">
   <h1>BU PROJECT TRACKER</h1>
+  
 </div>
+<hr>
 
 <div class="container" style="margin-top: 150px;margin-left: 100px;float:left">
    
@@ -21,8 +24,19 @@
       <h2 class="FormHeader">Create New Account
         <hr>  
       </h2>
-      <div>
 
+      <div>
+          <mat-form-field>
+              <mat-select placeholder="Title">
+                <mat-option *ngFor="let title of titles" [value]="title.value">
+                  {{ title.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+        </div>
+
+      <div>
         <mat-form-field>
           <input id="firstsName" matInput placeholder="Enter First Name" required>
         </mat-form-field>
@@ -52,7 +66,7 @@
 
       <div>
         <mat-form-field>
-          <input id="pass2" (input)="getPassword2($event)" matInput type="password" placeholder="Confirm Password" required>
+          <input id="pass2" (input)="getPassword2($event)" maxlength="12" minlength="8" matInput type="password" placeholder="Confirm Password" required>
         </mat-form-field>
         <label id="passwordStatus" for="pass2">{{confirmation}}
           <i class="material-icons">offline_pin</i>
@@ -64,3 +78,5 @@
     </mat-card>
   </form>
 </div>
+
+
