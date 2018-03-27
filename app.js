@@ -67,13 +67,13 @@ app.route("/user").post(users.addUser);
 app.route("/user/id").post(users.getUserById);
 app.route("/user/firstName").post(users.getUserByFirstName);
 app.route("/user/lastName").post(users.getUserByLastName);
+app.route("/user/auth").post(users.authenticateUser);
 
 /////////////////
 // Session Routes
 /////////////////
 // user-facing routes
 app.route('/session/userId').post(sessions.getSessionByUserId);
-app.route('/session').post(sessions.addSession);
 
 
 // start server

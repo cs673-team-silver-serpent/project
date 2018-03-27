@@ -1,6 +1,8 @@
 const express = require('express');
 const User = require('../models/users-model');
-const Session = require('../models/sessions-model');
+const session = require('../controllers/sessions-controlller');
+const hash = require('hash.js');
+
 // TODO
 // const apiQuery = require('api-query-params');
 
@@ -16,28 +18,6 @@ getAllUsers = (request, response) => {
       }
     });
 }
-
-// This function may be irrelevant, given Andy's implemntation of authenticateUser
-// getUserToken = (request, response) => {
-//   const email = request.params.email;
-//   let query = User.find({ email: email}, {_id: 0, password: 0 });
-//   query.exec();
-//   query.then ( (user) => {
-//       let userId = user[0]._id;
-//       Session.find({userId: userId}, {_id: 0, userId: 0} )
-//       .exec(
-//         (error,session) => {
-//           if (error) {
-//             response.send(error);
-//           } else if (session) {
-//             response.json({session});
-//           } else {
-//             response.json( {success: false} );
-//           }
-//       } 
-//       );
-//   });
-// }
 
 getUserById = (request, response) => {
     let id = request.body.id;
@@ -86,12 +66,13 @@ getUserByLastName = (request, response) => {
 // end of temporary functions
 
 addUser = (request, response) => {
+    const passwordHash = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
     let newUser = new User({
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       title: request.body.title,
       email: request.body.email,
-      password: request.body.password,
+      password: passwordHash,
       favorites: request.body.favorites,
       role: request.body.role,
     });
@@ -104,7 +85,33 @@ addUser = (request, response) => {
     });
   }
 
-  // Removing , getUserTokenByUserEmail from the module exports 'coz it 
-  // is throwing compilation error
-  module.exports = { addUser, getUserById, getUserByFirstName, 
-    getUserByLastName, getAllUsers};
+authenticateUser = (request, response) => {
+  const _email = request.body.email;
+  const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
+  let query = User.find({ email : _email },{__v: 0}).exec();
+  query.then( (user) => {                                   // wait for query promise to return
+    return user                                             // then return user
+  })
+  .then( (user)  => {                                       // handle user after it's returned
+    if (user[0].password == _password) { // mongo queries return cursors; only one object in this cursor so user[0].
+      let newSession = session.createSession(user[0]._id);  // create user session
+      newSession.save();                                    // save  session
+      let userReturned = {                                  // user object has id & password
+        firstName: user[0].firstName,                       // so remove them by constructing userReturned
+        lastName: user[0].lastName,                         // object, which is what is returned
+        email: user[0].email,
+        title: user[0].title,
+        favorites: user[0].favorites,
+        role: user[0].role
+      };
+      response.json(userReturned);  
+    } else {
+      response.status(401).send("Wrong Password");    
+    }
+  })
+  .catch( (error) => {
+    response.send(error);
+  });
+}
+
+module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };

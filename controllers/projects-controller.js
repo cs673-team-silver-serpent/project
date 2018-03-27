@@ -83,6 +83,9 @@ addProject = (request, response) => {
       response.json({success: true, message: "Project added successfully."});
     }
   });
+
+  // else 
+  // return unauth
 }
 
 deleteProjectById = (request,response) => {
