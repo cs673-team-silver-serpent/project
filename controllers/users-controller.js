@@ -36,7 +36,7 @@ getUserById = (request, response) => {
 // Temporary functions for Iteration 2 presentation only
 getUserByFirstName = (request, response) => {
   let firstName = request.body.firstName;
-  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i')
+  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i');
   User.find( {firstName: firstNameRegEx }, { _id: 0, password: 0 } )
       .exec((error,user) => {
     if (error) { 
@@ -51,7 +51,7 @@ getUserByFirstName = (request, response) => {
 
 getUserByLastName = (request, response) => {
   let lastName = request.body.lastName;
-  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i')
+  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i');
   User.find({ lastName : lastNameRegEx }, {_id: 0, password: 0} )
       .exec((error,user) => {
     if (error) { 
@@ -85,6 +85,25 @@ addUser = (request, response) => {
     });
   }
 
+
+deleteUserByName = (request,response) => {
+  let email = request.body.email;
+  let firstName = request.body.firstName;
+  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i');
+  let lastName = request.body.lastName;
+  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i');
+  let query = {firstName: firstNameRegEx, lastName: lastNameRegEx, email: email};
+  User.remove(query, (error, removedUser) => {
+      if (error) {
+        response.json({success: false, message: `Failed to delete the user. Error: ${error}`});
+      } else if (removedUser.n == 1) {
+          response.json({success: true, message: "User deleted successfully."});
+      } else { 
+        response.json({ success: false }); 
+      }
+  });
+}
+
 authenticateUser = (request, response) => {
   const _email = request.body.email;
   const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
@@ -114,4 +133,5 @@ authenticateUser = (request, response) => {
   });
 }
 
-module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };
+module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, deleteUserByName,
+  authenticateUser };

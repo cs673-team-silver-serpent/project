@@ -46,28 +46,30 @@ app.get('/', (req,res) => {
 //////////////////
 // Project Routes
 /////////////////
-// administrative routes
-app.route('/projects').get(projects.getAllProjects);
-app.route('/project/id').delete(projects.deleteProjectById); // administrative at the moment
-// TODO: refactor routes
-// user-facing routes
+// add routes
 app.route("/project").post(projects.addProject);
-app.route('/project/name/projectName').post(projects.getProjectByProjectName);
-app.route('/project/description/projectDescription').post(projects.getProjectByProjectDescription);
+// search routes
+app.route('/projects').post(projects.getAllProjects);
+app.route('/project/projectName').post(projects.getProjectByProjectName);
+app.route('/project/projectDescription').post(projects.getProjectByProjectDescription);
 app.route("/project/id").post(projects.getProjectById);
-
+// delete routes 
+app.route('/project/delete').post(projects.deleteProjectById);
 
 ///////////////
 // User Routes
 ///////////////
-// administrative route
-app.route("/users").get(users.getAllUsers);
-// user-facing routes
+// add routes
 app.route("/user").post(users.addUser);
+// view routes
+app.route("/users").post(users.getAllUsers);
 app.route("/user/id").post(users.getUserById);
 app.route("/user/firstName").post(users.getUserByFirstName);
 app.route("/user/lastName").post(users.getUserByLastName);
 app.route("/user/auth").post(users.authenticateUser);
+// delete routes
+app.route("/user/delete/").post(users.deleteUserByName);
+
 
 /////////////////
 // Session Routes

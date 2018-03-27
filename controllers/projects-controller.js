@@ -91,10 +91,10 @@ addProject = (request, response) => {
 deleteProjectById = (request,response) => {
   let id = request.body.id;
   let query = {_id: id};
-  Project.remove(query, (error, project) => {
+  Project.remove(query, (error, removedProject) => {
       if (error) {
         response.json({success: false, message: `Failed to delete the project. Error: ${error}`});
-      } else if (project) {
+      } else if (removedProject.n == 1) {
          response.json({success: true, message: "Project deleted successfully."});
       } else { 
         response.json({ success: false }); 
