@@ -84,8 +84,7 @@ addUser = (request, response) => {
       }
     });
   }
-
-<<<<<<< HEAD
+  
 authenticateUser = (request, response) => {
   const _email = request.body.email;
   const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
@@ -116,9 +115,3 @@ authenticateUser = (request, response) => {
 }
 
 module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };
-=======
-  // Removing , getUserTokenByUserEmail from the module exports 'coz it 
-  // is throwing compilation error
-  module.exports = { addUser, getUserById, getUserByFirstName, 
-    getUserByLastName, getAllUsers};
->>>>>>> 5d4bd930c3862ffce73cdfd465b0d3740c50bcad
