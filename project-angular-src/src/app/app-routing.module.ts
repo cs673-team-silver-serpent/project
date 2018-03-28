@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
+
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'projectSearch', component: ProjectSearchComponent},

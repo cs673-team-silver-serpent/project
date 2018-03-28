@@ -18,7 +18,7 @@ export class ViewProjectComponent implements OnInit {
  constructor(private projectService: ProjectService) { }
 
  ngOnInit() {
-     // Load projects on init
+     // Load projects on init     
      this.projectService.getAllProjects().subscribe(
        response => {
          this.projects = response;

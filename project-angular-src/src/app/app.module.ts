@@ -21,7 +21,6 @@ import { ProjectSearchComponent } from './project-search/project-search.componen
 import { ProfileComponent } from './profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
-
 import { CdkTableModule } from '@angular/cdk/table';
 import {
   MatAutocompleteModule,
@@ -60,6 +59,7 @@ import {
 
 
 
+
 @NgModule({
   exports: [
     CdkTableModule,
@@ -95,7 +95,8 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
+  
 })
 export class DemoMaterialModule {}
 

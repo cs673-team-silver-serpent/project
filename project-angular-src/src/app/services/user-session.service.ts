@@ -15,7 +15,7 @@ export class UserSessionService {
       email: email,
       password: password
     };
-    
+
     return this.http.post(`${this.baseURL}/user/auth`, userAuth);
   }
 
@@ -27,7 +27,21 @@ export class UserSessionService {
     this.user = undefined;
   }
 
-  addUser(user: User) {
+  /*addUser(user: User) {
     return this.http.post(`${this.baseURL}/user`, user);
+  }*/
+
+  public addUser(user: User) {
+    return this.http.post(`${this.baseURL}/user`, user);
+    //return this.http.post(`${this.baseURL}/user`, user);
   }
+
+
+  /*showall users
+  showAllUsers(user: User){
+    return this.http.get(`${this.baseURL}/user`, user);
+
+  }*/
 }
+
+

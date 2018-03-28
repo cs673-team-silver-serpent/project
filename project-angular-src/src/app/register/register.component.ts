@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
+import { User } from '../models/User';
+import { UserSessionService } from '../services/user-session.service';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ViewChild } from '@angular/core/src/metadata/di';
 
 
 @Component({
@@ -7,47 +12,88 @@ import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
+  private newUser: User;
+  
+
   status = "";
 
  private x = "";
  private y = "";
- private btnSwitchOff = true;
+ private allCool = false;
  private confirmation = "";
+ errorStatus=false;
+ errorMessage="";
+ success=false;
+ 
+ 
+ titles = [
+  {value: 'Mr.', viewValue: 'Mr.'},
+  {value: 'Ms.', viewValue: 'Ms.'},
+  {value: 'Mrs.', viewValue: 'Mrs.'}
+];
 
-
-  constructor() { }
-
+  constructor(private userSessionService: UserSessionService) { }
+  @Output() userAdded: EventEmitter<User> = new EventEmitter<User>();
   ngOnInit() {
+    this.allCool = false;
+    this.errorStatus=false;
+    this.newUser = {
+      _id:0,
+      firstName: '',
+      lastName:'',
+      title:'',
+      email: '',
+      password: '',
+      __v:0,
+      }; 
+      
 
-  };
+} //page Initialization ends here
+
 
   //create new account
+onCreateNewAccount() {
 
-  createNewAccount() {            
-    //check if the email already exists in the database--------------TO DO ITEM
+  if(this.allCool!=true){
+    console.log(this.newUser);
+      //---------------------------
+      this.userSessionService.addUser(this.newUser).subscribe(
+        response => {
+          console.log(response);
+          this.userAdded.emit(this.newUser);
+      //--------------------------
+          this.ngOnInit();
+          this.success=true;
+      });
 
-    //saving the user credentials
-    var user:User;
-
-    this.userSessionService.addUser(user).subscribe(
-      (response) => {
-        console.log("USER has been created", response);
-        this.router.navigate(['/login'])
-      },
-      (error) => {
-        console.log("Error", error)
-      }
-    )
-
-    
   }
 
+  else
+  {
+    this.newUser = {
+      _id:0,
+      firstName: 'name',
+      lastName:'lname',
+      title:'tit',
+      email: 'email',
+      password:'pass',
+      __v:0,
+      }; 
+      
+    this.errorMessage="Please Check the form";
+    this.errorStatus=true;
+  }
+
+     
+}
+ 
+  
 
 
   getPassword1(event: Event) {
     this.x = (<HTMLInputElement>event.target).value;
-
     this.matchPasswords();
   }
 
@@ -59,18 +105,15 @@ export class RegisterComponent implements OnInit {
   matchPasswords() {
 
     if (this.y == this.x && this.y != "" && this.x != "") {
-      this.confirmation = "";
-      document.getElementById('passwordStatus').style.color = "green";
-      this.btnSwitchOff = false;
+      this.confirmation = "";      
+      this.allCool=false;
     }
     else
       if (this.y != "") {
         this.confirmation = "Passwords do not match ";
-        document.getElementById('passwordStatus').style.color = "red";
-        this.btnSwitchOff = true;
+        this.allCool = true;
       }
 
-  }
+  }//matchpasword_End
 
-}
-
+}//class end

@@ -1,66 +1,94 @@
-<div class="container" style="text-align:center">
-  <h1>BU PROJECT TRACKER</h1>
-</div>
 
-<div class="container" style="margin-top: 150px;margin-left: 100px;float:left">
-   
+<div *ngIf=true style="text-align:center">
+        <mat-card style="width:500px">
+            <b style="color:forestgreen"><mat-icon>offline_pin</mat-icon>User Added Successfully</b>
+        </mat-card>
+    </div>
     
-  <mat-card style="float:left;width:840px;height:417px">
-      <img src="assets/images/bu.jpg">
-      
-  </mat-card>
-</div>
+<div class="container">
 
 
 
-<div class="container" style="margin-top: 150px;margin-right: 300px;float:right">
-
-  <form name="regform" (ngSubmit)="createNewAccount()">
-
-    <mat-card style="background-color:beige">
-      <h2 class="FormHeader">Create New Account
-        <hr>  
-      </h2>
-      <div>
-
-        <mat-form-field>
-          <input id="firstsName" matInput placeholder="Enter First Name" required>
-        </mat-form-field>
-      </div>
 
 
-      <div>
-        <mat-form-field>
-          <input id="lastName" matInput placeholder="Enter Last Name" required>
-        </mat-form-field>
-      </div>
+<mat-card>
+       
+    <form Id="newAccount" (ngSubmit)="onCreateNewAccount()">
+        <!-- title -->
 
 
-      <div>
-        <mat-form-field>
-          <input id="userEmail" matInput type="email" placeholder="Enter Email" required>
-        </mat-form-field>
-      </div>
+        <!-- Error Section Starts Here -->
+        
+        <div *ngIf="errorStatus">
+            <mat-card>
+                <p style="color:red">{{errorMessage}}</p>
+            </mat-card>
+        </div>
+        <!-- Error Section Ends Here -->
+        <div>
+            <mat-form-field>
+                <mat-select matInput placeholder="Title" [(ngModel)]="newUser.title" name="title">
+                    <mat-option *ngFor="let title of titles" [value]="title.value">
+                        {{ title.viewValue }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-      <div>
-        <mat-form-field>
-          <input (input)="getPassword1($event)"  maxlength="12" minlength="8" id="pass1" matInput type="password" placeholder="Enter Password" required>
-        </mat-form-field>
 
-      </div>
+        </div>
+        <!-- title ends -->
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName" required>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName" required>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Email" type="email" [(ngModel)]="newUser.email" name="email" required>
+            </mat-form-field>
+        </div>
+
+        <!-- Password One -->
+        <div>
+            <mat-form-field>
+                <input (input)="getPassword1($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Password" name="password1"
+                    [(ngModel)]="newUser.p1" required>
+            </mat-form-field>
+            <label *ngIf="allCool" style="color:red">*</label>
+
+        </div>
 
 
-      <div>
-        <mat-form-field>
-          <input id="pass2" (input)="getPassword2($event)" matInput type="password" placeholder="Confirm Password" required>
-        </mat-form-field>
-        <label id="passwordStatus" for="pass2">{{confirmation}}
-          <i class="material-icons">offline_pin</i>
-        </label>
-      </div>
 
-      <button id="btnCreateAccount" [disabled]="btnSwitchOff" mat-raised-button color="primary" type="submit" (click)='createNewAccount()'>Create Account</button>
+        <!-- Password Confirm -->
+        <div>
+            <mat-form-field>
+                <input (input)="getPassword2($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Confirm Password"
+                    [(ngModel)]="newUser.password" name="password2" required>
+            </mat-form-field>
+            <label *ngIf="allCool" style="color:red">*</label>
+            <label *ngIf="false">.........Passwords do not match</label>
+        </div>
 
-    </mat-card>
-  </form>
+
+        <div>
+            <button mat-raised-button color="primary">
+                Create Account
+            </button>
+        </div>
+
+    </form>
+
+    <div>
+        <p style="color:red">{{confirmation}}</p>
+    </div>
+
+</mat-card>
 </div>
