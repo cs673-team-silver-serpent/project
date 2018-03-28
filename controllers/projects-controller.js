@@ -89,7 +89,7 @@ addProject = (request, response) => {
 }
 
 deleteProjectById = (request,response) => {
-  let id = request.body.id;
+  let id = request.body._id;
   let query = {_id: id};
   Project.remove(query, (error, removedProject) => {
       if (error) {

@@ -20,18 +20,17 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   public getAllProjects(): Observable<Project[]> {
-    const url = `${this.baseURL}/view`;
-    return this.http.get<Project[]>(url);
+    const url = `${this.baseURL}/projects`;
+    return this.http.post<Project[]>(url, undefined);
   }
 
-  public deleteProject(projectID: string): Observable<any>{
-    const url = `${this.baseURL}/delete/${projectID}`
-    return this.http.delete(url);
+  public deleteProject(project: Project): Observable<any>{
+    const url = `${this.baseURL}/project/delete`
+    return this.http.post(url, project);
   }
 
   public addProject(project: NewProject): Observable<NewProject> {
-    const url = `${this.baseURL}/add`
-    return this.http.post<NewProject>(url, project, httpOptions);
+    const url = `${this.baseURL}/project`
+    return this.http.post<NewProject>(url, project);
   }
-
 }
