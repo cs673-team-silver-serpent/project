@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User, Roles } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserSessionService {
@@ -17,7 +18,7 @@ export class UserSessionService {
     };
     
     return this.http.post(`${this.baseURL}/user/auth`, userAuth);
-  }
+    }
 
   logInUser(user: User) {
     this.user = user;

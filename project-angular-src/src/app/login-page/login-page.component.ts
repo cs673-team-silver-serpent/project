@@ -26,14 +26,13 @@ export class LoginPageComponent implements OnInit {
 
     this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
       (user) => {
-        console.log
-        if( user != {}) {
-          console.log("login-page response: ", user);
+          console.log("login-page response: ", user.firstName);
+          if (user.firstName) {
           this.userSessionService.logInUser(user);
           this.router.navigate(['/home']);
-        } else {
-          console.log("Wrong Password");
-        }
+          } else {
+            console.log("Wrong Password");
+          }
       },
       (error) => {
         console.log("Error: ", error);
