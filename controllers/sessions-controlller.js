@@ -1,9 +1,11 @@
 const express = require('express');
 const Session = require('../models/sessions-model');
+const hash = require('hash.js');
+const randomWord = require('random-word');
 
 // TODO: figure out mongoose cursors interface
 getSessionByUserId = (request, response) => {
-     let userId = request.params.userId;
+     let userId = request.body.userId;
 //     let cursor = Session.find({userId:userId}).cursor();
 //     cursor
 //         .on('data',(doc) => {
@@ -14,8 +16,8 @@ getSessionByUserId = (request, response) => {
 //         .on('close', () => {
 //         });
 
-    let query = Session.find({userId: userId});
-    query.exec((error,sessions) => {
+    Session.find({userId: userId},{ _id: 0})
+            .exec((error,sessions) => {
         if (error) {
             response.send(error);
         } else if (sessions) {
@@ -26,27 +28,21 @@ getSessionByUserId = (request, response) => {
     });
 }
 
-addSession = (request, response) => {
+createSession = (userId) => {
     // calculate expiration date & time
     let now = new Date(Date.now());
     let expirationDate = new Date();
     expirationDate.setDate(now.getDate() + 2);
+    // generate a token
+    const token = hash.sha256().update(randomWord()).digest('hex').toUpperCase();
     
-    let newSession = new Session(
+    return new Session(
         {
-        userId: request.body.userId,
-        sessionToken: request.body.token,
+        userId: userId,
+        sessionToken: token,
         expirationDate: expirationDate 
         }
     );
-
-    newSession.save((error,session) => {
-        if (error) {
-            response.json({success: false, message: `Failed to create new session. Error: ${error}`});
-        } else {
-            response.json({success: true, message: 'Session created successfully.'});
-        }
-    });
 }
 
-module.exports = { addSession, getSessionByUserId };
+module.exports = { createSession, getSessionByUserId };

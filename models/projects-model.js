@@ -16,10 +16,12 @@ Comments = comments.Comments;
 // define ProjectPortalSchema
 const ProjectsSchema = mongo.Schema({
     dateCreated: {
-        type: Date
+        type: Date,
+        required: true
     },
     owner: {
-        type: String
+        type: String,
+        required: false
     },
     dateModified: {
         type: Date

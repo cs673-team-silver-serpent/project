@@ -1,63 +1,59 @@
 const express = require('express');
 const User = require('../models/users-model');
+const session = require('../controllers/sessions-controlller');
 const hash = require('hash.js');
+
 // TODO
 // const apiQuery = require('api-query-params');
 
 getAllUsers = (request, response) => {
-    let query = User.find();
-    query.exec((error, users) => {
+    User.find( {}, { _id: 0, password: 0} )
+        .exec((error, users) => {
       if (error) {
         response.send(error);
       } else if (users) {
         response.json(users);
       } else {
-        response.json({ success: false });
+        response.json( {success: false} );
       }
     });
 }
 
-// TODO
-// Get user by email, check that passwords match
-// send OK or No-go response along with new token
-// getUserTokenByUserEmail = 
-
-
 getUserById = (request, response) => {
-    let id = request.params.id;
-    let query = User.find({_id: id});
-    query.exec((error,user) => {
-      if (error) { 
-        response.send(error);
-      } else if (user) {
-        response.json(user);
-      } else {
-        response.json({ success: false });
-      }
+    let id = request.body.id;
+    User.find( { _id: id}, { _id: 0, password: 0 } )
+        .exec((error,user) => {
+          if (error) { 
+            response.send(error);
+          } else if (user) {
+            response.json(user);
+          } else {
+            response.json( {success: false} );
+          }
     });
   }
 
 // Temporary functions for Iteration 2 presentation only
 getUserByFirstName = (request, response) => {
-  let firstName = request.params.firstName;
-  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i')
-  let query = User.find({ firstName : firstNameRegEx });
-  query.exec((error,user) => {
+  let firstName = request.body.firstName;
+  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i');
+  User.find( {firstName: firstNameRegEx }, { _id: 0, password: 0 } )
+      .exec((error,user) => {
     if (error) { 
       response.send(error);
     } else if (user) {
       response.json(user);
     } else {
-      response.json({ success: false });
+      response.json( {success: false} );
     }
   });
 }
 
 getUserByLastName = (request, response) => {
-  let lastName = request.params.lastName;
-  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i')
-  let query = User.find({ lastName : lastNameRegEx });
-  query.exec((error,user) => {
+  let lastName = request.body.lastName;
+  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i');
+  User.find({ lastName : lastNameRegEx }, {_id: 0, password: 0} )
+      .exec((error,user) => {
     if (error) { 
       response.send(error);
     } else if (user) {
@@ -69,28 +65,14 @@ getUserByLastName = (request, response) => {
 }
 // end of temporary functions
 
-
-// TODO: figure out how to query by parameters
-// getUserByFilter = (request, response) => {
-//   let filter = JSON.stringify(request.params.filter);
-//   let query = User.find({filter});
-//   query.exec((error,user) => {
-//     if (error) { 
-//       response.send(error);
-//     } else {
-//       response.json(user);
-//     }
-//   });
-// }
-
-// TODO: figure out how to instantiate Project Id and reference them as an array
 addUser = (request, response) => {
+    const passwordHash = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
     let newUser = new User({
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       title: request.body.title,
       email: request.body.email,
-      password: request.body.password,
+      password: passwordHash,
       favorites: request.body.favorites,
       role: request.body.role,
     });
@@ -103,41 +85,53 @@ addUser = (request, response) => {
     });
   }
 
-authenticateUser = (request, response) => {
-  let _email = request.body.email;
-  let _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
-  var userSession = {
-    user: '',
-    session: ''
-  };
-  console.log("1.  _email: ", _email, " _password: ", _password);
-  let query = User.find({ email : _email });
-  query.exec((error,user) => {
-    if (error) { 
-      response.send(error);
-    } else if (user) {
-      user = user[0];  // mongo seems to return a list of objects even if there is only one object
-      if (user.password === _password) {
-        userSession.user = user;
-        response.json(user);
+
+deleteUserByName = (request,response) => {
+  let email = request.body.email;
+  let firstName = request.body.firstName;
+  let firstNameRegEx = new RegExp('.*' + firstName + '.*','i');
+  let lastName = request.body.lastName;
+  let lastNameRegEx = new RegExp('.*' + lastName + '.*','i');
+  let query = {firstName: firstNameRegEx, lastName: lastNameRegEx, email: email};
+  User.remove(query, (error, removedUser) => {
+      if (error) {
+        response.json({success: false, message: `Failed to delete the user. Error: ${error}`});
+      } else if (removedUser.n == 1) {
+          response.json({success: true, message: "User deleted successfully."});
+      } else { 
+        response.json({ success: false }); 
       }
-      else {
-        response.send(401, "Wrong Password");
-      }
-    } else {
-      response.json({ success: false });
-    }
   });
-  
-  
-  // check to see that the passwordHash matches what is in the database
-
-  // if passwordHash is equal to password in the database
-    // create new session 
-    //return user object and session object
-
-  // if passwordHash is not equal
-    // return 401
 }
 
-  module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, authenticateUser };
+authenticateUser = (request, response) => {
+  const _email = request.body.email;
+  const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
+  let query = User.find({ email : _email },{__v: 0}).exec();
+  query.then( (user) => {                                   // wait for query promise to return
+    return user                                             // then return user
+  })
+  .then( (user)  => {                                       // handle user after it's returned
+    if (user[0].password == _password) { // mongo queries return cursors; only one object in this cursor so user[0].
+      let newSession = session.createSession(user[0]._id);  // create user session
+      newSession.save();                                    // save  session
+      let userReturned = {                                  // user object has id & password
+        firstName: user[0].firstName,                       // so remove them by constructing userReturned
+        lastName: user[0].lastName,                         // object, which is what is returned
+        email: user[0].email,
+        title: user[0].title,
+        favorites: user[0].favorites,
+        role: user[0].role
+      };
+      response.json(userReturned);  
+    } else {
+      response.status(401).send("Wrong Password");    
+    }
+  })
+  .catch( (error) => {
+    response.send(error);
+  });
+}
+
+module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, deleteUserByName,
+  authenticateUser };

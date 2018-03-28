@@ -31,11 +31,10 @@ export class ViewProjectComponent implements OnInit {
  }
 
  public deleteProject(project: Project) {
-   console.log(project);
-    this.projectService.deleteProject(project._id).subscribe(
+   console.log("Deleting Project: ", project.projectName, "ID: ", project._id);
+    this.projectService.deleteProject(project).subscribe(
        response => {
          this.projects = this.projects.filter(projects => projects !== project)
-
          this.projectService.getAllProjects().subscribe(
           response => {
             this.projects = response;

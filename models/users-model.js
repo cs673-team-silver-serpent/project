@@ -1,5 +1,6 @@
 // require mongoose
 let mongo = require("mongoose");
+mongo.Promise = require('bluebird');
 let project = require("../models/projects-model");
 let ObjectId = mongo.Schema.Types.ObjectId;
 Project = project.Project; 
