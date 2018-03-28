@@ -63,7 +63,11 @@ describe('Project Tests', () => {
                 labels: "#Portal, #MEAN",
             }
             chai.request(server)
+<<<<<<< HEAD
             .post('/project')
+=======
+            .post('/add')
+>>>>>>> 4db28a6959968ed1e7a9e28774504ee5900f58c0
             .send(project)
             .end((error,response) => {
                 response.should.have.status(200);
@@ -89,7 +93,11 @@ describe('Project Tests', () => {
                 labels: "#Portal, #MEAN",
             }
             chai.request(server)
+<<<<<<< HEAD
             .post('/project')
+=======
+            .post('/add')
+>>>>>>> 4db28a6959968ed1e7a9e28774504ee5900f58c0
             .send(project)
             .end((error,response) => {
                 response.should.have.status(200);
@@ -114,7 +122,11 @@ describe('Project Tests', () => {
                 labels: "#Portal, #MEAN",
             }
             chai.request(server)
+<<<<<<< HEAD
             .post('/project')
+=======
+            .post('/add')
+>>>>>>> 4db28a6959968ed1e7a9e28774504ee5900f58c0
             .send(project)
             .end((error,response) => {
                 response.should.have.status(200);
@@ -142,10 +154,39 @@ describe('Project Tests', () => {
         });
     });
 
+<<<<<<< HEAD
  
 
 
 
+=======
+     //Test case summary: Get a Project by it's Id
+
+     describe('GET project', () => {
+        it('it should GET single Project by its ID', (done) => {
+            var id=null
+            chai.request(server)
+            .get('/view')
+            .end(function(err, res) 
+            {
+                chai.request(server)
+                .get('/view/'+ res.body[0]._id)
+                .end((error,response) => 
+                {
+                    response.should.have.status(200);
+                    response.should.be.a('object');
+                    response.body.length.should.be.eql(1);
+                    response.body[0].should.have.property('projectName')
+                        .and.to.eql('Projects Portal');
+                    response.body[0].should.have
+                      .property("projectDescription")
+                      .and.to.eql("A portal app to manage software development projects");
+                done();
+                });                
+            });
+    });
+})
+>>>>>>> 4db28a6959968ed1e7a9e28774504ee5900f58c0
     /************************************/
     // TEST findProjectBy - Project Name, Description and ID route
     /************************************/
@@ -213,11 +254,19 @@ describe('Project Tests', () => {
 //     });
 //    });
 
+<<<<<<< HEAD
 //  //Test case id:
 //    //Test Case summary: Delete a project that doesn't exist
 //    //Test Case type:
 
 // //*** Uncomment when the code is fixed ***//
+=======
+ //Test case id:
+   //Test Case summary: Delete a project that doesn't exist
+   //Test Case type:
+
+//*** Uncomment when the code is fixed ***//
+>>>>>>> 4db28a6959968ed1e7a9e28774504ee5900f58c0
 //    describe('DELETE project', () => {
 //     it('Delete a project that doesnt exist', (done) => {
 //         let project = new Project({ 
@@ -226,8 +275,12 @@ describe('Project Tests', () => {
 //         });
 //         project.save((error,project) => {
 //             chai.request(server)
+<<<<<<< HEAD
 //             .delete('/project/id/')
 //             .send({id: project.id})
+=======
+//             .delete('/delete/' + project.id)
+>>>>>>> 4db28a6959968ed1e7a9e28774504ee5900f58c0
 //             .end((error, response) => {
 //                 response.should.have.status(200);
 //                 response.body.should.be.a('object');
