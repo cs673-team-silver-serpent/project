@@ -1,11 +1,3 @@
- .container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 500px;
-    margin: auto;
-    background-color:darkblue;
-     /*margin-top: 150px;
-    margin-right: 300px; 
-    text-align: justify;    */
-} 
+.container{
+    margin-top:50px;
+}
