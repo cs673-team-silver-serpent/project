@@ -1,13 +1,11 @@
 export class User {
-
-
+    _id: number
     firstName: String
-    middleName: String
     lastName: String
     title: String
     email: String
-    role: Roles
-    
+    password: String
+    __v: number
 }
 
 export enum Roles {

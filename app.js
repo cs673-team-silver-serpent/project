@@ -1,11 +1,13 @@
-let express = require('express');
-let path = require('path');
-let bodyParser = require('body-parser');
-let cors = require('cors');
-let mongo = require('mongoose');
-let morgan = require("morgan");
-let config = require('config');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongo = require('mongoose');
+const morgan = require("morgan");
+const config = require('config');
 const projects = require('./controllers/projects-controller');
+const users = require('./controllers/users-controller');
+const sessions = require('./controllers/sessions-controlller');
 
 // initialize app variable
 let app = express();
@@ -41,13 +43,39 @@ app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
 });
 
-app.route('/view').get(projects.getAllProjects);
+//////////////////
+// Project Routes
+/////////////////
+// add routes
+app.route("/project").post(projects.addProject);
+// search routes
+app.route('/projects').post(projects.getAllProjects);
+app.route('/project/projectName').post(projects.getProjectByProjectName);
+app.route('/project/projectDescription').post(projects.getProjectByProjectDescription);
+app.route("/project/id").post(projects.getProjectById);
+// delete routes 
+app.route('/project/delete').post(projects.deleteProjectById);
 
-app.route("/view/:id").get(projects.getProjectById);
+///////////////
+// User Routes
+///////////////
+// add routes
+app.route("/user").post(users.addUser);
+// view routes
+app.route("/users").post(users.getAllUsers);
+app.route("/user/id").post(users.getUserById);
+app.route("/user/firstName").post(users.getUserByFirstName);
+app.route("/user/lastName").post(users.getUserByLastName);
+app.route("/user/auth").post(users.authenticateUser);
+// delete routes
+app.route("/user/delete/").post(users.deleteUserByName);
 
-app.route("/add").post(projects.addProject);
 
-app.route('/delete/:id').delete(projects.deleteProjectById);
+/////////////////
+// Session Routes
+/////////////////
+// user-facing routes
+app.route('/session/userId').post(sessions.getSessionByUserId);
 
 
 // start server

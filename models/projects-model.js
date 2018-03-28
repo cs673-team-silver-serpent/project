@@ -8,20 +8,23 @@ let ObjectId = mongo.Schema.Types.ObjectId;
 // then get rid of the following four lines
 let users = require('../models/users-model');
 let comments = require('../models/comments-model');
-Users = users.Users;
+Users = users.User;
 Comments = comments.Comments;
 
+// TODO: projectMembers should be type:[Users._id]
+// TODO: owner should be of type: Users._id
 // define ProjectPortalSchema
 const ProjectsSchema = mongo.Schema({
     dateCreated: {
-        type: Date
+        type: Date,
+        required: true
     },
     owner: {
         type: String,
+        required: false
     },
     dateModified: {
-        type: Date,
-        default: Date.now,
+        type: Date
     },
     projectName: {
         type: String,
@@ -42,25 +45,3 @@ const ProjectsSchema = mongo.Schema({
 
 // convert schema to project model and export
 const Project = module.exports = mongo.model('Project',ProjectsSchema);
-
-
-// moved these functions to the controller, portal-controller.js
-///////////////////////////
-// database query functions
-///////////////////////////
-
-// getAllProjects() is ues to return all projects from MongoDB
-// module.exports.getAllProjects = (callback) => {
-//    Project.find(callback);
-// };
-
-// addProject() is used to insert new project into MongoDB
-// module.exports.addProject = (newProject,callback) => {
-//    newProject.save(callback);
-// };
-
-// deleteById() uses an id parameter to remove a project from MongoDB
-// module.exports.deleteProjectById = (id,callback) => {
-//    let query = {_id: id};
-//    Project.remove(query,callback);
-// };

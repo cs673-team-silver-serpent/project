@@ -12,8 +12,6 @@ export class AddProjectComponent implements OnInit {
   private newProject: NewProject;
   @Output() projectAdded: EventEmitter<NewProject> = new EventEmitter<NewProject>();
 
-
-
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
@@ -45,7 +43,6 @@ export class AddProjectComponent implements OnInit {
           projectDemo: '',
           labels: []
         };
-        
     });
   }
 }
