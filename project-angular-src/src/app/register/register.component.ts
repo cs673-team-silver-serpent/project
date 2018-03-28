@@ -74,6 +74,8 @@ export class RegisterComponent implements OnInit {
     this.validForm = this.formValidation();
     if (this.allCool != true && this.validForm == 1) {
       console.log(this.newUser);
+
+      
       this.userSessionService.addUser(this.newUser).subscribe(
         response => {
           console.log(response);
