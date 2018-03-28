@@ -18,26 +18,25 @@ export class LoginPageComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    console.log("test",this.userSessionService.user);
   }
 
   authenticateUser() {
-    var email = 'ben@foundingfathers.com';
-    var password = 'password';
+    // var email = 'ben@foundingfathers.com';
+    // var password = 'password';
 
-    this.userSessionService.authenticate(email, password).subscribe(
+    this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
       (user) => {
-        console.log("login-page response: ", user);
-        this.userSessionService.logInUser(user);
-        this.router.navigate(['/home']);
+        console.log
+        if( user != {}) {
+          console.log("login-page response: ", user);
+          this.userSessionService.logInUser(user);
+          this.router.navigate(['/home']);
+        } else {
+          console.log("Wrong Password");
+        }
       },
       (error) => {
         console.log("Error: ", error);
       });
-
-    // if ( result ) {
-    //   this.router.navigate(['/home']);
-    // }
-
   }
 }
