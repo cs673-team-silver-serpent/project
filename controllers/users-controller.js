@@ -41,10 +41,11 @@ getUserByFirstName = (request, response) => {
       .exec((error,user) => {
     if (error) { 
       response.send(error);
-    } else if (user) {
-      response.json(user);
+    } else if (user.length == 0) {
+      response.json({success: false, message: "Failed to find user."});      
     } else {
-      response.json( {success: false} );
+      response.json(user);
+
     }
   });
 }
@@ -56,16 +57,26 @@ getUserByLastName = (request, response) => {
       .exec((error,user) => {
     if (error) { 
       response.send(error);
-    } else if (user) {
-      response.json(user);
+    } else if (user.lenght == 0) {
+      response.json({ success: false, message: "Failed to find user." });
     } else {
-      response.json({ success: false });
+      response.json(user);
     }
   });
 }
 // end of temporary functions
 
 addUser = (request, response) => {
+    if (!request.body.password.trim()) {
+      response.json({success: false, message: `Failed to create a new user. Error: Passwords may not be empty or contain whitespace.`});
+      return;
+    } else if (request.body.password.length < 8) {
+      response.json({success: false, message: `Failed to create a new user. Error: Passwords must be at least 8 characters long.`});
+      return;
+    } else if (!request.body.email.trim()) {
+      response.json({success: false, message: `Failed to create a new user. Error: Emails may not be empty or contain whitespace.`});
+      return;
+    }
     var passwordHash = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
     let newUser = new User({
       firstName: request.body.firstName,
