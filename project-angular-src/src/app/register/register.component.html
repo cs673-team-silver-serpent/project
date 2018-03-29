@@ -1,0 +1,113 @@
+<app-toolbar></app-toolbar>
+
+
+
+<!-- Page wrapper -->
+<div class="container" style="width:100%">
+    <div style="width:49%;margin-left:20px;float:left">
+        <mat-card class="mat-elevation-z15" style="height:488px">
+            <img id="buimg" style="width:100%;height:100%" src="/assets/images/bu.jpg" alt="BostonUniversity.JPG">
+        </mat-card>
+    </div>
+    <!-- Left Panel Ends -->
+
+
+    <div style="width:45%;float:right">
+        <mat-card class="mat-elevation-z15" style="margin-right:100px">
+            <mat-card-title>Create New Account</mat-card-title>
+
+            <form Id="newAccount" (ngSubmit)="onCreateNewAccount()">
+                <!-- title -->
+
+
+                <!-- Error Section Starts Here -->
+                <div *ngIf="success " style="text-align:center">
+                    <mat-card>
+                        <b style="color:forestgreen">{{errorMessage}}
+                            <mat-icon>offline_pin</mat-icon>
+                        </b>
+                    </mat-card>
+                </div>
+
+
+
+                <div *ngIf="errorStatus" style="text-align:center">
+                    <mat-card>
+                        <b style="color:red">{{errorMessage}}</b>
+                    </mat-card>
+                </div>
+                <!-- Error Section Ends Here -->
+                <div>
+                    <mat-form-field>
+                        <mat-select matInput placeholder="Title" [(ngModel)]="newUser.title" name="title">
+                            <mat-option *ngFor="let title of titles" [value]="title.value">
+                                {{ title.viewValue }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+                <!-- title ends -->
+                <div>
+                    <mat-form-field>
+                        <input id="fName" (input)="getFName($event)" matInput placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName"
+                            required>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field>
+                        <input id="lName" (input)="getLName($event)" matInput placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName"
+                            required>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field>
+                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email"  [(ngModel)]="newUser.email" name="email"
+                            required email>
+                    </mat-form-field>
+                </div>
+
+                <!-- Password One -->
+                <div>
+                    <mat-form-field>
+                        <input id="pass1" (input)="getPassword1($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Password"
+                            name="password1" [(ngModel)]="newUser.p1" required>
+                    </mat-form-field>
+                    <label *ngIf="allCool" style="color:red">*</label>
+                    <label *ngIf="lengthError" style="color:red">Minimum 8 characters required</label>
+
+                </div>
+
+                <!-- Password Confirm (database)-->
+                <div>
+                    <mat-form-field>
+                        <input id="pass2" (input)="getPassword2($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Confirm Password"
+                            [(ngModel)]="newUser.password" name="password2" required>
+                    </mat-form-field>
+                    <label *ngIf="allCool" style="color:red">*</label>
+                    <label style="color:red">{{confirmation}}</label>
+                </div>
+
+
+                <div>
+                    <button mat-raised-button color="primary">
+                        Create Account
+                    </button>
+                </div>
+
+            </form>
+
+            
+
+        </mat-card>
+
+    </div>
+    <!-- Right Panel Ends -->
+</div>
+
+<!-- <div style="margin-top:700px">
+    <button class="btn btn-primary" (click)="formValidation()">Click</button>
+Test Variables:"{{||validForm||emailvalidation()}}||{{passLength}} ""
+</div> -->

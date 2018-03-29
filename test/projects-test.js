@@ -114,6 +114,7 @@ describe('Project Tests', () => {
                 labels: "#Portal, #MEAN",
             }
             chai.request(server)
+
             .post('/project')
             .send(project)
             .end((error,response) => {
@@ -142,9 +143,7 @@ describe('Project Tests', () => {
         });
     });
 
-     //Test case summary: Get a Project by it's Id
 
- 
     /************************************/
     // TEST findProjectBy - Project Name, Description and ID route
     /************************************/
@@ -207,11 +206,13 @@ describe('Project Tests', () => {
 //     });
 //    });
 
+
 //  //Test case id:
 //    //Test Case summary: Delete a project that doesn't exist
 //    //Test Case type:
 
 // //*** Uncomment when the code is fixed ***//
+
 //    describe('DELETE project', () => {
 //     it('Delete a project that doesnt exist', (done) => {
 //         let project = new Project({ 

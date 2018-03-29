@@ -6,6 +6,8 @@ import { AddProjectComponent } from './add-project/add-project.component';
 import { ProjectSearchComponent } from './project-search/project-search.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -14,6 +16,7 @@ const routes: Routes = [
   { path: 'addProject', component: AddProjectComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'viewProject', component: ViewProjectComponent},
+  {path: 'register', component: RegisterComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ]
 
