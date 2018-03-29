@@ -6,6 +6,8 @@ const hash = require('hash.js');
 // TODO
 // const apiQuery = require('api-query-params');
 
+
+
 getAllUsers = (request, response) => {
     User.find( {}, { _id: 0, password: 0} )
         .exec((error, users) => {
@@ -76,6 +78,7 @@ addUser = (request, response) => {
       favorites: request.body.favorites,
       role: request.body.role,
     });
+    
     newUser.save((error, user) => {
       if (error) {
         response.json({success: false, message: `Failed to create a new user. Error: ${error}`});
@@ -106,7 +109,8 @@ deleteUserByName = (request,response) => {
 
 authenticateUser = (request, response) => {
   const _email = request.body.email;
-  const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase();  //FYI This is the HASH in action 
+  //FYI This is the HASH in action 
+  const _password = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
   let query = User.find({ email : _email },{__v: 0}).exec();
   query.then( (user) => {                                   // wait for query promise to return
     return user                                             // then return user

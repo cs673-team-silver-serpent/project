@@ -2,6 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NewProject } from '../models/Project';
 import { ProjectService } from '../services/project.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
+import { UserSessionService } from '../services/user-session.service';
+import { User } from '../models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-project',
@@ -11,9 +14,9 @@ import { ViewChild } from '@angular/core/src/metadata/di';
 export class AddProjectComponent implements OnInit {
   private newProject: NewProject;
   @Output() projectAdded: EventEmitter<NewProject> = new EventEmitter<NewProject>();
-
-  constructor(private projectService: ProjectService) { }
-
+user :User;
+  constructor(private projectService: ProjectService,private userSessionService: UserSessionService,private router: Router) { }
+  enableCreate;
 
   ngOnInit() {
    this.newProject = {
@@ -26,6 +29,12 @@ export class AddProjectComponent implements OnInit {
       projectDemo: '',
       labels: []
     };
+
+    if(this.userSessionService.user){
+      this.enableCreate=true;
+    }
+    else this.enableCreate=false;
+
   }
 
   public onCreateNewProject() {

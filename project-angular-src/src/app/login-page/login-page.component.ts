@@ -15,24 +15,31 @@ export class LoginPageComponent implements OnInit {
   }
 
   constructor(private userSessionService: UserSessionService,
-              private router: Router) { }
+    private router: Router) { }
 
+
+  passwordVisibility = false;
+  buttonicon="";
   ngOnInit() {
+    this.passwordVisibility = false;
+    this.buttonicon="visibility_off";
   }
-
+  loginError = false;
   authenticateUser() {
     // var email = 'ben@foundingfathers.com';
     // var password = 'password';
 
     this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
       (user) => {
-          console.log("login-page response: ", user.firstName);
-          if (user.firstName) {
+        console.log("login-page response: ", user.firstName);
+        if (user.firstName) {
           this.userSessionService.logInUser(user);
           this.router.navigate(['/home']);
-          } else {
-            console.log("Wrong Password");
-          }
+          this.loginError = false;
+        } else {
+          console.log("Wrong Password");
+          this.loginError = true;
+        }
       },
       (error) => {
         console.log("Error: ", error);
@@ -41,7 +48,23 @@ export class LoginPageComponent implements OnInit {
 
 
   //Redirect the flow to Register page
-  redirect_register(){
+  redirect_register() {
     this.router.navigate(['/register']);
+  }
+
+
+  toggleVisibility() {
+    if(this.passwordVisibility==false)
+    {
+      this.passwordVisibility = true;
+      this.buttonicon="visibility"
+      
+    }
+    else
+    {
+    this.passwordVisibility = false;
+    this.buttonicon="visibility_off";
+  }
+
   }
 }

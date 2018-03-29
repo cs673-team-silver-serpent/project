@@ -62,13 +62,16 @@
                     </mat-form-field>
                 </div>
 
+                <!-- Email -->
                 <div>
                     <mat-form-field>
-                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email"  [(ngModel)]="newUser.email" name="email"
-                            required email>
+                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email" [(ngModel)]="newUser.email" name="email" required
+                            email>
                     </mat-form-field>
+                    <!-- Temporary fix-->
+      <label *ngIf="emailError" style="color:red">Please Check Email</label>
                 </div>
-
+                <!-- Temporary fix-->
                 <!-- Password One -->
                 <div>
                     <mat-form-field>
@@ -99,7 +102,7 @@
 
             </form>
 
-            
+
 
         </mat-card>
 
