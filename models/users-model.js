@@ -16,6 +16,7 @@ const UsersSchema = mongo.Schema({
     required: true
   },
   title: String,
+  
   email: {
     type: String,
     required: true

@@ -14,8 +14,9 @@ export class AddProjectComponent implements OnInit {
 
   constructor(private projectService: ProjectService) { }
 
+
   ngOnInit() {
-    this.newProject = {
+   this.newProject = {
       owner: '',
       projectName: '',
       projectDescription: '',
@@ -29,20 +30,14 @@ export class AddProjectComponent implements OnInit {
 
   public onCreateNewProject() {
     console.log(this.newProject);
-    this.projectService.addProject(this.newProject).subscribe(
+    //---------------------------
+    this.projectService.addProject    
+    (this.newProject).subscribe(
       response => {
         console.log(response);
         this.projectAdded.emit(this.newProject);
-        this.newProject = {
-          owner: '',
-          projectName: '',
-          projectDescription: '',
-          projectMembers: '',
-          techStack: [],
-          repositoryLink: '',
-          projectDemo: '',
-          labels: []
-        };
+    //--------------------------
+        this.ngOnInit();
     });
   }
 }

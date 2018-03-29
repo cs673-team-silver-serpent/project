@@ -66,7 +66,7 @@ getUserByLastName = (request, response) => {
 // end of temporary functions
 
 addUser = (request, response) => {
-    const passwordHash = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
+    var passwordHash = hash.sha256().update(request.body.password).digest('hex').toUpperCase(); 
     let newUser = new User({
       firstName: request.body.firstName,
       lastName: request.body.lastName,

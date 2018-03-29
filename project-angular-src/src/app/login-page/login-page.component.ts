@@ -38,4 +38,10 @@ export class LoginPageComponent implements OnInit {
         console.log("Error: ", error);
       });
   }
+
+
+  //Redirect the flow to Register page
+  redirect_register(){
+    this.router.navigate(['/register']);
+  }
 }

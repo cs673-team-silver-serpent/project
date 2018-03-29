@@ -20,7 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { ProjectSearchComponent } from './project-search/project-search.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-
+import { RegisterComponent } from './register/register.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import {
   MatAutocompleteModule,
@@ -56,6 +56,8 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+
+
 
 
 @NgModule({
@@ -94,6 +96,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
   ],
+  
 })
 export class DemoMaterialModule {}
 
@@ -108,6 +111,7 @@ export class DemoMaterialModule {}
     HomeComponent,
     ProjectSearchComponent,
     ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
