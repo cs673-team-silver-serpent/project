@@ -57,7 +57,7 @@ getUserByLastName = (request, response) => {
       .exec((error,user) => {
     if (error) { 
       response.send(error);
-    } else if (user.lenght == 0) {
+    } else if (user.length == 0) {
       response.json({ success: false, message: "Failed to find user." });
     } else {
       response.json(user);
