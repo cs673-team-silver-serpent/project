@@ -69,8 +69,21 @@ export class RegisterComponent implements OnInit {
     this.isEmailValid = 0;
     this.lengthError = false;
   }
+  emailError;
+  showEmailError(){
+    if(this.emailvalidation()!=1 && this.Email!=""){
+      this.emailError=true;
+    } 
+  
+  else this.emailError=false;
+}
+  
   //create new account
   onCreateNewAccount() {
+    //Show Email Error
+    this.showEmailError();
+  
+    //
     this.validForm = this.formValidation();
     if (this.allCool != true && this.validForm == 1) {
       console.log(this.newUser);
@@ -142,7 +155,7 @@ export class RegisterComponent implements OnInit {
   }//matchpasword_End
 
 
-  //--FORM VALIDATE---
+  //--FORM VALIDATE--------------------------------------
   formValidation() {
     this.passLength = this.y.length;
 
@@ -154,14 +167,18 @@ export class RegisterComponent implements OnInit {
       return 0;
   }
 
+  
+
   emailvalidation() {
     var atI = this.Email.indexOf("@");
     var dotI = this.Email.indexOf(".");
     if (dotI != atI + 1
       && atI != 0 && atI != -1
       && dotI != -1) {
-      return 1;
+      return 1;      
     }
+
+    else return 0;
 
 
   }

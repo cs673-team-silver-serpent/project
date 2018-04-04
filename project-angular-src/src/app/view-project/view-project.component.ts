@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/Project';
 import { MatTableDataSource } from '@angular/material';
+import { UserSessionService } from '../services/user-session.service';
+import { User } from '../models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-project',
@@ -15,10 +18,12 @@ export class ViewProjectComponent implements OnInit {
  displayedColumns = ['dateCreated', 'projectName', 'projectDescription', 'delete'];
  dataSource = new MatTableDataSource<Project>(this.projects);
 
- constructor(private projectService: ProjectService) { }
-
+ constructor(private projectService: ProjectService,private userSessionService: UserSessionService,private router: Router) { }
+ user: User;
+ enableDelete=false;  //toggle the delete button
  ngOnInit() {
-     // Load projects on init     
+   
+  /// Load projects on init     
      this.projectService.getAllProjects().subscribe(
        response => {
          this.projects = response;
@@ -28,6 +33,13 @@ export class ViewProjectComponent implements OnInit {
          console.log(error);
        }
      );
+
+     if(this.userSessionService.user){
+      this.enableDelete=true;
+     }
+     else this.enableDelete=false;
+
+    
  }
 
  public deleteProject(project: Project) {

@@ -6,12 +6,14 @@
     <button mat-button routerLink="/viewProject">Manage Projects</button>
     <span class="example-spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
-        <span *ngIf="user">{{user.firstName}}</span>
+        <!-- <span *ngIf="userType">{{user.firstName}}</span> -->
+        <span >{{user.firstName}}</span>
         <mat-icon >account_box</mat-icon>
         <mat-menu #menu="matMenu" [overlapTrigger]="false">
             <button mat-menu-item routerLink="/profile">Profile</button>
-            <button mat-menu-item routerLink="/login">Login</button>
-            <button mat-menu-item (click)="onLogout()">Logout</button>
+            <button *ngIf="viewLogin" mat-menu-item routerLink="/login">Login</button>
+            <!-- <button mat-menu-item (click)="onLogout()">Logout</button> -->
+            <button *ngIf="viewLogout" mat-menu-item (click)="onLogout()">Logout</button>
         </mat-menu>
     </button>
 </mat-toolbar>

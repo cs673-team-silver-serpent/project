@@ -1,0 +1,149 @@
+<app-toolbar></app-toolbar>
+
+<div class="wrapper">
+
+  <div class="internal">
+    <mat-card class="mat-elevation-z6">
+      <mat-card-title style="text-align:center">Project Portal</mat-card-title>
+
+    </mat-card>
+  </div>
+
+
+  <div class="internal">
+    <mat-tab-group class="mat-elevation-z6">
+
+      <!-- tab1 -->
+      <mat-tab label="About">
+        <mat-list>
+          <mat-list-item>Date Created:
+            <b> March 26, 2018</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Last Modified:
+            <b> March 27, 2018</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Repository Link:
+            <a href="https://github.com/cs673-team-silver-serpent/project.git" class="href"> GitHub</a>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+          <mat-list-item>Demo Link:
+            <a href="https://github.com/cs673-team-silver-serpent/project.git" class="href"> GitHub</a>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+
+      </mat-tab>
+
+
+
+      <!-- tab2 -->
+      <mat-tab label="Technology Stack">
+        <mat-list>
+          <mat-list-item>Front End:
+            <b>AngularJS</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Back End:
+            <b>NodeJS | MongoDB</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Framework:
+            <b>Express JS</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Testing Framework:
+            <b>Mocha and Chai</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Version Control Tool:
+            <b>Git</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+
+        </mat-list>
+
+      </mat-tab>
+
+      <!-- tab 3 -->
+      <mat-tab label="Description">
+        <mat-card>
+          <mat-card-content>
+            <p class="mat-title"> Projects Portal (working title), aims to help Computer Science students and instructors to keep track of software
+              development projects. This repository contains Team Silver Serpent's class project for BU Met College CS672
+              (Spring 2018).
+            </p>
+          </mat-card-content>
+
+        </mat-card>
+
+      </mat-tab>
+
+      <!-- tab 4 -->
+      <mat-tab label="Members">
+        <mat-list>
+          <mat-list-item>Andy</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Ben</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Chad</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Kanishk</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Parker</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+
+      </mat-tab>
+
+
+
+    </mat-tab-group>
+
+  </div>
+
+  <div class="internal">
+    <mat-card>
+      <mat-card-title>Tags</mat-card-title>
+      <mat-card-content>
+        #angular #nodejs #mean #express #mongodb #typescript #angular-material
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <div class="internal" style="text-align:center">
+    <button mat-raised-button color="primary" (click)='redirectToPreviousPage()'>Back</button>
+    <button matTooltip="Add to Favorite Projects" mat-raised-button color="primary">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
+</div>
+
+
+
+<!-- This section will be used for testing during databinding -->
+<!-- <div class="wrapper">
+  <mat-card class="internal">
+Test Databinding here
+<hr>
+OWNER: {{projowner}}
+<hr>
+Project Name:{{projname}}
+<hr>
+Date Created:{{datecreated}}
+<hr>
+Last Modified:{{datelastmodified}}
+<hr>
+Repository Link:{{repolink}}
+<hr>
+Demo Link:{{demolink}}
+<hr>
+Description:{{description}}
+<hr>
+  </mat-card>
+  
+</div> -->
+<!-- This section will be used for testing during databinding -->

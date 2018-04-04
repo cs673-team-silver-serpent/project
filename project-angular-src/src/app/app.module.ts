@@ -22,6 +22,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
 import { CdkTableModule } from '@angular/cdk/table';
+import { DisplayProjectComponent } from './display-project/display-project.component';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -56,6 +58,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+
 
 
 
@@ -96,6 +99,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
   ],
+ 
   
 })
 export class DemoMaterialModule {}
@@ -111,7 +115,8 @@ export class DemoMaterialModule {}
     HomeComponent,
     ProjectSearchComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    DisplayProjectComponent
   ],
   imports: [
     BrowserModule,
