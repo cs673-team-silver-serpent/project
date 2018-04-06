@@ -16,7 +16,6 @@ const UsersSchema = mongo.Schema({
     required: true
   },
   title: String,
-  
   email: {
     type: String,
     required: true
@@ -25,10 +24,18 @@ const UsersSchema = mongo.Schema({
     type: String,
     required: true
   },
-  favorites: {
-     type: ObjectId,
-     ref: 'Project'
-   },
+  myProjects: [
+    {
+      type: ObjectId,
+      ref: 'Project'
+    }
+  ],
+  favorites: [
+    {
+      type: ObjectId,
+      ref: 'Project'
+    }
+  ],
   role: {
     type: String,
     enum: ["admin", "user", "visitor"]

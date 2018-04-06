@@ -8,7 +8,7 @@ let ObjectId = mongo.Schema.Types.ObjectId;
 // then get rid of the following four lines
 let users = require('../models/users-model');
 let comments = require('../models/comments-model');
-Users = users.User;
+User = users.User;
 Comments = comments.Comments;
 
 // TODO: projectMembers should be type:[Users._id]
@@ -18,10 +18,6 @@ const ProjectsSchema = mongo.Schema({
     dateCreated: {
         type: Date,
         required: true
-    },
-    owner: {
-        type: String,
-        required: false
     },
     dateModified: {
         type: Date
@@ -34,9 +30,17 @@ const ProjectsSchema = mongo.Schema({
         type: String,
         required: true
     },
-    projectMembers: {
-        type: [String],
+    owner: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
     },
+    projectMembers:  [
+        {
+            type:ObjectId, 
+            ref: 'User'
+        }
+    ],
     techStack: [String],
     repositoryLink: String,
     projectDemo: String,
