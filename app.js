@@ -84,6 +84,7 @@ app.route("/user/delete/").post(users.deleteUserByName);
 /////////////////
 // user-facing routes
 app.route('/session/userId').post(sessions.getSessionByUserId);
+app.route('/session/getUserBySession').post(sessions.getUserBySession);
 
 var httpsServer = https.createServer(credentials, app);
 

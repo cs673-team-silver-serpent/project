@@ -129,15 +129,7 @@ authenticateUser = (request, response) => {
     if (user[0].password == _password) { // mongo queries return cursors; only one object in this cursor so user[0].
       let newSession = session.createSession(user[0]._id);  // create user session
       newSession.save();                                    // save  session
-      let userReturned = {                                  // user object has id & password
-        firstName: user[0].firstName,                       // so remove them by constructing userReturned
-        lastName: user[0].lastName,                         // object, which is what is returned
-        email: user[0].email,
-        title: user[0].title,
-        favorites: user[0].favorites,
-        role: user[0].role
-      };
-      response.json(userReturned);  
+      response.json(newSession);
     } else {
       response.status(401).send("Wrong Password");    
     }
