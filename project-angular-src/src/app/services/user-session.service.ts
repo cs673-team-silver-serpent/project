@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class UserSessionService {
   user: User;
-  baseURL = 'http://localhost:3000';
+  baseURL = 'https://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
