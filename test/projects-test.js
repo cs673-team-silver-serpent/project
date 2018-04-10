@@ -30,10 +30,11 @@ describe('Project Tests', () => {
     // TEST POST route
     /************************************/
     describe('POST project', () => {
-        it('it should POST a new project with title & description', (done) => {
+        it('it should POST a new project with title, description and owner', (done) => {
             let project = {
                 projectName: "Projects Portal",
-                projectDescription: "A portal app to manage software development projects"
+                projectDescription: "A portal app to manage software development projects",
+                owner:"5ac74c2954051815cb0914ef",
             }
             chai.request(server)
             .post('/project')
@@ -52,15 +53,16 @@ describe('Project Tests', () => {
 
     //Create a New Project with ALL the fields populated:
     describe('POST project', () => {
-        it('it should POST a new project with title, description, ', (done) => {
+        it('it should POST a new project with all fields populated, ', (done) => {
             let project = {
                 projectName: "Projects Portal",
                 projectDescription: "A portal app to manage software development projects",
-                projectMembers: "",
+                owner:"5ac74c2954051815cb0914ef",
+                projectMembers:["5ac74c2954051815cb0914ef","5ac74c5a54051815cb0914f0"],
                 techStack: "Mongo,Express,Node,Angular",
                 repositoryLink: "www.github.com",
                 projectDemo: "www.youtube.com/project",
-                labels: "#Portal, #MEAN",
+                labels: ["#Portal, #MEAN"],
             }
             chai.request(server)
             .post('/project')
@@ -78,15 +80,16 @@ describe('Project Tests', () => {
 
      //Create a New Project with project name Containing special Characters:
      describe('POST project', () => {
-        it('it should POST a new project with title, description, ', (done) => {
+        it('it should POST a new project with project name containing special characters, ', (done) => {
             let project = {
                 projectName: "$@mplE Pro73CT ~!@#$%^&",
                 projectDescription: "Project with special Characters and Spaces",
-                projectMembers: "",
+                owner:"5ac74c2954051815cb0914ef",
+                projectMembers:["5ac74c2954051815cb0914ef","5ac74c5a54051815cb0914f0"],
                 techStack: "Mongo,Express,Node,Angular",
                 repositoryLink: "www.github.com",
                 projectDemo: "www.youtube.com/project",
-                labels: "#Portal, #MEAN",
+                labels: ["#Portal, #MEAN"],
             }
             chai.request(server)
             .post('/project')
@@ -102,16 +105,12 @@ describe('Project Tests', () => {
         });
     });
 
-     //Create a New Project with ProjectName Missing:
+     //Create a New Project with projectName Missing:
      describe('POST project', () => {
         it('it should FAIL trying to POST a new project with missing Project Name', (done) => {
             let project = {
                 projectDescription: "A portal app to manage software development projects",
-                projectMembers: "",
-                techStack: "Mongo,Express,Node,Angular",
-                repositoryLink: "www.github.com",
-                projectDemo: "www.youtube.com/project",
-                labels: "#Portal, #MEAN",
+                owner:"5ac74c2954051815cb0914ef"
             }
             chai.request(server)
 
@@ -127,6 +126,48 @@ describe('Project Tests', () => {
         });
     });
     
+    //Create a New Project with projectDescription Missing:
+    describe('POST project', () => {
+        it('it should FAIL trying to POST a new project with missing Project Description', (done) => {
+            let project = {
+                projectName: "Projects Portal",
+                owner:"5ac74c2954051815cb0914ef"
+            }
+            chai.request(server)
+            .post('/project')
+            .send(project)
+            .end((error,response) => {
+                response.should.have.status(200);
+                response.body.should.be.a('object');
+                expect(response.body.message).to.include("`projectDescription` is required");
+                expect(response.body.success).to.be.false;
+                done();
+            });
+        });
+    });
+
+
+    //Create a New Project with owner Missing:
+    describe('POST project', () => {
+        it('it should FAIL trying to POST a new project with missing owner', (done) => {
+            let project = {
+                projectName: "Projects Portal",
+                projectDescription: "A portal app to manage software development projects"
+            }
+            chai.request(server)
+            .post('/project')
+            .send(project)
+            .end((error,response) => {
+                response.should.have.status(200);
+                response.body.should.be.a('object');
+                expect(response.body.message).to.include("`owner` is required");
+                expect(response.body.success).to.be.false;
+                done();
+            });
+        });
+    });
+
+
     /************************************/
     // TEST GET All Projects
     /************************************/
@@ -175,8 +216,6 @@ describe('Project Tests', () => {
     })
 
         
-
-
     /************************************/
     // TEST DELETE route
     /************************************/

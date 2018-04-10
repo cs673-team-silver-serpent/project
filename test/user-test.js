@@ -26,6 +26,10 @@ describe('Users Tests', () => {
         });
     });
 
+    /************************************/
+    // TEST add user with all required fields
+    /************************************/
+
     describe('Add user, all required fields', () => {
         it('it should POST a new user with all required fields', (done) => {
             let user = {
@@ -49,7 +53,11 @@ describe('Users Tests', () => {
     });
 
 
-    // add one user only, then test all "find" endpoints
+    /************************************/
+    // TESTS find routes
+    // Note: add one user only, then test all "find" endpoints
+    /************************************/
+
     describe('Find user by firstName', () => {
         it('it should find user by firstName', (done) => {
             chai.request(server)
@@ -64,6 +72,8 @@ describe('Users Tests', () => {
                             "firstName": "Thomas",
                             "lastName": "Jefferson",
                             "email": "tom@foundingfathers.com",
+                            "favorites": [],
+                            "myProjects": [],
                             "__v": 0
                         }
                     ]
@@ -88,6 +98,8 @@ describe('Users Tests', () => {
                             "firstName": "Thomas",
                             "lastName": "Jefferson",
                             "email": "tom@foundingfathers.com",
+                            "favorites":[],
+                            "myProjects":[],
                             "__v": 0
                         }
                     ]
@@ -127,6 +139,8 @@ describe('Users Tests', () => {
                             "firstName": "Thomas",
                             "lastName": "Jefferson",
                             "email": "tom@foundingfathers.com",
+                            "favorites":[],
+                            "myProjects":[],
                             "__v": 0
                         }
                     ]
@@ -151,6 +165,8 @@ describe('Users Tests', () => {
                             "firstName": "Thomas",
                             "lastName": "Jefferson",
                             "email": "tom@foundingfathers.com",
+                            "favorites":[],
+                            "myProjects":[],
                             "__v": 0
                         }
                     ]
