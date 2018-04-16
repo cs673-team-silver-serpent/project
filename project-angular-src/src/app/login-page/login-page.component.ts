@@ -4,13 +4,12 @@ import { User } from '../models/User';
 import { Router } from '@angular/router';
 import { Session } from '../models/Session';
 
-
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   authInfo = {
     userName: "",
     password: ""
@@ -21,32 +20,6 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private userSessionService: UserSessionService,
               private router: Router) { }
-
-  ngOnInit() {
-  }
-  
-
-
-  // authenticateUser() {
-  //   // var email = 'ben@foundingfathers.com';
-  //   // var password = 'password';
-
-  //   this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
-  //     (user) => {
-  //       console.log("login-page response: ", user.firstName);
-  //       if (user.firstName) {
-  //         this.userSessionService.logInUser(user);
-  //         this.router.navigate(['/home']);
-  //         this.loginError = false;
-  //       } else {
-  //         console.log("Wrong Password");
-  //         this.loginError = true;
-  //       }
-  //     },
-  //     (error) => {
-  //       console.log("Error: ", error);
-  //     });
-  // }
 
   authenticateUser() {
     this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
@@ -59,6 +32,7 @@ export class LoginPageComponent implements OnInit {
             (user: User) => {
               console.log("login-page  authenticateUser  user:", user);
               this.userSessionService.setUser(user);
+              document.cookie = "user="+user;
               this.router.navigate(['/home']);
             },
             (error) => {
@@ -75,17 +49,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   toggleVisibility() {
-    if(this.passwordVisibility==false)
-    {
+    if(this.passwordVisibility==false) {
       this.passwordVisibility = true;
       this.buttonicon="visibility"
-      
+    } else {
+      this.passwordVisibility = false;
+      this.buttonicon="visibility_off";
     }
-    else
-    {
-    this.passwordVisibility = false;
-    this.buttonicon="visibility_off";
-  }
-
   }
 }

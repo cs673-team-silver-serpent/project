@@ -16,7 +16,7 @@
           <!-- dateCreated -->
           <ng-container matColumnDef="dateCreated">
             <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.dateCreated}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateCreated | date:'medium'}} </mat-cell>
           </ng-container>
 
           <!-- projectName -->

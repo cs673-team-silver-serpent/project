@@ -13,7 +13,8 @@ export class ProfileComponent implements OnInit {
   user: User;
   
 
-    constructor(private userSessionService: UserSessionService,private router: Router) { }
+    constructor(private userSessionService: UserSessionService,
+                private router: Router) { }
 
   ngOnInit() {
     if(this.userSessionService.user){      //Checking if the user object is not empty
@@ -22,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
     else{
       this.user = {
-        _id: 0,
+        _id: this.userSessionService.user._id,
       firstName: 'Guest',
       lastName: '',
       title: '',
