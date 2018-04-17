@@ -33,6 +33,7 @@ getProjectByProjectName = (request, response) => {//************************* */
   let projectName = request.body.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
   console.log(projectNameRegEx);
+  //*********mdb */
   Project.find({ projectName: projectNameRegEx },{_id: 0})
          .exec((error,project) => {
     if (error) { 
@@ -63,8 +64,9 @@ getProjectByProjectDescription = (request, response) => {
 
 //----------NEW------return project Ids-----------
 getProjectId=(request, response)=>{
+  var projectNameS = request.body.projectName;
   let searchName = new RegExp('.*' + projectName + '.*','i');
-  Project.find({projectName: 'Avengers'},{_id}).exec((error,project)=>{
+  Project.find({projectName: projectNameS},{_id, projectName}).exec((error,project)=>{
     if(error){
       response.send(error);
     }
@@ -78,6 +80,8 @@ getProjectId=(request, response)=>{
 
 }
 //------------------------------
+
+
 
 
 

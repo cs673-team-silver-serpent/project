@@ -30,9 +30,9 @@ export class ProjectService {
   }
   
   //----NEW--------------------------
- public getProject(project: Project): Observable<any>{
+ public getProject(projectName: String): Observable<any>{
     const url = `${this.baseURL}/project/projectName`
-    return this.http.post(url, project);
+    return this.http.post(url, projectName);
   }
   //-------------------------------------------
 
