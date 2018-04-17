@@ -28,6 +28,26 @@ export class ProjectService {
     const url = `${this.baseURL}/project/delete`
     return this.http.post(url, project);
   }
+  
+  //----NEW--------------------------
+ public getProject(project: Project): Observable<any>{
+    const url = `${this.baseURL}/project/projectName`
+    return this.http.post(url, project);
+  }
+  //-------------------------------------------
+
+  //----NEW---return project id, search by name(project controller-getProjectId)---------------
+ public getProjectId(project: Project): Observable<any>{
+  const url = `${this.baseURL}/project/projectName`
+  return this.http.post(url, project);
+}
+
+//-------------
+
+//-------------
+
+
+//-------------------------------------------
 
   public addProject(project: NewProject): Observable<NewProject> {
     const url = `${this.baseURL}/project`

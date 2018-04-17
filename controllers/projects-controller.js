@@ -29,7 +29,7 @@ getProjectById = (request, response) => {
 }
 
 // Temporary functions for Iteration 2 Presentation
-getProjectByProjectName = (request, response) => {
+getProjectByProjectName = (request, response) => {//************************* */
   let projectName = request.body.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
   console.log(projectNameRegEx);
@@ -60,6 +60,26 @@ getProjectByProjectDescription = (request, response) => {
   });
 }
 // end temporary functions
+
+//----------NEW------return project Ids-----------
+getProjectId=(request, response)=>{
+  let searchName = new RegExp('.*' + projectName + '.*','i');
+  Project.find({projectName: 'Avengers'},{_id}).exec((error,project)=>{
+    if(error){
+      response.send(error);
+    }
+    else if(project==false){
+      response.json({success: false})
+  }
+  else {
+    response.json(project);
+  }
+  })
+
+}
+//------------------------------
+
+
 
 
 addProject = (request, response) => {
@@ -103,4 +123,4 @@ deleteProjectById = (request,response) => {
 }
 
 module.exports = { addProject, deleteProjectById, getAllProjects, getProjectById,
-  getProjectByProjectName, getProjectByProjectDescription };
+  getProjectByProjectName, getProjectByProjectDescription, getProjectId };

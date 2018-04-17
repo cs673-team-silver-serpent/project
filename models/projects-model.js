@@ -31,11 +31,11 @@ const ProjectsSchema = mongo.Schema({
         required: true
     },
     owner: {
-        type: ObjectId,
+        type: ObjectId, //******PPPPP */
         ref: 'User',
         required: true
     },
-    projectMembers:  [
+    projectMembers:  [  //*******//
         {
             type:ObjectId, 
             ref: 'User'

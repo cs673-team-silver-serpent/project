@@ -24,13 +24,13 @@ const UsersSchema = mongo.Schema({
     type: String,
     required: true
   },
-  myProjects: [
+  myProjects: [  //****************** */
     {
       type: ObjectId,
       ref: 'Project'
     }
   ],
-  favorites: [
+  favorites: [ //********************* */
     {
       type: ObjectId,
       ref: 'Project'

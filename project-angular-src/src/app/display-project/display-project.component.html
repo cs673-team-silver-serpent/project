@@ -2,6 +2,39 @@
 
 <div class="wrapper">
 
+  <div class="internal" style="width:100%">
+            <mat-form-field>
+            <input matInput placeholder="Username">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)='searchProjectsByName()'>Search</button>
+     </div>
+
+<!-- List of Projects -->
+<div class="internal">
+  <mat-card>
+      <mat-card-title>Select a Project</mat-card-title>
+      <mat-table #table [dataSource]="ds">
+    
+      <ng-container matColumnDef="projectName">
+          <mat-header-cell *matHeaderCellDef> Project Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-raised-button (click)="showThisProject(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+        </mat-table>
+  </mat-card>
+</div>
+
+<!--  -->
+
+
   <div class="internal">
     <mat-card class="mat-elevation-z6">
       <mat-card-title style="text-align:center">Project Portal</mat-card-title>
