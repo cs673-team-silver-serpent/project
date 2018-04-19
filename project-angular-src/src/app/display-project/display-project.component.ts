@@ -47,9 +47,14 @@ export class DisplayProjectComponent implements OnInit {
   }
 
   //method to get the list of project matching the entered name
-  searchProjectsByName() {
+  searchProjectsByName(){
+    this.projectService.getProjectName("veronica").subscribe(
+      Response=>
+    )
+  }
+  /*searchProjectsByName() {
     
-    this.projectService.getProject(queryProject).subscribe(
+    this.projectService.getProject("veronica").subscribe(
       response => {
         this.projects = this.projects.filter(projects => projects !== project)
         this.projectService.getAllProjects().subscribe(
@@ -58,7 +63,7 @@ export class DisplayProjectComponent implements OnInit {
           // this.dataSource = new MatTableDataSource<Project>(this.projects);
          },
         }
-      }
+  }*/
   //method to show the clicked project's details
   showThisProject() {
 /* */
