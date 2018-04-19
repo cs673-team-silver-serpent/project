@@ -30,7 +30,7 @@ export class ProjectService {
   }
   
   //----NEW--------------------------
- public getProject(projectName: String): Observable<any>{
+ public getProjectName(projectName: String): Observable<any>{
     const url = `${this.baseURL}/project/projectName`
     return this.http.post(url, projectName);  //pass the data to controller
   }

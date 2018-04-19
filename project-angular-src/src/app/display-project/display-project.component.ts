@@ -30,20 +30,20 @@ export class DisplayProjectComponent implements OnInit {
 
   queryProject:Project;
   ngOnInit() {
-    this.queryProject=    
-    {owner: '',
+  //   this.queryProject=    
+  //   {owner: '',
     
-      projectName: ,
-      projectDescription: '',
-      projectMembers: '',
-      techStack: [],
-      repositoryLink: '',
-      projectDemo: '',
-      labels: [],
-      _id:'',
-      dateCreated: '',
-      dateModified:'',
-  }
+  //     projectName: ,
+  //     projectDescription: '',
+  //     projectMembers: '',
+  //     techStack: [],
+  //     repositoryLink: '',
+  //     projectDemo: '',
+  //     labels: [],
+  //     _id:'',
+  //     dateCreated: '',
+  //     dateModified:'',
+  // }
   }
 
   //method to get the list of project matching the entered name
