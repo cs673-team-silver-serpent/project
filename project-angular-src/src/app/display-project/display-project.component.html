@@ -4,7 +4,7 @@
 
   <div class="internal" style="width:100%">
             <mat-form-field>
-            <input matInput placeholder="Username">
+            <input [ngModel]matInput placeholder="Username">
         </mat-form-field>
         <button mat-raised-button color="primary" (click)='searchProjectsByName()'>Search</button>
      </div>
