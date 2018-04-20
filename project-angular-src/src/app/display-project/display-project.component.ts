@@ -47,11 +47,8 @@ export class DisplayProjectComponent implements OnInit {
   }
 
   //method to get the list of project matching the entered name
-  searchProjectsByName(){
-    this.projectService.getProjectName("veronica").subscribe(
-      Response=>
-    )
-  }
+  
+  
   /*searchProjectsByName() {
     
     this.projectService.getProject("veronica").subscribe(
@@ -65,9 +62,9 @@ export class DisplayProjectComponent implements OnInit {
         }
   }*/
   //method to show the clicked project's details
-  showThisProject() {
+  //showThisProject() {
 /* */
-  }
+  //}
 
 
 }

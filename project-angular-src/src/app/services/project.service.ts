@@ -29,18 +29,28 @@ export class ProjectService {
     return this.http.post(url, project);
   }
   
+
+
   //----NEW--------------------------
- public getProjectName(projectName: String): Observable<any>{
+ public getProjectName(projectName: String): Observable<Project[]>{
+  var projectObj={
+    projectName : projectName
+  } 
+  console.log(projectName);
+
     const url = `${this.baseURL}/project/projectName`
-    return this.http.post(url, projectName);  //pass the data to controller
+    return this.http.post<Project[]>(url,projectObj);  //pass the data to controller
+    
   }
+
   //-------------------------------------------
 
-  //----NEW---return project id, search by name(project controller-getProjectId)---------------
- public getProjectId(project: Project): Observable<any>{
-  const url = `${this.baseURL}/project/projectName`
-  return this.http.post(url, project);
-}
+//   //----NEW---return project id, search by name(project controller-getProjectId)---------------
+//  public getProjectId(projectName: String): Observable<any>{
+//   const url = `${this.baseURL}/project/projectName`
+//   //return this.http.post(url, project);
+//   return this.http.post<Project[]>(url, undefined);
+// }
 
 //-------------
 
