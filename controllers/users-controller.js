@@ -9,31 +9,31 @@ const hash = require('hash.js');
 
 
 getAllUsers = (request, response) => {
-    User.find( {}, { _id: 0, password: 0} )
-        .exec((error, users) => {
-      if (error) {
-        response.send(error);
-      } else if (users) {
-        response.json(users);
-      } else {
-        response.json( {success: false} );
-      }
-    });
+  User.find( {}, { _id: 0, password: 0} )
+      .exec((error, users) => {
+    if (error) {
+      response.send(error);
+    } else if (users) {
+      response.json(users);
+    } else {
+      response.json( {success: false} );
+    }
+  });
 }
 
 getUserById = (request, response) => {
-    let id = request.body.id;
-    User.find( { _id: id}, { _id: 0, password: 0 } )
-        .exec((error,user) => {
-          if (error) { 
-            response.send(error);
-          } else if (user) {
-            response.json(user);
-          } else {
-            response.json( {success: false} );
-          }
-    });
-  }
+  let id = request.body.id;
+  User.find( { _id: id}, { _id: 0, password: 0 } )
+      .exec((error,user) => {
+        if (error) { 
+          response.send(error);
+        } else if (user) {
+          response.json(user);
+        } else {
+          response.json( {success: false} );
+        }
+  });
+}
 
 // Temporary functions for Iteration 2 presentation only
 getUserByFirstName = (request, response) => {
@@ -47,7 +47,6 @@ getUserByFirstName = (request, response) => {
       response.json({success: false, message: "Failed to find user."});      
     } else {
       response.json(user);
-
     }
   });
 }
@@ -130,15 +129,7 @@ authenticateUser = (request, response) => {
     if (user[0].password == _password) { // mongo queries return cursors; only one object in this cursor so user[0].
       let newSession = session.createSession(user[0]._id);  // create user session
       newSession.save();                                    // save  session
-      let userReturned = {                                  // user object has id & password
-        firstName: user[0].firstName,                       // so remove them by constructing userReturned
-        lastName: user[0].lastName,                         // object, which is what is returned
-        email: user[0].email,
-        title: user[0].title,
-        favorites: user[0].favorites,
-        role: user[0].role
-      };
-      response.json(userReturned);  
+      response.json(newSession);
     } else {
       response.status(401).send("Wrong Password");    
     }

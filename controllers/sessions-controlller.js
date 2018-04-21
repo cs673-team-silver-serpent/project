@@ -1,20 +1,12 @@
 const express = require('express');
 const Session = require('../models/sessions-model');
+const Users = require('../models/users-model');
 const hash = require('hash.js');
 const randomWord = require('random-word');
 
 // TODO: figure out mongoose cursors interface
 getSessionByUserId = (request, response) => {
      let userId = request.body.userId;
-//     let cursor = Session.find({userId:userId}).cursor();
-//     cursor
-//         .on('data',(doc) => {
-//         })
-//         .on('error', () => {
-//             response.send(error);
-//         })
-//         .on('close', () => {
-//         });
 
     Session.find({userId: userId},{ _id: 0})
             .exec((error,sessions) => {
@@ -27,6 +19,41 @@ getSessionByUserId = (request, response) => {
         }
     });
 }
+
+// Given a SessionToken in the URL Param return the User
+getUserBySession = (request, response) => {
+    // Find User ID by the SessionToken
+    let sessionToken = request.body.sessionToken;
+    var userId;
+    Session.find({sessionToken: sessionToken})
+            .exec((error, answer) => {
+            if (error) {
+                response.send(error);
+            } else if (answer) {
+                console.log("Anser from Session find: ", answer);
+                if (answer.length == 0) {
+                    response.json({ success: false});
+                } else {
+                    userId = answer[0].userId;
+                    console.log("UserID: ", userId);
+                    Users.find({_id: userId})
+                        .exec((error, user) => {
+                            if (error) {
+                                response.send(error);
+                            } else if (user) {
+                                console.log("User: ", user)
+                                delete(user[0].password);
+                                response.json(user[0]);
+                            } else {
+                                response.json({ success: false});
+                            }
+                    });
+                }
+            } else {
+                response.json({ success: false});
+            }
+        });
+    }
 
 createSession = (userId) => {
     // calculate expiration date & time
@@ -45,4 +72,4 @@ createSession = (userId) => {
     );
 }
 
-module.exports = { createSession, getSessionByUserId };
+module.exports = { createSession, getSessionByUserId, getUserBySession };

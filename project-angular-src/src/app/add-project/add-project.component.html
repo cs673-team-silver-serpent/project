@@ -5,9 +5,6 @@
 
     <form #newProjectForm (ngSubmit)="onCreateNewProject()">
         <mat-form-field>
-            <input matInput placeholder="Owner" [(ngModel)]="newProject.owner" name="owner">
-        </mat-form-field>
-        <mat-form-field>
             <input matInput placeholder="Project Name" [(ngModel)]="newProject.projectName" name="projectName" required>
         </mat-form-field>
         <mat-form-field>

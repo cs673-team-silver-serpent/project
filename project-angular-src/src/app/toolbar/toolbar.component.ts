@@ -25,7 +25,7 @@ export class ToolbarComponent implements OnInit {
     else{
       
      this.user = {
-        _id: 0,
+        _id: '',
       firstName: 'Guest',
       lastName: '',
       title: '',

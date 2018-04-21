@@ -9,6 +9,14 @@ const projects = require('./controllers/projects-controller');
 const users = require('./controllers/users-controller');
 const sessions = require('./controllers/sessions-controlller');
 
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('./certificates/private.key', 'utf8');
+var certificate = fs.readFileSync('./certificates/cacert.pem', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
+
 // initialize app variable
 let app = express();
 
@@ -76,10 +84,12 @@ app.route("/user/delete/").post(users.deleteUserByName);
 /////////////////
 // user-facing routes
 app.route('/session/userId').post(sessions.getSessionByUserId);
+app.route('/session/getUserBySession').post(sessions.getUserBySession);
 
+var httpsServer = https.createServer(credentials, app);
 
 // start server
-app.listen(port, () => {
+httpsServer.listen(port, () => {
    console.log(`Starting the server at port ${port}.`);
 });
 

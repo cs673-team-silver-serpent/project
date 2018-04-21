@@ -1,5 +1,5 @@
 export class User {
-    _id: number
+    _id: String
     firstName: String
     lastName: String
     title: String
