@@ -31,7 +31,7 @@ export class ProjectService {
   
 
 
-  //----NEW--------------------------
+  //----NEW---------------------------------------------
  public getProjectName(projectName: String): Observable<Project[]>{
   var projectObj={
     projectName : projectName
@@ -43,21 +43,18 @@ export class ProjectService {
     
   }
 
-  //-------------------------------------------
+  public getProjectById(projectId: String): Observable<any>{
+    console.log("We are in service | Id: ",projectId);
+    var projectIdObj={
+      Id : projectId
+    } 
+      
+      const url = `${this.baseURL}/project/id`
+      return this.http.post(url,projectIdObj);  //pass the data to controller    
+    }
 
-//   //----NEW---return project id, search by name(project controller-getProjectId)---------------
-//  public getProjectId(projectName: String): Observable<any>{
-//   const url = `${this.baseURL}/project/projectName`
-//   //return this.http.post(url, project);
-//   return this.http.post<Project[]>(url, undefined);
-// }
-
-//-------------
-
-//-------------
-
-
-//-------------------------------------------
+    
+//------------FINISH NEW-----------------------------------------
 
   public addProject(project: NewProject): Observable<NewProject> {
     const url = `${this.baseURL}/project`

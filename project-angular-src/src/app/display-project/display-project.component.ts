@@ -21,9 +21,9 @@ export class DisplayProjectComponent implements OnInit {
   demolink = "";
   description = "";
 
-  projects: Project[] = [];
-  displayedColumns = ['projectName', 'select'];
-  ds = new MatTableDataSource<Project>(this.projects);
+  //projects: Project[] = [];
+  //displayedColumns = ['projectName', 'select'];
+  //ds = new MatTableDataSource<Project>(this.projects);
 
   constructor(private projectService: ProjectService,private userSessionService: UserSessionService,private router: Router) { }
 

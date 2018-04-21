@@ -14,7 +14,7 @@ Clicked Times: {{btnStatus}}
   <input mat-input name="query" id="nameTextQuery">
   <button class="btn btn-primary" (click)="getProject()">Click Me</button>
 </p>
-<p>Project Name: {{abc}}</p>
+<p>TOtal Search Results: {{abc}}</p>
 
 
 <p>-----------List of projects------------------------</p>
@@ -31,10 +31,10 @@ Clicked Times: {{btnStatus}}
   
   <!-- delete -->
   <ng-container matColumnDef="select">
-    <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Search</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-raised-button color="warn" (click)="selectProject(element)">
-        <mat-icon>delete</mat-icon>
+      <button mat-raised-button color="primary" (click)="selectProject(element)">
+        <mat-icon>search</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

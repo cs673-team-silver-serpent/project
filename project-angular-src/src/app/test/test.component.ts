@@ -22,12 +22,7 @@ import { element } from 'protractor';
 // });
 export class TestComponent implements OnInit {
   
-  
-
-
-
- 
-  
+  // @Output() projectAdded: EventEmitter<Project> = new EventEmitter<Project>();
   //Show just one project
   user :User;
   constructor(private projectService: ProjectService, private userSessionService: UserSessionService, private router: Router) { }
@@ -75,24 +70,16 @@ else
   labels: [],
   __v: 0
 }*/
-    /*this.displayedProject = {
-      owner: '',
-      projectName: '',
-      projectDescription: '',
-      projectMembers: '',
-      techStack: [],
-      repositoryLink: '',
-      projectDemo: '',
-      labels: []*/
-    };  /*********************************d*/
+    }; 
 
     btnStatus=0;
     onBtnClick(){
 this.btnStatus+=1;
     }
 
-   abc='1234';
-   searchName="ver";
+   abc='none';
+   searchName="pro";
+
 
     getProject(){
     //  this.searchName=document.getElementById("nameTextQuery") ///work on this part
@@ -101,14 +88,45 @@ this.btnStatus+=1;
           console.log(response);
           this.projects=response;
           this.dataSource = new MatTableDataSource<Project>(this.projects);
+          // this.abc=response.length;
+          this.abc=this.projects[1].projectName;
+          
          
         }
       )
     }
-
-    selectProject(element){
-      
+    selectedProjectName;
+    selectedProjectId;
+    selectProject(project: Project){
+      var searchProject = project.projectName;
+      index=0;
+var index = this.projects.findIndex(x=>x.projectName === searchProject)
+      //console.log("Project Selected: ", project.projectName, "ID: ", project._id,"SNO:",index)
+     this.selectedProjectName=this.projects[index].projectName;
+     this.selectedProjectId=this.projects[index]._id;
+      //console.log("Clicked Project: ", this.selectedProject);   
+      this.showClickedProject();
     }
  
+newProject: Project;
+
+    showClickedProject(){
+      console.log("We are in showClickedProject() method||Project To Show: ",this.selectedProjectName,"Id: ",this.selectedProjectId);
+      this.projectService.getProjectById(this.selectedProjectId).subscribe(
+        response=>{
+          //console.log("Response",response);
+          console.log("Response of Show Project",response);
+          
+        }
+      )
+
+
+
+    }
+
+
+
+
+
 
 }

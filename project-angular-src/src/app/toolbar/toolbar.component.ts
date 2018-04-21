@@ -32,7 +32,7 @@ export class ToolbarComponent implements OnInit {
       email: '',
       password: '',
       __v: 0,
-        }
+     }
 
     }
     
