@@ -15,6 +15,7 @@ export class LoginPageComponent {
     password: ""
   }
   loginError: boolean = false;
+  loginValid: boolean = false;
   passwordVisibility: boolean = false;
   buttonIcon: string="visibility_off";
 
@@ -60,5 +61,11 @@ export class LoginPageComponent {
       this.passwordVisibility = false;
       this.buttonIcon="visibility_off";
     }
+  }
+
+  isLoginValid() {
+    if (this.authInfo.email.length >= 7 && this.authInfo.password.length > 7) {
+      this.loginValid = true;
+    } 
   }
 }

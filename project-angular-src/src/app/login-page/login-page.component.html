@@ -2,7 +2,7 @@
     <div class="container" style="margin-top:1px">
         <img height="150px" width="100%" src="/assets/images/bu2.jpg" alt="BU PROJECT TRACKER HOME">
     </div>
-    <div class="container"  (keyup.enter)="authenticateUser()">
+    <div class="container"  (keyup.enter)="loginValid ? authenticateUser(): ''" (keyup)="isLoginValid()">
         <h2 class="loginheader">BOSTON UNIVERSITY PROJECT TRACKER</h2>
 
         <div *ngIf="loginError">
@@ -31,7 +31,7 @@
         </div>
 
         <!-- Buttons -->
-        <button mat-raised-button color="primary" (click)='authenticateUser()'>Login</button>
+        <button [disabled]="!loginValid" mat-raised-button color="primary" (click)='authenticateUser()'>Login</button>
 
         <div>
             <div class="container" style="margin-top:10px;width:45%;float: left;">
