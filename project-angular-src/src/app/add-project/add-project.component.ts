@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 export class AddProjectComponent implements OnInit {
   @Output() projectAdded: EventEmitter<NewProject> = new EventEmitter<NewProject>();
   newProject: NewProject;
-  user: User;
-  enableCreate: Boolean;
+  formIsValid: Boolean = false;
+  userIsAuthorized: Boolean = false;
   
   constructor(private projectService: ProjectService,
               private userSessionService: UserSessionService,
@@ -24,10 +24,9 @@ export class AddProjectComponent implements OnInit {
   
   ngOnInit() {
     this.createEmptyProject();
-
-    if(this.userSessionService.user){
-      this.enableCreate=true;
-    } else this.enableCreate=false;
+    if ( this.userSessionService.user.firstName != 'Guest') {
+      this.userIsAuthorized = true;
+    }
   }
 
   public onCreateNewProject() {
@@ -41,7 +40,21 @@ export class AddProjectComponent implements OnInit {
     });
   }
 
-  createEmptyProject() {
+  isProjectValid(): Boolean {
+    if (this.newProject.projectName.length < 1){
+      return false;
+    }
+    if (this.newProject.projectDescription.length < 1) {
+      return false;
+    }
+    return true;
+  }
+
+  updateFormValid(): void {
+    this.formIsValid = this.isProjectValid();
+  }
+
+  createEmptyProject(): void {
     this.newProject = {
       projectName: '',
       projectDescription: '',
