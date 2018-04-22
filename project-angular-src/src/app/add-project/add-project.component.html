@@ -1,26 +1,64 @@
 <mat-card>
-
     <mat-card-title>Create a New Project</mat-card-title>
 
+    <form 
+        *ngIf="userIsAuthorized" 
+        #newProjectForm 
+        (keyup)="updateFormValid()"
+        (ngSubmit)="onCreateNewProject()">
+        <mat-form-field>
+            <input
+                matInput 
+                placeholder="Project Name" 
+                [(ngModel)]="newProject.projectName" 
+                name="projectName" 
+                required>
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="Description"
+                [(ngModel)]="newProject.projectDescription"
+                name="projectDescription"
+                required>
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="Repository Link" 
+                [(ngModel)]="newProject.repositoryLink" 
+                name="repositoryLink">
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="Demo"
+                [(ngModel)]="newProject.projectDemo"
+                name="projectDemo">
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="Tech Stack"
+                [(ngModel)]="newProject.techStack"
+                name="techStack">
+        </mat-form-field>
 
-    <form #newProjectForm (ngSubmit)="onCreateNewProject()">
         <mat-form-field>
-            <input matInput placeholder="Owner" [(ngModel)]="newProject.owner" name="owner">
+            <input
+                matInput
+                placeholder="labels"
+                [(ngModel)]="newProject.labels"
+                name="labels">
         </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Project Name" [(ngModel)]="newProject.projectName" name="projectName" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Description" [(ngModel)]="newProject.projectDescription" name="projectDescription" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Repository Link" [(ngModel)]="newProject.repositoryLink" name="repositoryLink">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Demo" [(ngModel)]="newProject.projectDemo" name="projectDemo">
-        </mat-form-field>
-        <button [disabled]="!enableCreate" mat-raised-button color="primary">
+
+        <button 
+            [disabled]="!formIsValid"
+            mat-raised-button 
+            color="primary">
             <mat-icon>note_add</mat-icon>
         </button>
     </form>
+    
+    <p *ngIf="!userIsAuthorized">Please Login to create a project!</p>
 </mat-card>

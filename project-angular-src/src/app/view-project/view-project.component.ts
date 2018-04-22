@@ -15,41 +15,42 @@ export class ViewProjectComponent implements OnInit {
 
  // an array of projects
  projects: Project[] = [];
- displayedColumns = ['dateCreated', 'projectName', 'projectDescription', 'delete'];
+ displayedColumns: String[] = ['projectName', 'projectDescription', 'delete'];
  dataSource = new MatTableDataSource<Project>(this.projects);
 
- constructor(private projectService: ProjectService,private userSessionService: UserSessionService,private router: Router) { }
- user: User;
- enableDelete=false;  //toggle the delete button
- ngOnInit() {
-   
-  /// Load projects on init     
-     this.projectService.getAllProjects().subscribe(
-       response => {
-         this.projects = response;
-         this.dataSource = new MatTableDataSource<Project>(this.projects);
-       },
-       (error) => {
-         console.log(error);
-       }
-     );
 
-     if(this.userSessionService.user){
-      this.enableDelete=true;
-     }
-     else this.enableDelete=false;
+ constructor(private projectService: ProjectService,
+             private userSessionService: UserSessionService,
+             private router: Router) { }
+  user: User;
+  enableDelete=false;  //toggle the delete button
+  
+  ngOnInit() {
+    if (this.userSessionService.user.firstName == 'Guest') {
+      this.displayedColumns.pop();
+    }
+    this.displayedColumns
 
+    this.projectService.getAllProjects().subscribe(
+      response => {
+        this.projects = response;
+        this.dataSource = new MatTableDataSource<Project>(this.projects);
+      },
+      (error) => console.log(error)
+    );
     
- }
-
- public deleteProject(project: Project) {
-   console.log("Deleting Project: ", project.projectName, "ID: ", project._id);
-   
+    if(this.userSessionService.user){
+      this.enableDelete=true;
+    } else this.enableDelete=false;
+  }
+  
+  deleteProject(project: Project) {
+    console.log("Deleting Project: ", project.projectName, "ID: ", project._id);
     this.projectService.deleteProject(project).subscribe(
-       response => {
-         this.projects = this.projects.filter(projects => projects !== project)
-         this.projectService.getAllProjects().subscribe(
-          response => {
+      (response) => {
+        this.projects = this.projects.filter(projects => projects !== project)
+        this.projectService.getAllProjects().subscribe(
+          (response) => {
             this.projects = response;
             this.dataSource = new MatTableDataSource<Project>(this.projects);
           },
@@ -60,7 +61,7 @@ export class ViewProjectComponent implements OnInit {
     });
   }
 
-  public onNewProjectAddedRefreshList(newProject) {
+  onNewProjectAddedRefreshList(newProject) {
     this.projectService.getAllProjects().subscribe(
       response => {
         this.projects = response;
@@ -68,8 +69,6 @@ export class ViewProjectComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-      }
-    );
- }
-
+    });
+  }
 }

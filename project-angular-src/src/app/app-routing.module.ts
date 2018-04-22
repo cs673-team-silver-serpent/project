@@ -18,11 +18,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'addProject', component: AddProjectComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'manageProjects', component: ViewProjectComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'displayProject', component: DisplayProjectComponent},
   { path: 'viewProject', component: ViewProjectComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'displayProject', component: DisplayProjectComponent},
-  {path: 'test', component: TestComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ]
 
 @NgModule({

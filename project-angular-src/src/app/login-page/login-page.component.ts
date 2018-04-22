@@ -1,70 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSessionService } from '../services/user-session.service';
+import { User } from '../models/User';
 import { Router } from '@angular/router';
-
+import { Session } from '../models/Session';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   authInfo = {
-    userName: "",
+    email: "",
     password: ""
   }
+  loginError: boolean = false;
+  loginValid: boolean = false;
+  passwordVisibility: boolean = false;
+  buttonIcon: string="visibility_off";
 
   constructor(private userSessionService: UserSessionService,
-    private router: Router) { }
+              private router: Router) { }
 
-
-  passwordVisibility = false;
-  buttonicon="";
   ngOnInit() {
-    this.passwordVisibility = false;
-    this.buttonicon="visibility_off";
+    console.log("login-page.component User: ", this.userSessionService.user);
   }
-  loginError = false;
+  
   authenticateUser() {
-    // var email = 'ben@foundingfathers.com';
-    // var password = 'password';
-
-    this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
-      (user) => {
-        console.log("login-page response: ", user.firstName);
-        if (user.firstName) {
-          this.userSessionService.logInUser(user);
-          this.router.navigate(['/home']);
-          this.loginError = false;
+    this.userSessionService.authenticate(this.authInfo.email, this.authInfo.password).subscribe(
+      (session: Session) => {
+        if (session.userId) {
+          this.userSessionService.setSession(session);
+          let sessionToken = this.userSessionService.session.sessionToken;
+          
+          this.userSessionService.getUserBySessionToken(sessionToken).subscribe(
+            (user: User) => {
+              this.userSessionService.setUser(user);
+              document.cookie = "user="+user;
+              this.router.navigate(['/home']);
+            },
+            (error) => {
+              console.log("login-page  userSessionService.getUserBySessionToken:", error);
+          });
         } else {
           console.log("Wrong Password");
           this.loginError = true;
         }
       },
       (error) => {
-        console.log("Error: ", error);
+        this.loginError = true;
+        console.log("login-page userSessionService.authenticate error: ", error);
       });
   }
 
-
-  //Redirect the flow to Register page
-  redirect_register() {
-    this.router.navigate(['/register']);
-  }
-
-
   toggleVisibility() {
-    if(this.passwordVisibility==false)
-    {
+    if(this.passwordVisibility==false) {
       this.passwordVisibility = true;
-      this.buttonicon="visibility"
-      
+      this.buttonIcon="visibility"
+    } else {
+      this.passwordVisibility = false;
+      this.buttonIcon="visibility_off";
     }
-    else
-    {
-    this.passwordVisibility = false;
-    this.buttonicon="visibility_off";
   }
 
+  isLoginValid() {
+    if (this.authInfo.email.length >= 7 && this.authInfo.password.length > 7) {
+      this.loginValid = true;
+    } 
   }
 }

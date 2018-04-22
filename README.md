@@ -45,7 +45,7 @@
 8. ### Start MongoDB
    Until this step is automated, you must start MongoDB manually or at startup on your machine. See [MongoDB] for platform-specific instructions.
 9. ### Start the backend server
-   Inside of his project folder, Chewie types `npm start`. If all goes well, he will see the obligatory "Hello, world!" message from `http:\\127.0.0.1:3000\hello`. (`http:\\127.0.0.1\` will display the test data imported in Step 3 above.)
+   Inside of this project folder, Chewie types `npm start`. Then accept the self signed cert error and you should see the "Welcome to Projects Portal!" message from `https:\\127.0.0.1:3000`.
 10. ### Start the frontend server
     Chewie changes directory into `project-angular-src`, and fires up the dev server by typing `ng serve`. He can then see the project portal&mdash;with its two records and admittedly simple stylesheet&mdash;on `http://localhost:4200`.
 

@@ -15,7 +15,7 @@ const httpOptions = {
 @Injectable()
 export class ProjectService {
 
-  baseURL = 'http://localhost:3000';
+  baseURL = 'https://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
@@ -56,7 +56,7 @@ export class ProjectService {
     
 //------------FINISH NEW-----------------------------------------
 
-  public addProject(project: NewProject): Observable<NewProject> {
+  public addProject(project: Project): Observable<NewProject> {
     const url = `${this.baseURL}/project`
     return this.http.post<NewProject>(url, project);
   }

@@ -16,7 +16,7 @@
           <!-- dateCreated -->
           <ng-container matColumnDef="dateCreated">
             <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.dateCreated}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateCreated | date:'medium'}} </mat-cell>
           </ng-container>
 
           <!-- projectName -->
@@ -35,7 +35,7 @@
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <button [disabled]="!enableDelete" mat-raised-button color="warn" (click)="deleteProject(element)">
+              <button mat-raised-button color="warn" (click)="deleteProject(element)">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-cell>
@@ -64,7 +64,5 @@
     </mat-card>
   </mat-grid-tile>
   <!-- dummy -->
-
-
 
 </mat-grid-list>

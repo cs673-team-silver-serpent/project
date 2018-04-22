@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
 
 
   titles = [
+    { value: '', viewValue: '' },
     { value: 'Mr.', viewValue: 'Mr.' },
     { value: 'Ms.', viewValue: 'Ms.' },
     { value: 'Mrs.', viewValue: 'Mrs.' }
@@ -43,14 +44,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.pageRefresh();
     this.newUser = {
-      _id: 0,
+      _id: '',
       firstName: '',
       lastName: '',
       title: '',
       email: '',
       password: '',
       __v: 0,
-
     };
 
 

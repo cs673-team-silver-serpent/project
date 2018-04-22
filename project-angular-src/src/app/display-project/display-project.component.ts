@@ -72,8 +72,8 @@ errorMessage="Please Enter Search keywords";
 
   }
 
-  selectedProjectName="Not Available";
-  selectedProjectId="Not Available";
+  selectedProjectName;
+  selectedProjectId;
   selectedProjectDescription="Not Available";
   selectedProjectDateCreated="Not Available";
   selectedProjectOwnerId="Not Available";
