@@ -33,9 +33,7 @@ export class ToolbarComponent implements OnInit {
       password: '',
       __v: 0,
         }
-
     }
-    
   }
   
 

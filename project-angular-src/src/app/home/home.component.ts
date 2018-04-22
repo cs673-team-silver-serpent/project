@@ -7,7 +7,13 @@ import { User } from '../models/User';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   constructor(private userSessionService: UserSessionService) { }
+
+  ngOnInit() {
+    console.log("Home component User: ", this.userSessionService.user);
+  }
+
+
 }

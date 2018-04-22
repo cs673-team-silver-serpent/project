@@ -2,65 +2,48 @@
     <div class="container" style="margin-top:1px">
         <img height="150px" width="100%" src="/assets/images/bu2.jpg" alt="BU PROJECT TRACKER HOME">
     </div>
-    <div class="container">
+    <div class="container"  (keyup.enter)="loginValid ? authenticateUser(): ''" (keyup)="isLoginValid()">
         <h2 class="loginheader">BOSTON UNIVERSITY PROJECT TRACKER</h2>
 
         <div *ngIf="loginError">
             <label style="color:red">Incorrect Username and Password Combination</label>
         </div>
         <mat-form-field>
-            <input matInput [(ngModel)]="authInfo.userName" placeholder="Username">
+            <input matInput [(ngModel)]="authInfo.email" placeholder="Email">
         </mat-form-field>
 
         <div style="width:100%">
             <mat-form-field style="width:80%;float:left">
-                <input ng-keypress="toggleVisibility()" *ngIf="!passwordVisibility, else showPassword" matInput [(ngModel)]="authInfo.password"
-                    type="password" placeholder="Password">
-
+                <input 
+                    ng-keypress="toggleVisibility()" 
+                    *ngIf="!passwordVisibility, else showPassword" 
+                    matInput 
+                    [(ngModel)]="authInfo.password"
+                    type="password"
+                    placeholder="Password">
                 <ng-template #showPassword>
                     <input matInput [(ngModel)]="authInfo.password" type="text" placeholder="Password">
                 </ng-template>
             </mat-form-field>
             <button mat-raised-button color="primary" (click)="toggleVisibility()" style="float:right">
-                <mat-icon>{{buttonicon}}</mat-icon>
+                <mat-icon>{{buttonIcon}}</mat-icon>
             </button>
         </div>
 
         <!-- Buttons -->
-        <button mat-raised-button color="primary" (click)='authenticateUser()'>Login</button>
+        <button [disabled]="!loginValid" mat-raised-button color="primary" (click)='authenticateUser()'>Login</button>
 
         <div>
             <div class="container" style="margin-top:10px;width:45%;float: left;">
-                <button mat-raised-button color="primary" (click)='loginwithGoogle()'>Login with Google</button>
+                <button mat-raised-button color="primary" disabled (click)='loginwithGoogle()'>Login with Google</button>
             </div>
             <div class="container" style="margin-top:10px;width:45%;float:right">
                 <button mat-raised-button color="primary" routerLink="/home">Continue as Guest</button>
             </div>
         </div>
 
-
         <div class="container" style="margin-top:10px" routerLink="/register">
             <button mat-raised-button color="primary">Create New Account</button>
         </div>
     </div>
 </mat-card>
-
-<mat-card class="container mat-elevation-z15" style="margin-top:20px;background-color:rgb(71, 73, 223)" matRipple>
-    <b style="color:white">TEAM SILVERSERPENT</b>
-
-
-</mat-card>
-
-
-
-
-<!-- <div class="container">
-    <h2 class="loginheader">Boston University Project Tracker</h2>
-        <mat-form-field>
-            <input matInput [(ngModel)]="authInfo.userName" placeholder="Username">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput [(ngModel)]="authInfo.password" type="password" placeholder="Password">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="authenticateUser()">Login</button>
-</div> -->

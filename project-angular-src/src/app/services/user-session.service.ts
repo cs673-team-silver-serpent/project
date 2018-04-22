@@ -7,9 +7,18 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserSessionService {
-  user: User;
   session: Session;
   baseURL = 'https://localhost:3000';
+  user: User = {
+    _id: '',
+    firstName: 'Guest',
+    lastName: '',
+    title: '',
+    email: '',
+    password: '',
+    __v: 0
+  }
+
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +36,15 @@ export class UserSessionService {
   }
 
   logOutUser() {
-    this.user = undefined;
+    this.user = {
+      _id: '',
+      firstName: 'Guest',
+      lastName: '',
+      title: '',
+      email: '',
+      password: '',
+      __v: 0
+    }
   }
 
   setSession( session: Session) {

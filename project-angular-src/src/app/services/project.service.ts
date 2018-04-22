@@ -29,7 +29,7 @@ export class ProjectService {
     return this.http.post(url, project);
   }
 
-  public addProject(project: NewProject): Observable<NewProject> {
+  public addProject(project: Project): Observable<NewProject> {
     const url = `${this.baseURL}/project`
     return this.http.post<NewProject>(url, project);
   }
