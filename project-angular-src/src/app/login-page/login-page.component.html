@@ -26,7 +26,7 @@
                 </ng-template>
             </mat-form-field>
             <button mat-raised-button color="primary" (click)="toggleVisibility()" style="float:right">
-                <mat-icon>{{buttonicon}}</mat-icon>
+                <mat-icon>{{buttonIcon}}</mat-icon>
             </button>
         </div>
 
@@ -35,7 +35,7 @@
 
         <div>
             <div class="container" style="margin-top:10px;width:45%;float: left;">
-                <button mat-raised-button color="primary" (click)='loginwithGoogle()'>Login with Google</button>
+                <button mat-raised-button color="primary" disabled (click)='loginwithGoogle()'>Login with Google</button>
             </div>
             <div class="container" style="margin-top:10px;width:45%;float:right">
                 <button mat-raised-button color="primary" routerLink="/home">Continue as Guest</button>
@@ -46,8 +46,4 @@
             <button mat-raised-button color="primary">Create New Account</button>
         </div>
     </div>
-</mat-card>
-
-<mat-card class="container mat-elevation-z15" style="margin-top:20px;background-color:rgb(71, 73, 223)" matRipple>
-    <b style="color:white">TEAM SILVERSERPENT</b>
 </mat-card>

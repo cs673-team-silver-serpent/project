@@ -16,7 +16,7 @@ export class LoginPageComponent {
   }
   loginError: boolean = false;
   passwordVisibility: boolean = false;
-  buttonicon: string="visibility_off";
+  buttonIcon: string="visibility_off";
 
   constructor(private userSessionService: UserSessionService,
               private router: Router) { }
@@ -30,7 +30,7 @@ export class LoginPageComponent {
       (session: Session) => {
         if (session.userId) {
           this.userSessionService.setSession(session);
-          let sessionToken = this.userSessionService.getSession().sessionToken;
+          let sessionToken = this.userSessionService.session.sessionToken;
           
           this.userSessionService.getUserBySessionToken(sessionToken).subscribe(
             (user: User) => {
@@ -48,6 +48,7 @@ export class LoginPageComponent {
         }
       },
       (error) => {
+        this.loginError = true;
         console.log("login-page.authenticateUser error: ", error);
       });
   }
@@ -55,10 +56,10 @@ export class LoginPageComponent {
   toggleVisibility() {
     if(this.passwordVisibility==false) {
       this.passwordVisibility = true;
-      this.buttonicon="visibility"
+      this.buttonIcon="visibility"
     } else {
       this.passwordVisibility = false;
-      this.buttonicon="visibility_off";
+      this.buttonIcon="visibility_off";
     }
   }
 }
