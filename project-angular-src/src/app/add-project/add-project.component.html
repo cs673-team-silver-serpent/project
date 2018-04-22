@@ -8,7 +8,6 @@
         (ngSubmit)="onCreateNewProject()">
         <mat-form-field>
             <input
-                
                 matInput 
                 placeholder="Project Name" 
                 [(ngModel)]="newProject.projectName" 
@@ -37,6 +36,22 @@
                 [(ngModel)]="newProject.projectDemo"
                 name="projectDemo">
         </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="Tech Stack"
+                [(ngModel)]="newProject.techStack"
+                name="techStack">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="labels"
+                [(ngModel)]="newProject.labels"
+                name="labels">
+        </mat-form-field>
+
         <button 
             [disabled]="!formIsValid"
             mat-raised-button 

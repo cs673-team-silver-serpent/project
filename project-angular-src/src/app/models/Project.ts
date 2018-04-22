@@ -1,15 +1,15 @@
 export interface Project {
     dateCreated: Date;
     dateModified: Date;
-    owner: string;
-    projectName: string;
-    projectDescription: string;
-    projectMembers: string;
-    techStack: string[];
-    repositoryLink: string;
-    projectDemo: string;
-    labels: string[];
-    _id: string;
+    owner: String;
+    projectName: String;
+    projectDescription: String;
+    projectMembers: String[];
+    techStack: String[];
+    repositoryLink: String;
+    projectDemo: String;
+    labels: String[];
+    _id: String;
 }
 
 // export interface NewProject {
@@ -25,14 +25,14 @@ export interface Project {
 // }
 
 export interface NewProject {
-    "projectName": String;
-    "projectDescription": String;
-    "owner": String;
-    "projectMembers": String[];
-    "techStack": String[];
-    "repositoryLink": String;
-    "projectDemo": String;
-    "labels": String[];
+    projectName: String;
+    projectDescription: String;
+    owner: String;
+    projectMembers: String;
+    techStack: String;
+    repositoryLink: String;
+    projectDemo: String;
+    labels: String;
 }
 
 // {

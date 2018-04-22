@@ -14,9 +14,13 @@
 
         <div style="width:100%">
             <mat-form-field style="width:80%;float:left">
-                <input ng-keypress="toggleVisibility()" *ngIf="!passwordVisibility, else showPassword" matInput [(ngModel)]="authInfo.password"
-                    type="password" placeholder="Password">
-
+                <input 
+                    ng-keypress="toggleVisibility()" 
+                    *ngIf="!passwordVisibility, else showPassword" 
+                    matInput 
+                    [(ngModel)]="authInfo.password"
+                    type="password"
+                    placeholder="Password">
                 <ng-template #showPassword>
                     <input matInput [(ngModel)]="authInfo.password" type="text" placeholder="Password">
                 </ng-template>
@@ -38,7 +42,6 @@
             </div>
         </div>
 
-
         <div class="container" style="margin-top:10px" routerLink="/register">
             <button mat-raised-button color="primary">Create New Account</button>
         </div>
@@ -47,20 +50,4 @@
 
 <mat-card class="container mat-elevation-z15" style="margin-top:20px;background-color:rgb(71, 73, 223)" matRipple>
     <b style="color:white">TEAM SILVERSERPENT</b>
-
-
 </mat-card>
-
-
-
-
-<!-- <div class="container">
-    <h2 class="loginheader">Boston University Project Tracker</h2>
-        <mat-form-field>
-            <input matInput [(ngModel)]="authInfo.userName" placeholder="Username">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput [(ngModel)]="authInfo.password" type="password" placeholder="Password">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="authenticateUser()">Login</button>
-</div> -->

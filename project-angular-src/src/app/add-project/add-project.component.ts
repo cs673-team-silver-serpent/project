@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NewProject } from '../models/Project';
+import { NewProject, Project } from '../models/Project';
 import { ProjectService } from '../services/project.service';
 import { ViewChild } from '@angular/core/src/metadata/di';
 import { UserSessionService } from '../services/user-session.service';
@@ -30,14 +30,35 @@ export class AddProjectComponent implements OnInit {
   }
 
   public onCreateNewProject() {
-    console.log(this.newProject);
+    var proj = {
+      dateCreated: new Date(),
+      dateModified: new Date(),
+      owner: this.newProject.owner,
+      projectName: this.newProject.projectName,
+      projectDescription: this.newProject.projectDescription,
+      projectMembers: this.parseString(this.newProject.projectMembers),
+      techStack: this.parseString(this.newProject.techStack),
+      repositoryLink: this.newProject.repositoryLink,
+      projectDemo: this.newProject.projectDemo,
+      labels: this.parseString(this.newProject.labels),
+      _id: ''
+    }
+    console.log("add-project -- onCreate New Project(): project: ", proj);
 
-    this.projectService.addProject    
-    (this.newProject).subscribe(
+    this.projectService.addProject(proj).subscribe(
       response => {
         this.projectAdded.emit(this.newProject);
         this.createEmptyProject();
     });
+  }
+
+  // Break a comma seperated string into an array
+  parseString(s: String): String[] {
+    if (s == '') {
+      return [];
+    } else {
+      return s.split(",");
+    }
   }
 
   isProjectValid(): Boolean {
@@ -59,11 +80,11 @@ export class AddProjectComponent implements OnInit {
       projectName: '',
       projectDescription: '',
       owner: this.userSessionService.user._id,
-      projectMembers: [],
-      techStack: [],
+      projectMembers: '',
+      techStack: '',
       repositoryLink: '',
       projectDemo: '',
-      labels: []
+      labels: ''
     };
   }
 }

@@ -15,7 +15,7 @@ export class ViewProjectComponent implements OnInit {
 
  // an array of projects
  projects: Project[] = [];
- displayedColumns: String[] = ['dateCreated', 'projectName', 'projectDescription', 'delete'];
+ displayedColumns: String[] = ['projectName', 'projectDescription', 'delete'];
  dataSource = new MatTableDataSource<Project>(this.projects);
 
 

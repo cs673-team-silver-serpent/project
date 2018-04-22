@@ -36,7 +36,15 @@ export class UserSessionService {
   }
 
   logOutUser() {
-    this.user = undefined;
+    this.user = {
+      _id: '',
+      firstName: 'Guest',
+      lastName: '',
+      title: '',
+      email: '',
+      password: '',
+      __v: 0
+    }
   }
 
   setSession( session: Session) {

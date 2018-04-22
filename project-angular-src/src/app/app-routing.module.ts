@@ -16,9 +16,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'addProject', component: AddProjectComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'viewProject', component: ViewProjectComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'displayProject', component: DisplayProjectComponent},
+  { path: 'manageProjects', component: ViewProjectComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: 'displayProject', component: DisplayProjectComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ]
 

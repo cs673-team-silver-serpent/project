@@ -21,6 +21,10 @@ export class LoginPageComponent {
   constructor(private userSessionService: UserSessionService,
               private router: Router) { }
 
+  ngOnInit() {
+    console.log("login-page.component User: ", this.userSessionService.user);
+  }
+  
   authenticateUser() {
     this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
       (session: Session) => {
