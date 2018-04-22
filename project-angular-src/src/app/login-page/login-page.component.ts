@@ -11,7 +11,7 @@ import { Session } from '../models/Session';
 })
 export class LoginPageComponent {
   authInfo = {
-    userName: "",
+    email: "",
     password: ""
   }
   loginError: boolean = false;
@@ -26,7 +26,7 @@ export class LoginPageComponent {
   }
   
   authenticateUser() {
-    this.userSessionService.authenticate(this.authInfo.userName, this.authInfo.password).subscribe(
+    this.userSessionService.authenticate(this.authInfo.email, this.authInfo.password).subscribe(
       (session: Session) => {
         if (session.userId) {
           this.userSessionService.setSession(session);
@@ -34,13 +34,12 @@ export class LoginPageComponent {
           
           this.userSessionService.getUserBySessionToken(sessionToken).subscribe(
             (user: User) => {
-              console.log("login-page  authenticateUser  user:", user);
               this.userSessionService.setUser(user);
               document.cookie = "user="+user;
               this.router.navigate(['/home']);
             },
             (error) => {
-              console.log("login-page  authenticateUser  error:", error);
+              console.log("login-page  userSessionService.getUserBySessionToken:", error);
           });
         } else {
           console.log("Wrong Password");
@@ -49,7 +48,7 @@ export class LoginPageComponent {
       },
       (error) => {
         this.loginError = true;
-        console.log("login-page.authenticateUser error: ", error);
+        console.log("login-page userSessionService.authenticate error: ", error);
       });
   }
 
