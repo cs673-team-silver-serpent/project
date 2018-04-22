@@ -1,71 +1,8 @@
-<!-- Show One project here -->
-
-
-<p>Project Name:</p>
-<p>{{projectName}}</p>
-<p>User: {{user.firstName}}</p>
-<button class="btn btn-primary" (click)="onBtnClick()">Total Button Clicks</button>
-Clicked Times: {{btnStatus}}
-<!-- Show One project here -->
+test page
 
 
 
-<p>
-  <input mat-input name="query" id="nameTextQuery">
-  <button class="btn btn-primary" (click)="getProject()">Click Me</button>
-</p>
-<p>TOtal Search Results: {{abc}}</p>
-
-
-<p>-----------List of projects------------------------</p>
-<mat-table #table [dataSource]="dataSource">
-
-  
-
-  <!-- projectName -->
-  <ng-container matColumnDef="projectName">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
-  </ng-container>
-
-  
-  <!-- delete -->
-  <ng-container matColumnDef="select">
-    <mat-header-cell *matHeaderCellDef> Search</mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary" (click)="selectProject(element)">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-
-
-<p>------------------PART 2------------------------------</p>
-
-<!-- This section will be used for testing during databinding -->
-<div class="wrapper">
-  <mat-card class="internal">
-Test Databinding here
-PROJECT NAME: {{projectName}}
-<hr>
-OWNER: {{projowner}}
-<hr>
-Project Name:{{projname}}
-<hr>
-Date Created:{{datecreated}}
-<hr>
-Last Modified:{{dateModified}}
-<hr>
-Repository Link:{{repolink}}
-<hr>
-Demo Link:{{demolink}}
-<hr>
-Description:{{description}}
-<hr>
-  </mat-card>
-  
-</div><!-- This section will be used for testing during databinding -->
+<input type="text" id="textBox">
+<button (click)="trim()">Process</button>
+<p>Output  :  '{{text}}'</p>
+<p>Length: {{len}}</p>

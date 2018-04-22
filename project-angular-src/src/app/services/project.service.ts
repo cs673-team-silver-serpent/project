@@ -43,14 +43,14 @@ export class ProjectService {
     
   }
 
-  public getProjectById(projectId: String): Observable<any>{
+  public getProjectById(projectId: String): Observable<Project>{
     console.log("We are in service | Id: ",projectId);
-    var projectIdObj={
-      Id : projectId
+    var id={
+      id : projectId
     } 
       
       const url = `${this.baseURL}/project/id`
-      return this.http.post(url,projectIdObj);  //pass the data to controller    
+      return this.http.post<Project>(url,id);  //pass the data to controller    
     }
 
     

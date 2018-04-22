@@ -9,7 +9,8 @@ const hash = require('hash.js');
 
 
 getAllUsers = (request, response) => {
-    User.find( {}, { _id: 0, password: 0} )
+    // User.find( {}, { _id: 0, password: 0} )
+    User.find( {}, { password: 0} )
         .exec((error, users) => {
       if (error) {
         response.send(error);
@@ -21,19 +22,35 @@ getAllUsers = (request, response) => {
     });
 }
 
+
+
+
 getUserById = (request, response) => {
-    let id = request.body.id;
-    User.find( { _id: id}, { _id: 0, password: 0 } )
-        .exec((error,user) => {
-          if (error) { 
-            response.send(error);
-          } else if (user) {
-            response.json(user);
-          } else {
-            response.json( {success: false} );
-          }
-    });
-  }
+  let id = request.body.id;
+  User.find( { _id: id}, { _id: 0, password: 0 } )
+      .exec((error,user) => {
+        if (error) { 
+          response.send(error);
+        } else if (user) {
+          response.json(user);
+        } else {
+          response.json( {success: false} );
+        }
+  });
+}
+// getUserById = (request, response) => {
+//     let id = request.body.id;
+//     User.find( { _id: id}, { _id: 0, password: 0 } )
+//         .exec((error,user) => {
+//           if (error) { 
+//             response.send(error);
+//           } else if (user) {
+//             response.json(user);
+//           } else {
+//             response.json( {success: false} );
+//           }
+//     });
+//   }
 
 // Temporary functions for Iteration 2 presentation only
 getUserByFirstName = (request, response) => {

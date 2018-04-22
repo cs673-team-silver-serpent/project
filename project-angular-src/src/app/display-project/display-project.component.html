@@ -1,49 +1,78 @@
 <app-toolbar></app-toolbar>
-
+<button (click)="getMembersById()">Get user</button>
 <div class="wrapper">
 
-  <div class="internal" style="width:100%">
-            <mat-form-field>
-            <input [ngModel]matInput placeholder="Username">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)='searchProjectsByName()'>Search</button>
-     </div>
-
-<!-- List of Projects -->
-
-
-<!--  -->
-
-
-  <div class="internal">
-    <mat-card class="mat-elevation-z6">
-      <mat-card-title style="text-align:center">Project Portal</mat-card-title>
-
-    </mat-card>
+  <div ng-app="" class="internal" style="width:100%">
+    <mat-form-field>
+      <input matInput id="x" placeholder="Search Project">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="getProject()">Select</button>
+    <label *ngIf="showError" style="color:red">{{errorMessage}}</label>
   </div>
 
 
-  <div class="internal">
+  <!-- List of Searched Projects | START -->
+  <div *ngIf="showProjectList" class="internal">
+    <mat-card>
+      <mat-card-title >Select A Project To Display</mat-card-title>
+      <mat-table #table [dataSource]="dataSource">
+
+        <!-- projectName -->
+        <ng-container matColumnDef="projectName">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+        </ng-container>
+
+
+        <!-- delete -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef> Search</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-raised-button color="primary" (click)="selectProject(element)">
+              <mat-icon>label</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </mat-card>
+  </div>
+  <!-- List of Searched Projects | END -->
+
+  <!-- Header | Start -->
+  <div *ngIf="showProjectContent" class="internal">
+    <mat-card class="mat-elevation-z6">
+      <mat-card-title style="text-align:center">{{selectedProjectName}}</mat-card-title>
+
+    </mat-card>
+  </div>
+  <!-- Header | End -->
+
+
+  <div *ngIf="showProjectContent"  class="internal">
     <mat-tab-group class="mat-elevation-z6">
 
       <!-- tab1 -->
       <mat-tab label="About">
         <mat-list>
           <mat-list-item>Date Created:
-            <b> March 26, 2018</b>
+            <b> {{selectedProjectDateCreated | date : "MMM dd yyyy"}}</b>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>Last Modified:
-            <b> March 27, 2018</b>
+            <b> Not Available</b>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>Repository Link:
-            <a href="https://github.com/cs673-team-silver-serpent/project.git" class="href"> GitHub</a>
+            <a href="" class="href"> {{selectedProjectRepositoryLink}}</a>
           </mat-list-item>
 
           <mat-divider></mat-divider>
           <mat-list-item>Demo Link:
-            <a href="https://github.com/cs673-team-silver-serpent/project.git" class="href"> GitHub</a>
+            <a href="" class="href"> {{selectedProjectDemo}}</a>
           </mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
@@ -55,24 +84,25 @@
       <!-- tab2 -->
       <mat-tab label="Technology Stack">
         <mat-list>
-          <mat-list-item>Front End:
-            <b>AngularJS</b>
-          </mat-list-item>
-          <mat-divider></mat-divider>
+
           <mat-list-item>Back End:
-            <b>NodeJS | MongoDB</b>
+            <b>{{selectedProjectBackEnd}}</b>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>Framework:
-            <b>Express JS</b>
+            <b>{{selectedProjectFramework}}</b>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Front End:
+            <b>{{selectedProjectFrontend}}</b>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>Testing Framework:
-            <b>Mocha and Chai</b>
+            <b>{{selectedProjectTestingFramework}}</b>
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item>Version Control Tool:
-            <b>Git</b>
+            <b>{{selectedProjectVersionControlTool}}</b>
           </mat-list-item>
           <mat-divider></mat-divider>
 
@@ -84,10 +114,7 @@
       <mat-tab label="Description">
         <mat-card>
           <mat-card-content>
-            <p class="mat-title"> Projects Portal (working title), aims to help Computer Science students and instructors to keep track of software
-              development projects. This repository contains Team Silver Serpent's class project for BU Met College CS672
-              (Spring 2018).
-            </p>
+            <p class="mat-title">{{selectedProjectDescription}}</p>
           </mat-card-content>
 
         </mat-card>
@@ -117,7 +144,7 @@
 
   </div>
 
-  <div class="internal">
+  <div *ngIf="showProjectContent" class="internal">
     <mat-card>
       <mat-card-title>Tags</mat-card-title>
       <mat-card-content>
@@ -127,7 +154,7 @@
   </div>
 
 
-  <div class="internal" style="text-align:center">
+  <div *ngIf="showProjectContent" class="internal" style="text-align:center">
     <button mat-raised-button color="primary" (click)='redirectToPreviousPage()'>Back</button>
     <button matTooltip="Add to Favorite Projects" mat-raised-button color="primary">
       <mat-icon>favorite</mat-icon>
@@ -136,27 +163,18 @@
 </div>
 
 
-
-<!-- This section will be used for testing during databinding -->
-<!-- <div class="wrapper">
-  <mat-card class="internal">
-Test Databinding here
-<hr>
-OWNER: {{projowner}}
-<hr>
-Project Name:{{projname}}
-<hr>
-Date Created:{{datecreated}}
-<hr>
-Last Modified:{{datelastmodified}}
-<hr>
-Repository Link:{{repolink}}
-<hr>
-Demo Link:{{demolink}}
-<hr>
-Description:{{description}}
-<hr>
-  </mat-card>
-  
+<!-- <div>
+  DATA BINDING TESTING
+  <p>{{selectedProjectName}}</p>
+  <p>{{selectedProjectDescription}}</p>
+  <p>{{selectedProjectDemo}}</p>
+  <p>{{selectedProjectName}}</p>
+  <p>{{selectedProjectRepositoryLink}}</p>
+  <p>{{selectedProjectDateCreated}}</p>
+  <p>{{selectedProjectTags}}</p>
+  <p>{{selectedProjectBackEnd}}; </p>
+  <p>{{selectedProjectFrontend}}; </p>
+  <p>{{selectedProjectFramework}}; </p>
+  <p>{{selectedProjectTestingFramework}} </p>
+  <p>{{selectedProjectVersionControlTool}} </p>
 </div> -->
-<!-- This section will be used for testing during databinding -->

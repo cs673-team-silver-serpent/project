@@ -11,6 +11,7 @@ import { DisplayProjectComponent } from './display-project/display-project.compo
 import { TestComponent } from './test/test.component';
 
 
+
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'projectSearch', component: ProjectSearchComponent},
@@ -21,7 +22,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'displayProject', component: DisplayProjectComponent},
   {path: 'test', component: TestComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ]
 
 @NgModule({

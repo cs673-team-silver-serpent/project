@@ -45,6 +45,22 @@ getProjectByProjectName = (request, response) => {//************************* */
     }
   });
 }
+getProjectByProjectName = (request, response) => {//************************* */
+  let projectName = request.body.projectName;
+  let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
+  console.log(projectNameRegEx);
+  //*********mdb */
+  Project.find({ projectName: projectNameRegEx },{projectName})
+         .exec((error,project) => {
+    if (error) { 
+      response.send(error);
+    } else if (project) {
+      response.json(project);
+    } else {
+      response.json({ success: false });
+    }
+  });
+}
 
 
 

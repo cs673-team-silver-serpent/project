@@ -38,6 +38,24 @@ export class UserSessionService {
   }
 
 
+  // public getProjectById(projectId: String): Observable<Project>{
+  //   console.log("We are in service | Id: ",projectId);
+  //   var id={
+  //     id : projectId
+  //   } 
+  //     const url = `${this.baseURL}/project/id`
+  //     return this.http.post<Project>(url,id);  //pass the data to controller    
+  //   }
+public getUserById(userId: String): Observable<User>{
+console.log("This user Id is sent: ",userId)
+  var id={
+    id: userId
+  }
+  const url = `${this.baseURL}/user/id`
+  return this.http.post<User>(url, id);
+}
+
+
   /*showall users
   showAllUsers(user: User){
     return this.http.get(`${this.baseURL}/user`, user);
