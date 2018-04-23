@@ -111,7 +111,7 @@ export class DisplayProjectComponent implements OnInit {
   newProject: Project;
 tagsLength=111;
 projcetLabeles:any[];
-tags="#labels";
+tags="";
   showClickedProject() {
     //console.log("We are in showClickedProject() method||Project To Show: ",this.selectedProjectName,"Id: ",this.selectedProjectId);
     this.projectService.getProjectById(this.selectedProjectId).subscribe(
@@ -121,9 +121,9 @@ tags="#labels";
         this.tagsLength=this.newProject[0].labels.length;
         console.log("Tech Stack Length: ", this.tagsLength);
 
-        for(var i=0;i<this.tagsLength,i++)
+        for(var i=0;i<this.tagsLength;i++)
         {
-          this.tags+=this.newProject[0].labels[i];
+          this.tags+="#"+this.newProject[0].labels[i];
           console.log("Tags++",this.tags)
         }
         
