@@ -40,7 +40,6 @@ export class ProjectService {
     var body = {
       owner: this.userSessionService.user._id
     }
-    body.owner = '5adcf96267f8217002e9e65f';
     console.log(body);
     const url = `${this.baseURL}/project/projectsByOwner`
     return this.http.post<Project[]>(url, body);
