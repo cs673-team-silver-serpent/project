@@ -23,7 +23,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DisplayProjectComponent } from './display-project/display-project.component';
-import { TestComponent } from './test/test.component';
+
 
 import {
   MatAutocompleteModule,
@@ -123,7 +123,6 @@ export class DemoMaterialModule {}
     ProjectSearchComponent,
     ProfileComponent,
     RegisterComponent,
-    TestComponent,
     DisplayProjectComponent
   ],
   imports: [

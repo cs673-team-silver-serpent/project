@@ -28,28 +28,11 @@ getProjectById = (request, response) => {
   });
 }
 
-// Temporary functions for Iteration 2 Presentation // Returns Project Name and Id
-getProjectByProjectName = (request, response) => {//************************* */
+
+getProjectByProjectName = (request, response) => {
   let projectName = request.body.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
   console.log(projectNameRegEx);
-  //*********mdb */
-  Project.find({ projectName: projectNameRegEx },{projectName})
-         .exec((error,project) => {
-    if (error) { 
-      response.send(error);
-    } else if (project) {
-      response.json(project);
-    } else {
-      response.json({ success: false });
-    }
-  });
-}
-getProjectByProjectName = (request, response) => {//************************* */
-  let projectName = request.body.projectName;
-  let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
-  console.log(projectNameRegEx);
-  //*********mdb */
   Project.find({ projectName: projectNameRegEx },{projectName})
          .exec((error,project) => {
     if (error) { 
@@ -62,28 +45,6 @@ getProjectByProjectName = (request, response) => {//************************* */
   });
 }
 
-
-
-
-
-
-// // Temporary functions for Iteration 2 Presentation
-// getProjectByProjectName = (request, response) => {//************************* */
-//   let projectName = request.body.projectName;
-//   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
-//   console.log(projectNameRegEx);
-//   //*********mdb */
-//   Project.find({ projectName: projectNameRegEx },{_id: 0})
-//          .exec((error,project) => {
-//     if (error) { 
-//       response.send(error);
-//     } else if (project) {
-//       response.json(project);
-//     } else {
-//       response.json({ success: false });
-//     }
-//   });
-// }
 
 getProjectByProjectDescription = (request, response) => {
   let projectDescription = request.body.projectDescription;
@@ -99,7 +60,6 @@ getProjectByProjectDescription = (request, response) => {
     }
   });
 }
-// end temporary functions
 
 //----------NEW------return project Ids-----------
 getProjectId=(request, response)=>{

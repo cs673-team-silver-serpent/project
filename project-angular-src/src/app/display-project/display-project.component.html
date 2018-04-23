@@ -1,12 +1,10 @@
 <app-toolbar></app-toolbar>
-<button (click)="getMembersById()">Get user</button>
 
 <div class="wrapper">
 
   <mat-card class="internal">
-    <label>Please Enter the search keywords</label>
-  
-  <div ng-app="" class="internal" style="width:100%">
+    <mat-card-title>Search Projects</mat-card-title>
+    <div ng-app="" class="internal" style="width:100%">
     <mat-form-field>
       <input matInput id="x" placeholder="Search Project">
     </mat-form-field>
@@ -44,7 +42,7 @@
 
         <!-- delete -->
         <ng-container matColumnDef="select">
-          <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Select Project</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-raised-button color="primary" (click)="selectProject(element)">
               <mat-icon>label</mat-icon>
@@ -179,20 +177,3 @@
     </button>
   </div>
 </div>
-
-
-<!-- <div>
-  DATA BINDING TESTING
-  <p>{{selectedProjectName}}</p>
-  <p>{{selectedProjectDescription}}</p>
-  <p>{{selectedProjectDemo}}</p>
-  <p>{{selectedProjectName}}</p>
-  <p>{{selectedProjectRepositoryLink}}</p>
-  <p>{{selectedProjectDateCreated}}</p>
-  <p>{{selectedProjectTags}}</p>
-  <p>{{selectedProjectBackEnd}}; </p>
-  <p>{{selectedProjectFrontend}}; </p>
-  <p>{{selectedProjectFramework}}; </p>
-  <p>{{selectedProjectTestingFramework}} </p>
-  <p>{{selectedProjectVersionControlTool}} </p>
-</div> -->

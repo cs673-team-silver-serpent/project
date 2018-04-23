@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { DisplayProjectComponent } from './display-project/display-project.component';
-import { TestComponent } from './test/test.component';
+
 
 
 

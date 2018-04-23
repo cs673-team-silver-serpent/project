@@ -34,7 +34,7 @@ export class DisplayProjectComponent implements OnInit {
   showProjectList = false;
   showProjectContent = false;
   noMatch = false;
-  errorMessage = "Please Enter Search keywords";
+  errorMessage = "Please Enter The Search Keywords";
 
 
   getProject() {
@@ -108,11 +108,15 @@ export class DisplayProjectComponent implements OnInit {
     this.showClickedProject();
   }
 
+
+
   newProject: Project;
 tagsLength=111;
 projcetLabeles:any[];
 tags="";
+
   showClickedProject() {
+    this.tags="";
     //console.log("We are in showClickedProject() method||Project To Show: ",this.selectedProjectName,"Id: ",this.selectedProjectId);
     this.projectService.getProjectById(this.selectedProjectId).subscribe(
       response => {
@@ -127,14 +131,6 @@ tags="";
           console.log("Tags++",this.tags)
         }
         
-
-
-      
-
-
-
-
-
         //console.log("Project Name: ",this.newProject[0].projectName)
         var iniIndex = 0;
         this.selectedProjectName = this.newProject[iniIndex].projectName
@@ -152,7 +148,6 @@ tags="";
         var ownerId;
         ownerId=this.newProject[iniIndex].owner
         this.getMembersById(ownerId,101);
-        
         
         for (var i=0;i<4;i++){
         var id = (this.newProject[iniIndex].projectMembers[i]).toString();
