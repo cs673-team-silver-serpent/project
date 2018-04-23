@@ -36,17 +36,7 @@
                     </mat-card>
                 </div>
                 <!-- Error Section Ends Here -->
-                <div>
-                    <mat-form-field>
-                        <mat-select matInput placeholder="Title" [(ngModel)]="newUser.title" name="title">
-                            <mat-option *ngFor="let title of titles" [value]="title.value">
-                                {{ title.viewValue }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                </div>
-                <!-- title ends -->
+                
                 <div>
                     <mat-form-field>
                         <input id="fName" (input)="getFName($event)" matInput placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName"

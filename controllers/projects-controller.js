@@ -1,5 +1,6 @@
 let express = require('express');
 let Project = require('../models/projects-model');
+var ObjectId = require('mongodb').ObjectId;
 
 getAllProjects = (request, response) => {
     Project.find({})
@@ -28,7 +29,29 @@ getProjectById = (request, response) => {
   });
 }
 
+// Given an User object ID it returns an array of projects associated with that user
+getProjectsByOwner = ( request, response) => {
+  var owner = request.body.owner;
 
+  // Check to make sure the string is a proper object id
+  if (owner.length != 24) {
+    response.json([]);
+    return
+  }
+
+  Project.find({owner: owner})
+          .exec((error, projects) => {
+      if (error) {
+        response.send(error);
+      } else if (projects) {
+        response.json(projects);
+      } else {
+        response.json({success: false });
+      }
+  });
+}
+
+// Temporary functions for Iteration 2 Presentation
 getProjectByProjectName = (request, response) => {
   let projectName = request.body.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
@@ -125,5 +148,12 @@ deleteProjectById = (request,response) => {
   });
 }
 
-module.exports = { addProject, deleteProjectById, getAllProjects, getProjectById,
-  getProjectByProjectName, getProjectByProjectDescription, getProjectId };
+module.exports = { 
+  addProject, 
+  deleteProjectById,
+  getAllProjects,
+  getProjectById,
+  getProjectByProjectName,
+  getProjectByProjectDescription,
+  getProjectsByOwner
+};

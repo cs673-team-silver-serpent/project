@@ -61,6 +61,7 @@ app.route('/projects').post(projects.getAllProjects);
 app.route('/project/projectName').post(projects.getProjectByProjectName);
 app.route('/project/projectDescription').post(projects.getProjectByProjectDescription);
 app.route("/project/id").post(projects.getProjectById);
+app.route('/project/projectsByOwner').post(projects.getProjectsByOwner);
 // delete routes 
 app.route('/project/delete').post(projects.deleteProjectById);
 

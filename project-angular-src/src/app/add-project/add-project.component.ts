@@ -29,7 +29,7 @@ export class AddProjectComponent implements OnInit {
     }
   }
 
-  public onCreateNewProject() {
+  onCreateNewProject() {
     var proj = {
       dateCreated: new Date(),
       dateModified: new Date(),
@@ -49,6 +49,7 @@ export class AddProjectComponent implements OnInit {
       response => {
         this.projectAdded.emit(this.newProject);
         this.createEmptyProject();
+        this.formIsValid = false;
     });
   }
 
