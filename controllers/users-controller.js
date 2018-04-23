@@ -9,8 +9,8 @@ const hash = require('hash.js');
 
 
 getAllUsers = (request, response) => {
-  User.find( {}, { _id: 0, password: 0} )
-  //User.find( {}, { password: 0} )
+  //User.find( {}, { _id: 0, password: 0} )
+  User.find( {}, { password: 0} )
       .exec((error, users) => {
     if (error) {
       response.send(error);

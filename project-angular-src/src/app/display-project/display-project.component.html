@@ -1,20 +1,38 @@
 <app-toolbar></app-toolbar>
 <button (click)="getMembersById()">Get user</button>
+
 <div class="wrapper">
 
+  <mat-card class="internal">
+    <label>Please Enter the search keywords</label>
+  
   <div ng-app="" class="internal" style="width:100%">
     <mat-form-field>
       <input matInput id="x" placeholder="Search Project">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="getProject()">Select</button>
+    <button mat-raised-button color="primary" (click)="getProject()">Search<mat-icon>search</mat-icon></button>
     <label *ngIf="showError" style="color:red">{{errorMessage}}</label>
-  </div>
 
+  </div>
+</mat-card>
+
+<!-- No match Start-->
+
+<div *ngIf="noMatch" class="internal" >
+  <mat-card style="background-color:rgb(145, 10, 10)">
+    <p style="color:white">No projects found matching that name</p>
+  </mat-card>
+</div>
+
+<!-- No match End-->
 
   <!-- List of Searched Projects | START -->
   <div *ngIf="showProjectList" class="internal">
-    <mat-card>
-      <mat-card-title >Select A Project To Display</mat-card-title>
+    <mat-card class="mat-elevation-z6">
+        <mat-card style="background-color:rgb(44, 44, 155)">
+            <p style="color:white">Select A Project To Display</p>
+          </mat-card>
+      
       <mat-table #table [dataSource]="dataSource">
 
         <!-- projectName -->
@@ -26,7 +44,7 @@
 
         <!-- delete -->
         <ng-container matColumnDef="select">
-          <mat-header-cell *matHeaderCellDef> Search</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Select</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-raised-button color="primary" (click)="selectProject(element)">
               <mat-icon>label</mat-icon>
@@ -43,16 +61,16 @@
   <!-- List of Searched Projects | END -->
 
   <!-- Header | Start -->
-  <div *ngIf="showProjectContent" class="internal">
-    <mat-card class="mat-elevation-z6">
-      <mat-card-title style="text-align:center">{{selectedProjectName}}</mat-card-title>
+  <div *ngIf="showProjectContent" class="internal" style="margin-top:100px">
+    <mat-card style="background-color:rgb(44, 44, 155)" class="mat-elevation-z10">
+      <p style="font-weight:bolder;color:white">{{selectedProjectName}}</p>
 
     </mat-card>
   </div>
   <!-- Header | End -->
 
 
-  <div *ngIf="showProjectContent"  class="internal">
+  <div *ngIf="showProjectContent"  class="internal" style="margin-top:10px">
     <mat-tab-group class="mat-elevation-z6">
 
       <!-- tab1 -->
@@ -124,15 +142,15 @@
       <!-- tab 4 -->
       <mat-tab label="Members">
         <mat-list>
-          <mat-list-item>Andy</mat-list-item>
+          <mat-list-item>{{selectedProjectOwner}}(Owner)</mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item>Ben</mat-list-item>
+          <mat-list-item>{{selectedProjectMember1}}</mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item>Chad</mat-list-item>
+          <mat-list-item>{{selectedProjectMember2}}</mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item>Kanishk</mat-list-item>
+          <mat-list-item>{{selectedProjectMember3}}</mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item>Parker</mat-list-item>
+          <mat-list-item>{{selectedProjectMember4}}</mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
 
@@ -148,7 +166,7 @@
     <mat-card>
       <mat-card-title>Tags</mat-card-title>
       <mat-card-content>
-        #angular #nodejs #mean #express #mongodb #typescript #angular-material
+          {{tags}}
       </mat-card-content>
     </mat-card>
   </div>
