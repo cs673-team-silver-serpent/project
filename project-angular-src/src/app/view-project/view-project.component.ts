@@ -29,16 +29,15 @@ export class ViewProjectComponent implements OnInit {
     if (this.userSessionService.user.firstName == 'Guest') {
       this.displayedColumns.pop();
     }
-    this.displayedColumns
 
     this.projectService.getAllProjects().subscribe(
-      response => {
+      (response) => {
         this.projects = response;
         this.dataSource = new MatTableDataSource<Project>(this.projects);
       },
       (error) => console.log(error)
     );
-    
+
     if(this.userSessionService.user){
       this.enableDelete=true;
     } else this.enableDelete=false;
@@ -63,7 +62,7 @@ export class ViewProjectComponent implements OnInit {
 
   onNewProjectAddedRefreshList(newProject) {
     this.projectService.getAllProjects().subscribe(
-      response => {
+      (response) => {
         this.projects = response;
         this.dataSource = new MatTableDataSource<Project>(this.projects);
       },
