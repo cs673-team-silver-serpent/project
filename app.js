@@ -98,9 +98,9 @@ restServer.listen(restPort, () => {
    console.log(`Starting the server at port ${restPort}.`);
 });
 
-// // start server
-// frontEndServer.listen(frontEndPort, () => {
-//     console.log(`Starting the server at port ${frontEndPort}`);
-//  });
+// start server
+frontEndServer.listen(frontEndPort, () => {
+    console.log(`Starting the server at port ${frontEndPort}`);
+ });
 
 //module.exports = app; // for teting purposes
