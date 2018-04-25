@@ -31,9 +31,11 @@ export class RegisterComponent implements OnInit {
   validForm = 0;
   passLength = 0;
   isEmailValid = 0;
+  redirect = false;
+  enableCreateButton = false;
 
-  constructor(private userSessionService: UserSessionService) { }
-  
+  constructor(private userSessionService: UserSessionService, private router: Router) { }
+  // @Output() userAdded: EventEmitter<User> = new EventEmitter<User>();
   ngOnInit() {
     this.pageRefresh();
     this.newUser = {
