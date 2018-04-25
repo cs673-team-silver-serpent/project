@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 export class UserSessionService {
   session: Session;
   baseURL = 'https://67.207.83.83:3000';
+  //baseURL = 'https://localhost:3000';
   user: User = {
     _id: '',
     firstName: 'Guest',
