@@ -20,5 +20,6 @@ div {
 .card{
     width:87%;
     height: 80%;
-    
+    color: midnightblue;
+    font-size: 20px;
 }

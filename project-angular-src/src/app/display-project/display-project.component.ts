@@ -17,6 +17,12 @@ export class DisplayProjectComponent {
   projects: Project[] = [];
   displayedColumns: String[] = ['projectName', 'select'];
   dataSource = new MatTableDataSource<Project>(this.projects);
+
+x:number=0;
+  ngOnInit() {
+    
+  }
+  
   searchName;
   showError: Boolean = false;
   showProjectList: Boolean = false;
@@ -68,7 +74,7 @@ export class DisplayProjectComponent {
   selectedProjectName;
   selectedProjectId;
   selectedProjectDescription = "Not Available";
-  selectedProjectDateCreated = "Not Available";
+  selectedProjectDateCreated;
   selectedProjectOwner;
   selectedProjectDemo = "Not Available";
   selectedProjectRepositoryLink = "Not Available";

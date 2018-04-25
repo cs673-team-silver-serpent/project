@@ -1,50 +1,50 @@
 <app-toolbar></app-toolbar>
 
+<!-- Error/success Section Starts Here -->
 
+<div *ngIf="success" style="width:30%;margin:auto;text-align:center;margin-top:100px">
+    <mat-card style="height:15px">
+        <b style="color:forestgreen">{{errorMessage}}
+            <mat-icon>offline_pin</mat-icon>
+        </b>
+    </mat-card>
+</div>
+
+<!-- <div *ngIf="errorStatus" style="text-align:center">
+        <mat-card style="height:15px">
+            <b style="color:red">{{errorMessage}}</b>
+        </mat-card>
+    </div> -->
+
+<!-- Error/success Section Ends Here -->
 
 <!-- Page wrapper -->
-<div class="container" style="width:100%">
+
+<div *ngIf="!redirect; else redirecting" class="container" style="width:100%">
     <div style="width:49%;margin-left:20px;float:left">
-        <mat-card class="mat-elevation-z15" style="height:488px">
-            <img id="buimg" style="width:100%;height:100%" src="/assets/images/bu.jpg" alt="BostonUniversity.JPG">
+        <mat-card class="mat-elevation-z15" style="height:510px">
+            <img id="buimg" style="width:100%;height:510px" src="/assets/images/bu.jpg" alt="BostonUniversity.JPG">
         </mat-card>
     </div>
     <!-- Left Panel Ends -->
 
 
     <div style="width:45%;float:right">
-        <mat-card class="mat-elevation-z15" style="margin-right:100px">
+        <mat-card class="mat-elevation-z15" style="margin-right:100px;height:510px">
             <mat-card-title>Create New Account</mat-card-title>
 
-            <form Id="newAccount" (ngSubmit)="onCreateNewAccount()">
+            <form Id="newAccount" name="newAccount" (ngSubmit)="onCreateNewAccount()">
                 <!-- title -->
 
-                <!-- Error Section Starts Here -->
-                <div *ngIf="success" style="text-align:center">
-                    <mat-card>
-                        <b style="color:forestgreen">{{errorMessage}}
-                            <mat-icon>offline_pin</mat-icon>
-                        </b>
-                    </mat-card>
-                </div>
 
-
-
-                <div *ngIf="errorStatus" style="text-align:center">
-                    <mat-card>
-                        <b style="color:red">{{errorMessage}}</b>
-                    </mat-card>
-                </div>
-                <!-- Error Section Ends Here -->
-                
-                <div>
+                <div class="custom-margin">
                     <mat-form-field>
                         <input id="fName" (input)="getFName($event)" matInput placeholder="First Name" [(ngModel)]="newUser.firstName" name="firstName"
                             required>
                     </mat-form-field>
                 </div>
 
-                <div>
+                <div class="custom-margin">
                     <mat-form-field>
                         <input id="lName" (input)="getLName($event)" matInput placeholder="Last Name" [(ngModel)]="newUser.lastName" name="lastName"
                             required>
@@ -52,17 +52,17 @@
                 </div>
 
                 <!-- Email -->
-                <div>
+                <div class="custom-margin">
                     <mat-form-field>
-                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email" [(ngModel)]="newUser.email" name="email" required
-                            email>
+                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email (Only BU Email Id allowed)" [(ngModel)]="newUser.email"
+                            name="email" required email>
                     </mat-form-field>
                     <!-- Temporary fix-->
-      <label *ngIf="emailError" style="color:red">Please Check Email</label>
+                    <label *ngIf="emailError" style="color:red">{{BUEmailError}}</label>
                 </div>
                 <!-- Temporary fix-->
                 <!-- Password One -->
-                <div>
+                <div class="custom-margin">
                     <mat-form-field>
                         <input id="pass1" (input)="getPassword1($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Password"
                             name="password1" required>
@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- Password Confirm (database)-->
-                <div>
+                <div class="custom-margin">
                     <mat-form-field>
                         <input id="pass2" (input)="getPassword2($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Confirm Password"
                             [(ngModel)]="newUser.password" name="password2" required>
@@ -83,10 +83,21 @@
                 </div>
 
 
-                <div>
-                    <button mat-raised-button color="primary">
-                        Create Account
-                    </button>
+                <div style="width:100%">
+                    <div style="width:15%;float: left">
+                        <button [disabled]="!enableCreateButton" mat-raised-button color="primary">
+                            Create Account
+                        </button>
+                    </div>
+
+
+                    <div style="width:55%;float:right">
+                        <label>Have an Account?</label>
+                        <button id="signIn" name="signIn" routerLink="/login" mat-raised-button color="primary">
+                            Sign In
+                        </button>
+                    </div>
+
                 </div>
 
             </form>
@@ -98,3 +109,15 @@
     </div>
     <!-- Right Panel Ends -->
 </div>
+
+<!-- Redrect Div -->
+<ng-template #redirecting>
+    <div class="container" style="width:30%;margin:auto;margin-top:100px;text-align:center">
+
+        <mat-card style="color:brown">
+            <mat-card-title style="font-weight:bolder">Please Wait</mat-card-title>
+
+            <p>Redirecting you to the Login Page...</p>
+        </mat-card>
+    </div>
+</ng-template>
