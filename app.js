@@ -12,8 +12,8 @@ const sessions = require('./controllers/sessions-controlller');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('./certificates/private.key', 'utf8');
-var certificate = fs.readFileSync('./certificates/cacert.pem', 'utf8');
+var privateKey  = fs.readFileSync('./certificates/server.key', 'utf8');
+var certificate = fs.readFileSync('./certificates/server.crt', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 
