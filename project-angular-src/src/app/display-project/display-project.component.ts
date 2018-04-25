@@ -23,11 +23,15 @@ export class DisplayProjectComponent implements OnInit {
   dataSource = new MatTableDataSource<Project>(this.projects);
 
 
+
+x:number=0;
   ngOnInit() {
+    
 
   }
 
-
+  
+  
 
   searchName;
   showError = false;
@@ -76,7 +80,7 @@ export class DisplayProjectComponent implements OnInit {
   selectedProjectName;
   selectedProjectId;
   selectedProjectDescription = "Not Available";
-  selectedProjectDateCreated = "Not Available";
+  selectedProjectDateCreated;
   selectedProjectOwner;
   selectedProjectDemo = "Not Available";
   selectedProjectRepositoryLink = "Not Available";
@@ -107,8 +111,6 @@ export class DisplayProjectComponent implements OnInit {
     console.log("Clicked Project: ", this.selectedProjectName);
     this.showClickedProject();
   }
-
-
 
   newProject: Project;
 tagsLength=111;

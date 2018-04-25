@@ -2,15 +2,20 @@
 
 <mat-grid-list cols="12" rowHeight="200px">
   <mat-grid-tile [colspan]="3" [rowspan]="3">
-    <app-add-project (projectAdded)="onNewProjectAddedRefreshList()"></app-add-project>
+    <div style="height:auto;width:auto;margin:auto">
+
+      <app-add-project (projectAdded)="onNewProjectAddedRefreshList()"></app-add-project>
+    </div>
   </mat-grid-tile>
+
   <mat-grid-tile [colspan]="6" [rowspan]="3">
 
 
-    <div class="example-container mat-elevation-z8">
+    <div class="example-container mat-elevation-z8" style="overflow:scroll;margin-top:30px;margin-left:50px">
 
       <mat-card>
         <mat-card-title>All Projects</mat-card-title>
+
         <mat-table #table [dataSource]="dataSource">
 
           <!-- dateCreated -->
@@ -21,60 +26,60 @@
 
           <!-- dateModified -->
           <ng-container matColumnDef="dateModified">
-              <mat-header-cell *matHeaderCellDef> Date Modified </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.dateModified | date:'medium'}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Date Modified </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateModified | date:'medium'}} </mat-cell>
           </ng-container>
 
           <!-- projectName -->
           <ng-container matColumnDef="projectName">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+            <mat-header-cell style="font-size:medium" [ngClass]="'column1'" *matHeaderCellDef fxFlex="50px"> Name </mat-header-cell>
+            <mat-cell [ngClass]="'column1'" *matCellDef="let element"> {{element.projectName}} </mat-cell>
           </ng-container>
 
           <!-- projectDescription -->
           <ng-container matColumnDef="projectDescription">
-            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
+            <mat-header-cell style="font-size:medium" [ngClass]="'column2'" *matHeaderCellDef> Description </mat-header-cell>
+            <mat-cell [ngClass]="'column2'" *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
           </ng-container>
 
           <!-- projectMembers -->
           <ng-container matColumnDef="projectMembers">
-              <mat-header-cell *matHeaderCellDef> Project Members </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.projectMembers}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Project Members </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.projectMembers}} </mat-cell>
           </ng-container>
 
           <!-- techStack -->
           <ng-container matColumnDef="techStack">
-              <mat-header-cell *matHeaderCellDef> Tech Stack </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.techStack}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Tech Stack </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.techStack}} </mat-cell>
           </ng-container>
 
           <!-- repositoryLink -->
           <ng-container matColumnDef="repositoryLink">
-              <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.repositoryLink}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.repositoryLink}} </mat-cell>
           </ng-container>
 
           <!-- projectDemo -->
           <ng-container matColumnDef="projectDemo">
-              <mat-header-cell *matHeaderCellDef> Demo </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.projectDemo}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Demo </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.projectDemo}} </mat-cell>
           </ng-container>
 
           <!-- labels -->
           <ng-container matColumnDef="labels">
-              <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
           </ng-container>
 
           <!-- delete -->
           <ng-container matColumnDef="delete">
-              <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                  <button mat-raised-button color="warn" (click)="deleteProject(element)">
-                      <mat-icon>delete</mat-icon>
-                  </button>
-              </mat-cell>
+            <mat-header-cell style="font-size:medium" [ngClass]="'column3'" *matHeaderCellDef> Delete</mat-header-cell>
+            <mat-cell [ngClass]="'column3'" *matCellDef="let element">
+              <button mat-raised-button color="warn" (click)="deleteProject(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -86,17 +91,16 @@
 
   <!-- dummy -->
   <mat-grid-tile [colspan]="3" [rowspan]="3">
-    <mat-card class="example-container mat-elevation-z8" style="height:500px;width:400px">
+    <mat-card class="example-container mat-elevation-z8" style="height:515px;margin-top:20px;width:400px;overflow:auto">
 
       <mat-card-title>My Favorite Projects</mat-card-title>
-
-      <mat-card>Project 1</mat-card>
-      <mat-card>Project 2</mat-card>
-      <mat-card>Project 3</mat-card>
-      <mat-card>Project 4</mat-card>
-      <mat-card>Project 5</mat-card>
-      <mat-card>Project 6</mat-card>
-
+      <mat-card><p>Project 1</p></mat-card>
+      <mat-card><p>Project 2</p></mat-card>
+      <mat-card><p>Project 3</p></mat-card>
+      <mat-card><p>Project 4</p></mat-card>
+      <mat-card><p>Project 5</p></mat-card>
+      <mat-card><p>Project 6</p></mat-card>
+      <mat-card><p>Project 7</p></mat-card>
     </mat-card>
   </mat-grid-tile>
   <!-- dummy -->
