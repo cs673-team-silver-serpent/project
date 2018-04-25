@@ -18,11 +18,6 @@ export class DisplayProjectComponent {
   displayedColumns: String[] = ['projectName', 'select'];
   dataSource = new MatTableDataSource<Project>(this.projects);
 
-x:number=0;
-  ngOnInit() {
-    
-  }
-  
   searchName;
   showError: Boolean = false;
   showProjectList: Boolean = false;

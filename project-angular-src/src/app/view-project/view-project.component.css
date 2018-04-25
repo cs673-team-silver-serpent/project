@@ -1,38 +1,13 @@
-div.example-container {
-  width: 95%;
+mat-card {
   height: 100%;
-  margin: auto;
+  width: 97%;
 }
 
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+app-add-project {
+  height: 100%;
+  width: 95%;
 }
 
-.example-full-width {
-  width: 100%;
-}
-
-.column1 {
-  flex: 0 0 200px;
-  white-space: unset;
-}
-
-.column2 {
-  flex: 0 0 500px;
-  white-space: unset;
-  margin-left: 10px;
-}
-
-.column3 {
-  margin-left: 10px;
-  flex: 0 0 90px;
-  white-space: unset;
-  float: right;
-}
-
-mat-card-title{
-  font-size:22px;
-  font-weight: bold;
+mat-grid-tile {
+  background-color: lightblue;
 }

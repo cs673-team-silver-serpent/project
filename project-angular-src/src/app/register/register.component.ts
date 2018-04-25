@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userSessionService: UserSessionService, private router: Router) { }
   // @Output() userAdded: EventEmitter<User> = new EventEmitter<User>();
+
   ngOnInit() {
     this.pageRefresh();
     this.newUser = {
