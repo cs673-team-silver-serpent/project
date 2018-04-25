@@ -66,6 +66,8 @@ export class LoginPageComponent {
   isLoginValid() {
     if (this.authInfo.email.length >= 7 && this.authInfo.password.length > 7) {
       this.loginValid = true;
-    } 
+    } else {
+      this.loginValid = false;
+    }
   }
 }

@@ -49,6 +49,7 @@ export class AddProjectComponent implements OnInit {
       response => {
         this.projectAdded.emit(this.newProject);
         this.createEmptyProject();
+        this.formIsValid = false;
     });
   }
 
