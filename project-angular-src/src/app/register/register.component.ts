@@ -196,7 +196,7 @@ export class RegisterComponent implements OnInit {
     else
     if (isBUId != 1) {
       this.emailError=true;
-      this.BUEmailError = "Please enter a valid BU Email Id";
+      this.BUEmailError = "Please Enter a Valid BU Email Id";
     }
     else {
       this.BUEmailError = "";
