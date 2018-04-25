@@ -68,7 +68,7 @@ export class DisplayProjectComponent {
   selectedProjectName;
   selectedProjectId;
   selectedProjectDescription = "Not Available";
-  selectedProjectDateCreated = "Not Available";
+  selectedProjectDateCreated;
   selectedProjectOwner;
   selectedProjectDemo = "Not Available";
   selectedProjectRepositoryLink = "Not Available";

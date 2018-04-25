@@ -6,3 +6,8 @@ mat-card {
 mat-form-field {
     width: 100%;
 }
+mat-card-title{
+    font-size:22px;
+    font-weight: bold;
+  }
+  
