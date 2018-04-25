@@ -1,4 +1,4 @@
-div.example-container {
+/* div.example-container {
   width: 95%;
   height: 100%;
   margin: auto;
@@ -12,4 +12,18 @@ div.example-container {
 
 .example-full-width {
   width: 100%;
+} */
+
+mat-card {
+  height: 100%;
+  width: 97%;
+}
+
+app-add-project {
+  height: 100%;
+  width: 95%;
+}
+
+mat-grid-tile {
+  background-color: lightblue;
 }
