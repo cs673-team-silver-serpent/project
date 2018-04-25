@@ -27,11 +27,11 @@ export class RegisterComponent implements OnInit {
   private confirmation = "";
   private errorStatus = false;
   private errorMessage = "";
-  private success = false;
+  success = false;
   private validForm = 0;
   private passLength = 0;
   private isEmailValid = 0;
-  private redirect = false;
+  redirect = false;
   private enableCreateButton = false;
 
   constructor(private userSessionService: UserSessionService, private router: Router) { }
