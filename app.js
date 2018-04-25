@@ -23,7 +23,7 @@ let app = express();
 
 // declare port
 const restPort = 3000;
-const frontEndPort = 443;
+const frontEndPort = 3001;
 
 // connect to database
 mongo.connect(config.dbHost);
@@ -91,6 +91,9 @@ var restServer = https.createServer(credentials, app);
 // Front End
 let appFrontEnd = express();
 appFrontEnd.use(express.static('static'));
+appFrontEnd.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/index.html'));
+  });
 var frontEndServer = https.createServer(credentials, appFrontEnd);
 
 // start server
@@ -98,9 +101,9 @@ restServer.listen(restPort, () => {
    console.log(`Starting the server at port ${restPort}.`);
 });
 
-// // start server
-// frontEndServer.listen(frontEndPort, () => {
-//     console.log(`Starting the server at port ${frontEndPort}`);
-//  });
+// start server
+frontEndServer.listen(frontEndPort, () => {
+    console.log(`Starting the server at port ${frontEndPort}`);
+ });
 
 //module.exports = app; // for teting purposes
