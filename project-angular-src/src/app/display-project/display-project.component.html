@@ -39,7 +39,6 @@
           <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
         </ng-container>
 
-
         <!-- delete -->
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef> Select Project</mat-header-cell>
@@ -67,7 +66,6 @@
   </div>
   <!-- Header | End -->
 
-
   <div *ngIf="showProjectContent"  class="internal" style="margin-top:10px">
     <mat-tab-group class="mat-elevation-z6">
 
@@ -85,14 +83,12 @@
           <mat-list-item>Repository Link:
             <a href="" class="href"> {{selectedProjectRepositoryLink}}</a>
           </mat-list-item>
-
           <mat-divider></mat-divider>
           <mat-list-item>Demo Link:
             <a href="" class="href"> {{selectedProjectDemo}}</a>
           </mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
-
       </mat-tab>
 
 
@@ -100,7 +96,6 @@
       <!-- tab2 -->
       <mat-tab label="Technology Stack">
         <mat-list>
-
           <mat-list-item>Back End:
             <b>{{selectedProjectBackEnd}}</b>
           </mat-list-item>
@@ -121,9 +116,7 @@
             <b>{{selectedProjectVersionControlTool}}</b>
           </mat-list-item>
           <mat-divider></mat-divider>
-
         </mat-list>
-
       </mat-tab>
 
       <!-- tab 3 -->
@@ -132,9 +125,7 @@
           <mat-card-content>
             <p class="mat-title">{{selectedProjectDescription}}</p>
           </mat-card-content>
-
         </mat-card>
-
       </mat-tab>
 
       <!-- tab 4 -->
@@ -151,11 +142,7 @@
           <mat-list-item>{{selectedProjectMember4}}</mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
-
       </mat-tab>
-
-
-
     </mat-tab-group>
 
   </div>

@@ -13,17 +13,17 @@ import { ViewChild } from '@angular/core/src/metadata/di';
 })
 
 export class RegisterComponent implements OnInit {
-  private newUser: User;
-
+  newUser: User;
+  @Output() userAdded: EventEmitter<User> = new EventEmitter<User>();
 
   status = "";
   lengthError = true;
-  private x = ""; y = "";
-  private First = "";
-  private Last = "";
-  private Email = "";
-  private allCool = false;
-  private confirmation = "";
+  x = ""; y = "";
+  First = "";
+  Last = "";
+  Email = "";
+  allCool = false;
+  confirmation = "";
   errorStatus = false;
   errorMessage = "";
   success = false;
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   ];
 
   constructor(private userSessionService: UserSessionService) { }
-  @Output() userAdded: EventEmitter<User> = new EventEmitter<User>();
+  
   ngOnInit() {
     this.pageRefresh();
     this.newUser = {

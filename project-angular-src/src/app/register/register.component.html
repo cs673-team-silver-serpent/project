@@ -75,7 +75,7 @@
                 <div>
                     <mat-form-field>
                         <input id="pass1" (input)="getPassword1($event)" minlength="8" maxlength="12" matInput type="password" placeholder="Password"
-                            name="password1" [(ngModel)]="newUser.p1" required>
+                            name="password1" required>
                     </mat-form-field>
                     <label *ngIf="allCool" style="color:red">*</label>
                     <label *ngIf="lengthError" style="color:red">Minimum 8 characters required</label>

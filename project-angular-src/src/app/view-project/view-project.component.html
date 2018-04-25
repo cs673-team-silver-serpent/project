@@ -2,10 +2,9 @@
 
 <mat-grid-list cols="12" rowHeight="200px">
   <mat-grid-tile [colspan]="3" [rowspan]="3">
-    <app-add-project (projectAdded)="onNewProjectAddedRefreshList()"></app-add-project>
+    <app-add-project (projectAdded)="onNewProjectAddedRefreshList($event)"></app-add-project>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="6" [rowspan]="3">
-
 
     <div class="example-container mat-elevation-z8">
 

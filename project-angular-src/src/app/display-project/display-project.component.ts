@@ -12,30 +12,22 @@ import { Router } from '@angular/router';
   templateUrl: './display-project.component.html',
   styleUrls: ['./display-project.component.css']
 })
-export class DisplayProjectComponent implements OnInit {
-
-
+export class DisplayProjectComponent {
   user: User;
-  constructor(private projectService: ProjectService, private userSessionService: UserSessionService, private router: Router) { }
-
   projects: Project[] = [];
-  displayedColumns = ['projectName', 'select'];
+  displayedColumns: String[] = ['projectName', 'select'];
   dataSource = new MatTableDataSource<Project>(this.projects);
-
-
-  ngOnInit() {
-
-  }
-
-
-
   searchName;
-  showError = false;
-  showProjectList = false;
-  showProjectContent = false;
-  noMatch = false;
-  errorMessage = "Please Enter The Search Keywords";
+  showError: Boolean = false;
+  showProjectList: Boolean = false;
+  showProjectContent: Boolean = false;
+  noMatch: Boolean = false;
+  errorMessage: String = "Please Enter The Search Keywords";
 
+
+  constructor(private projectService: ProjectService,
+              private userSessionService: UserSessionService,
+              private router: Router) { }
 
   getProject() {
     this.showProjectContent = false;
@@ -44,28 +36,28 @@ export class DisplayProjectComponent implements OnInit {
       this.showProjectContent = false;
       this.showError = true;
       this.showProjectList = false;
-
     }
     else {
       this.showError = false;
-      console.log("Text box value: ", this.searchName)
+      console.log("getProject searchName: ", this.searchName)
       //  this.searchName=document.getElementById("nameTextQuery") ///work on this part
       this.projectService.getProjectName(this.searchName).subscribe(
-        response => {
+        (response) => {
           console.log(response);
           this.projects = response;
           if (this.projects.length != 0) {
             this.dataSource = new MatTableDataSource<Project>(this.projects);
             this.showProjectList = true;
             this.noMatch = false;
-            //this.noMatch = false;
-          }
-          else {
+          } else {
             this.showProjectList = false;
             this.showProjectContent = false;
             this.noMatch = true;
             console.log("Nothing found")
           }
+        },
+        (error) => {
+          console.log("display-project -- getProject ERROR", error);
         }
       )
     }
@@ -108,54 +100,53 @@ export class DisplayProjectComponent implements OnInit {
     this.showClickedProject();
   }
 
-
-
   newProject: Project;
-tagsLength=111;
-projcetLabeles:any[];
-tags="";
+  tagsLength=111;
+  projcetLabeles:any[];
+  tags="";
 
   showClickedProject() {
     this.tags="";
     //console.log("We are in showClickedProject() method||Project To Show: ",this.selectedProjectName,"Id: ",this.selectedProjectId);
     this.projectService.getProjectById(this.selectedProjectId).subscribe(
-      response => {
+      (response) => {
+        console.log("showClickedProject() -- getProjectId", response);
         this.newProject = response;
-        console.log("Response of Show Project", response);
-        this.tagsLength=this.newProject[0].labels.length;
-        console.log("Tech Stack Length: ", this.tagsLength);
+        //this.tagsLength=this.newProject[0].labels.length;
 
-        for(var i=0;i<this.tagsLength;i++)
-        {
-          this.tags+="#"+this.newProject[0].labels[i];
-          console.log("Tags++",this.tags)
-        }
+        // for(var i=0;i<this.tagsLength;i++)
+        // {
+        //   this.tags+="#"+this.newProject[0].labels[i];
+        //   console.log("Tags++",this.tags)
+        // }
         
-        //console.log("Project Name: ",this.newProject[0].projectName)
-        var iniIndex = 0;
-        this.selectedProjectName = this.newProject[iniIndex].projectName
-        this.selectedProjectDescription = this.newProject[iniIndex].projectDescription
-        this.selectedProjectDateCreated = this.newProject[iniIndex].dateCreated
-        this.selectedProjectDemo = this.newProject[iniIndex].projectDemo
-        this.selectedProjectName = this.newProject[iniIndex].projectName
-        this.selectedProjectRepositoryLink = this.newProject[iniIndex].repositoryLink
-        this.selectedProjectBackEnd = this.newProject[iniIndex].techStack[0];
-        this.selectedProjectFramework = this.newProject[iniIndex].techStack[1];
-        this.selectedProjectFrontend = this.newProject[iniIndex].techStack[2];
-        this.selectedProjectTestingFramework = this.newProject[iniIndex].techStack[3];
-        this.selectedProjectVersionControlTool = this.newProject[iniIndex].techStack[4];
+        // //console.log("Project Name: ",this.newProject[0].projectName)
+        // var iniIndex = 0;
+        // this.selectedProjectName = this.newProject[iniIndex].projectName
+        // this.selectedProjectDescription = this.newProject[iniIndex].projectDescription
+        // this.selectedProjectDateCreated = this.newProject[iniIndex].dateCreated
+        // this.selectedProjectDemo = this.newProject[iniIndex].projectDemo
+        // this.selectedProjectName = this.newProject[iniIndex].projectName
+        // this.selectedProjectRepositoryLink = this.newProject[iniIndex].repositoryLink
+        // this.selectedProjectBackEnd = this.newProject[iniIndex].techStack[0];
+        // this.selectedProjectFramework = this.newProject[iniIndex].techStack[1];
+        // this.selectedProjectFrontend = this.newProject[iniIndex].techStack[2];
+        // this.selectedProjectTestingFramework = this.newProject[iniIndex].techStack[3];
+        // this.selectedProjectVersionControlTool = this.newProject[iniIndex].techStack[4];
 
-        var ownerId;
-        ownerId=this.newProject[iniIndex].owner
-        this.getMembersById(ownerId,101);
+        // var ownerId;
+        // ownerId=this.newProject[iniIndex].owner
+        // this.getMembersById(ownerId,101);
         
-        for (var i=0;i<4;i++){
-        var id = (this.newProject[iniIndex].projectMembers[i]).toString();
-        this.selectedProjectMember[1]=this.getMembersById(id,i);
-        //console.log("chad",this.selectedProjectMember[i]);
-        }
-      }
-    )
+        // for (var i=0;i<4;i++){
+        // var id = (this.newProject[iniIndex].projectMembers[i]).toString();
+        // this.selectedProjectMember[1]=this.getMembersById(id,i);
+        // //console.log("chad",this.selectedProjectMember[i]);
+        //}
+      },
+      (error) => {
+        console.log("showClickedProject ERROR: ", error);
+  });
   }
 
   member: User;
@@ -163,43 +154,36 @@ tags="";
   //Conditional Get, Ticket dependents[owner, else]
   getMembersById(id,sno) {
     var iniIndex = 0;
-    if(sno==101)
-    {
+    if(sno==101) {
       this.userSessionService.getUserById(id).subscribe(
         (response) => {
           this.member = response[0];
           this.selectedProjectOwner=this.member.firstName;
           console.log("This is owner:",this.selectedProjectOwner);
-    },
-    (error) => {
-      console.log("Error: ", error);
-  })
-  console.log("Run Mode: Members")
-}
-    
-    else {
-    
-    this.userSessionService.getUserById(id).subscribe(
-      (response) => {
-        this.member = response[0];
-        // console.log("login-page response: ", response);
-        // console.log("Name", this.member.firstName);
-        this.selectedProjectMember[sno+1]=this.member.firstName;
-        console.log("selected Project Member: ", this.selectedProjectMember[sno+1]);
+        },
+        (error) => {
+          console.log("Error: ", error);
+      });
+    console.log("Run Mode: Members")
+    } else {
+      this.userSessionService.getUserById(id).subscribe(
+        (response) => {
+          this.member = response[0];
+          // console.log("login-page response: ", response);
+          // console.log("Name", this.member.firstName);
+          this.selectedProjectMember[sno+1]=this.member.firstName;
+          console.log("selected Project Member: ", this.selectedProjectMember[sno+1]);
 
-        this.selectedProjectMember1=this.selectedProjectMember[1];
-        this.selectedProjectMember2=this.selectedProjectMember[2];
-        this.selectedProjectMember3=this.selectedProjectMember[3];
-        this.selectedProjectMember4=this.selectedProjectMember[4];
-        console.log("Only users mode ran this time")
-        
-      },
-      (error) => {
+          this.selectedProjectMember1=this.selectedProjectMember[1];
+          this.selectedProjectMember2=this.selectedProjectMember[2];
+          this.selectedProjectMember3=this.selectedProjectMember[3];
+          this.selectedProjectMember4=this.selectedProjectMember[4];
+          console.log("Only users mode ran this time")
+        },
+        (error) => {
         console.log("Error: ", error);
-  });
-}
+      });
+    }
     console.log(this.user);
   }
-
-
 }

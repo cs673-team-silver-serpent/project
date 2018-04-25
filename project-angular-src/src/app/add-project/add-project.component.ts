@@ -29,7 +29,7 @@ export class AddProjectComponent implements OnInit {
     }
   }
 
-  public onCreateNewProject() {
+  onCreateNewProject() {
     var proj = {
       dateCreated: new Date(),
       dateModified: new Date(),

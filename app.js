@@ -45,7 +45,8 @@ app.use(bodyParser.json({type:'application/json'}));
 app.use(bodyParser.text());
 
 // declare public folder
-app.use(express.static(path.join(__dirname,'public')));
+//app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static('static'));
 
 app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
