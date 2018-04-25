@@ -1,23 +1,22 @@
 <app-toolbar></app-toolbar>
 
+<!-- Error/success Section Starts Here -->
 
-<!-- Error Section Starts Here -->
-<div style="height:55px;width:30%;margin:auto;margin-top:20px">
-    <div *ngIf="success" style="text-align:center">
-        <mat-card style="height:15px">
-            <b style="color:forestgreen">{{errorMessage}}
-                <mat-icon>offline_pin</mat-icon>
-            </b>
-        </mat-card>
-    </div>
+<div *ngIf="success" style="width:30%;margin:auto;text-align:center;margin-top:100px">
+    <mat-card style="height:15px">
+        <b style="color:forestgreen">{{errorMessage}}
+            <mat-icon>offline_pin</mat-icon>
+        </b>
+    </mat-card>
+</div>
 
-    <div *ngIf="errorStatus" style="text-align:center">
+<!-- <div *ngIf="errorStatus" style="text-align:center">
         <mat-card style="height:15px">
             <b style="color:red">{{errorMessage}}</b>
         </mat-card>
-    </div>
-</div>
-<!-- Error Section Ends Here -->
+    </div> -->
+
+<!-- Error/success Section Ends Here -->
 
 <!-- Page wrapper -->
 
@@ -34,7 +33,7 @@
         <mat-card class="mat-elevation-z15" style="margin-right:100px;height:510px">
             <mat-card-title>Create New Account</mat-card-title>
 
-            <form Id="newAccount" (ngSubmit)="onCreateNewAccount()">
+            <form Id="newAccount" name="newAccount" (ngSubmit)="onCreateNewAccount()">
                 <!-- title -->
 
 
@@ -55,11 +54,11 @@
                 <!-- Email -->
                 <div class="custom-margin">
                     <mat-form-field>
-                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email (Only BU Email Id Allowed)" [(ngModel)]="newUser.email" name="email" required
-                            email>
+                        <input id="email" (input)="getEmail($event)" matInput placeholder="Email (Only BU Email Id allowed)" [(ngModel)]="newUser.email"
+                            name="email" required email>
                     </mat-form-field>
                     <!-- Temporary fix-->
-                    <label *ngIf="emailError" style="color:red">Please Check Email{{BUEmailError}}{{specialCharError}}</label>
+                    <label *ngIf="emailError" style="color:red">{{BUEmailError}}</label>
                 </div>
                 <!-- Temporary fix-->
                 <!-- Password One -->
@@ -84,10 +83,21 @@
                 </div>
 
 
-                <div>
-                    <button [disabled]="!enableCreateButton" mat-raised-button color="primary">
-                        Create Account
-                    </button>
+                <div style="width:100%">
+                    <div style="width:15%;float: left">
+                        <button [disabled]="!enableCreateButton" mat-raised-button color="primary">
+                            Create Account
+                        </button>
+                    </div>
+
+
+                    <div style="width:55%;float:right">
+                        <label for="signIn">Have an Account?</label>
+                        <button id="signIn" name="signIn" mat-raised-button color="primary">
+                            Sign In
+                        </button>
+                    </div>
+
                 </div>
 
             </form>

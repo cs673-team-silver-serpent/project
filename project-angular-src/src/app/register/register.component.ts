@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
   private passLength = 0;
   private isEmailValid = 0;
   private redirect = false;
-  private enableCreateButton=false;
+  private enableCreateButton = false;
 
   constructor(private userSessionService: UserSessionService, private router: Router) { }
   @Output() userAdded: EventEmitter<User> = new EventEmitter<User>();
@@ -152,7 +152,7 @@ export class RegisterComponent implements OnInit {
         this.confirmation = "Passwords do not match ";
         this.allCool = true;
       }
-      
+
   }//matchpasword_End
 
 
@@ -172,44 +172,53 @@ export class RegisterComponent implements OnInit {
   BUEmailError;
 
   private split() {
+    var specialCharacter = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
     this.host = this.Email.split('@');
-    if (this.host[1] == "bu.edu")
-    { this.BUEmailError = "";
-     return 1;}
-    else{
-    this.BUEmailError = " | Please enter a BU Email Id";
-      return 0;}
+    if (this.host[0].match(specialCharacter))
+      return 5;
+
+    else if (this.host[1] == "bu.edu") {
+    this.BUEmailError = "";
+      return 1;
+    }
+    else {
+      return 0;
+    }
   }
 
   emailvalidation() {
     var isBUId;
     isBUId = this.split();
+    if(isBUId==5){
+      this.emailError=true;
+      this.BUEmailError="Please enter a valid BU Email Id";
+    }
+    else
     if (isBUId != 1) {
-      this.BUEmailError = " | Please enter a BU Email Id";
+      this.emailError=true;
+      this.BUEmailError = "Please enter a valid BU Email Id";
     }
-    else { 
-      this.BUEmailError="";     
-    
-    var atI = this.Email.indexOf("@");
-    var dotI = this.Email.indexOf(".");
-    if (dotI != atI + 1
-      && atI != 0 && atI != -1
-      && dotI != -1 && isBUId == 1 && dotI!=atI-1) {
-      return 1;
+    else {
+      this.BUEmailError = "";
+      
+      var atI = this.Email.indexOf("@");
+      var dotI = this.Email.indexOf(".");
+      if (dotI != atI + 1
+        && atI != 0 && atI != -1
+        && dotI != -1 && isBUId == 1 && dotI != atI - 1) {
+        return 1;
+      }
+
+      else {this.emailError=true; return 0;}
     }
 
-    else return 0;
   }
 
-  }
-  
-  checkEverything(){
-    if(this.First!="" && this.Last!="" && this.Email!="" &&this.x!="" &&this.y!="" && this.emailvalidation()==1 && this.allCool==false && this.split()==1)
-
-    {
-      this.enableCreateButton=true;
+  checkEverything() {
+    if (this.First != "" && this.Last != "" && this.Email != "" && this.x != "" && this.y != "" && this.emailvalidation() == 1 && this.allCool == false && this.split() == 1) {
+      this.enableCreateButton = true;
     }
-    else this.enableCreateButton=false;
+    else this.enableCreateButton = false;
   }
 
 }
