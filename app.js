@@ -20,8 +20,10 @@ var credentials = {key: privateKey, cert: certificate};
 // initialize app variable
 let app = express();
 
+
 // declare port
-const port = 3000;
+const restPort = 3000;
+const frontEndPort = 443;
 
 // connect to database
 mongo.connect(config.dbHost);
@@ -43,10 +45,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type:'application/json'}));
 app.use(bodyParser.text());
-
-// declare public folder
-//app.use(express.static(path.join(__dirname,'public')));
-app.use(express.static('static'));
 
 app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
@@ -87,11 +85,21 @@ app.route("/user/delete/").post(users.deleteUserByName);
 app.route('/session/userId').post(sessions.getSessionByUserId);
 app.route('/session/getUserBySession').post(sessions.getUserBySession);
 
-var httpsServer = https.createServer(credentials, app);
+var restServer = https.createServer(credentials, app);
+
+// Front End
+let appFrontEnd = express();
+appFrontEnd.use(express.static('static'));
+var frontEndServer = https.createServer(credentials, appFrontEnd);
 
 // start server
-httpsServer.listen(port, () => {
-   console.log(`Starting the server at port ${port}.`);
+restServer.listen(restPort, () => {
+   console.log(`Starting the server at port ${restPort}.`);
 });
 
-module.exports = app; // for teting purposes
+// start server
+frontEndServer.listen(frontEndPort, () => {
+    console.log(`Starting the server at port ${frontEndPort}`);
+ });
+
+//module.exports = app; // for teting purposes
