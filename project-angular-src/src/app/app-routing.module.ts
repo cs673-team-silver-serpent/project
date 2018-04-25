@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { DisplayProjectComponent } from './display-project/display-project.component';
+import { ProjectBoxComponent } from './project-box/project-box.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'displayProject', component: DisplayProjectComponent},
   { path: 'viewProject', component: ViewProjectComponent},
+  {path:'projectBox', component:ProjectBoxComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ]
 
