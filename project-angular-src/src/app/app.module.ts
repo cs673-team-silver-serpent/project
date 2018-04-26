@@ -23,6 +23,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DisplayProjectComponent } from './display-project/display-project.component';
+import { ProjectBoxComponent } from './project-box/project-box.component';
 
 
 import {
@@ -59,6 +60,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+
 
 
 
@@ -106,6 +108,8 @@ import {
   
   
   
+  
+  
  
   
 })
@@ -123,7 +127,8 @@ export class DemoMaterialModule {}
     ProjectSearchComponent,
     ProfileComponent,
     RegisterComponent,
-    DisplayProjectComponent
+    DisplayProjectComponent,
+    ProjectBoxComponent
   ],
   imports: [
     BrowserModule,

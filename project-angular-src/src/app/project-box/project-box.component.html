@@ -1,0 +1,125 @@
+
+<div *ngIf="showContent">
+<div  class="internal" style="margin-top:20px">
+  <mat-card style="background-color:rgb(63, 63, 175)" class="mat-elevation-z10">
+    <p style="font-weight:bolder;color:white">{{selectedProjectName}}</p>
+
+  </mat-card>
+</div>
+
+<div   class="internal" style="margin-top:5px">
+  <mat-tab-group class="mat-elevation-z6">
+
+    <!-- tab1 -->
+    <mat-tab label="About">
+      <mat-list>
+        <mat-list-item>Date Created:
+          <b> {{selectedProjectDateCreated | date : "MMM dd yyyy"}}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Last Modified:
+          <b> Not Available</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Repository Link:
+          <a href="" class="href"> {{selectedProjectRepositoryLink}}</a>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+        <mat-list-item>Demo Link:
+          <a href="" class="href"> {{selectedProjectDemo}}</a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+
+    </mat-tab>
+
+
+
+    <!-- tab2 -->
+    <mat-tab label="Technology Stack">
+      <mat-list>
+
+        <mat-list-item>Back End:
+          <b>{{selectedProjectBackEnd}}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Framework:
+          <b>{{selectedProjectFramework}}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Front End:
+          <b>{{selectedProjectFrontend}}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Testing Framework:
+          <b>{{selectedProjectTestingFramework}}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>Version Control Tool:
+          <b>{{selectedProjectVersionControlTool}}</b>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+
+      </mat-list>
+
+    </mat-tab>
+
+    <!-- tab 3 -->
+    <mat-tab label="Description">
+      <mat-card>
+        <mat-card-content>
+          <p class="mat-title">{{selectedProjectDescription}}</p>
+        </mat-card-content>
+
+      </mat-card>
+
+    </mat-tab>
+
+    <!-- tab 4 -->
+    <mat-tab label="Members">
+      <mat-list>
+        <mat-list-item>{{selectedProjectOwner}}(Owner)</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{selectedProjectMember1}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{selectedProjectMember2}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{selectedProjectMember3}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{selectedProjectMember4}}</mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+
+<div  class="internal">
+  <mat-card>
+    <mat-card-title>Tags</mat-card-title>
+    <mat-card-content>
+        {{tags}}
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="internal" style="text-align:center">
+  <button mat-raised-button color="primary" (click)='redirectToPreviousPage()'>Back</button>
+  <button matTooltip="Add to Favorite Projects" mat-raised-button color="primary">
+    <mat-icon>favorite</mat-icon>
+  </button>
+</div>
+</div>
+
+
+<div *ngIf="wait" style="text-align:center">
+  Loading...
+  <mat-spinner aria-labelledby="Loading" style="width:100px;margin:auto"></mat-spinner>
+
+</div>
+<div *ngIf="serviceError" style="text-align:center">
+    <p style="color:red;font-weight:bold">Service Error | Please Try Again</p>
+    <mat-progress-spinner value="100" color="warn" mode="determinate" aria-labelledby="Loading" style="width:100px;margin:auto"></mat-progress-spinner>
+  
+  </div>
