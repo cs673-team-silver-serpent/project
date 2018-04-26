@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NewProject, Project } from '../models/Project';
 import { UserSessionService } from './user-session.service';
-
+import {Subject} from 'rxjs/Subject'
 import 'rxjs/add/operator/map';
 
 
@@ -20,8 +20,8 @@ export class ProjectService {
   baseURL = 'https://localhost:3000';
 
   constructor(private http: HttpClient,
-              private userSessionService: UserSessionService) { }
-
+              private userSessionService: UserSessionService) {}
+               
   getAllProjects(): Observable<Project[]> {
     const url = `${this.baseURL}/projects`;
     return this.http.post<Project[]>(url, undefined);
@@ -38,19 +38,24 @@ export class ProjectService {
   var projectObj={
     projectName : projectName
   } 
-   // console.log(projectName);
+
+    // console.log(projectName);
 
     const url = `${this.baseURL}/project/projectName`
     return this.http.post<Project[]>(url,projectObj);  //pass the data to controller
     
   }
+sharedId:String="000";
+
 
   public getProjectById(projectId: String): Observable<Project>{
+
     // console.log("We are in service | Id: ",projectId);
+    this.sharedId=projectId;
+
     var id={
       id : projectId
     } 
-      
       const url = `${this.baseURL}/project/id`
       return this.http.post<Project>(url,id);  //pass the data to controller    
     }

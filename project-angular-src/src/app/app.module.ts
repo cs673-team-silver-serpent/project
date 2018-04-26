@@ -17,12 +17,12 @@ import { ViewProjectComponent } from './view-project/view-project.component';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomeComponent } from './home/home.component';
-import { ProjectSearchComponent } from './project-search/project-search.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DisplayProjectComponent } from './display-project/display-project.component';
+import { ProjectBoxComponent } from './project-box/project-box.component';
 
 
 import {
@@ -59,6 +59,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+
 
 
 
@@ -106,6 +107,8 @@ import {
   
   
   
+  
+  
  
   
 })
@@ -120,10 +123,10 @@ export class DemoMaterialModule {}
     LoginPageComponent,
     ToolbarComponent,
     HomeComponent,
-    ProjectSearchComponent,
     ProfileComponent,
     RegisterComponent,
-    DisplayProjectComponent
+    DisplayProjectComponent,
+    ProjectBoxComponent
   ],
   imports: [
     BrowserModule,
