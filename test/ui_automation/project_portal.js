@@ -20,7 +20,7 @@ describe('Project Portal ', function() {
         browser.sleep(5000);
         expect(browser.getCurrentUrl()).toBe('http://localhost:4200/home');
 
-        //console.log("Current UrL: " + browser.getCurrentUrl());
+        // console.log("Current UrL: " + browser.getCurrentUrl());
     })
    
   });

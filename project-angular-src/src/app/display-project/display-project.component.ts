@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material';
 import { UserSessionService } from '../services/user-session.service';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
-import {Subject} from 'rxjs/Subject'
+import { Subject } from 'rxjs/Subject'
 import { ProjectBoxComponent } from '../project-box/project-box.component';
 
 
@@ -17,23 +17,22 @@ import { ProjectBoxComponent } from '../project-box/project-box.component';
 })
 export class DisplayProjectComponent implements OnInit {
 
+constructor(private projectService: ProjectService,private userSessionService:UserSessionService,private router: Router) { }
 
-@ViewChild(ProjectBoxComponent) projectBoxObject: ProjectBoxComponent;
+  @ViewChild(ProjectBoxComponent) projectBoxObject: ProjectBoxComponent;
 
   user: User;
-  constructor(private projectService: ProjectService, private userSessionService: UserSessionService, private router: Router) { }
-
   projects: Project[] = [];
-  displayedColumns = ['projectName', 'select'];
+  displayedColumns: String[] = ['projectName', 'select'];
   dataSource = new MatTableDataSource<Project>(this.projects);
-  
-  ngOnInit() {    
+
+  ngOnInit() {
   }
 
   searchName;
   showError = false;
   showProjectList = false;
- 
+
   noMatch = false;
   errorMessage = "Please Enter The Search Keywords";
 
@@ -41,14 +40,14 @@ export class DisplayProjectComponent implements OnInit {
     this.projectBoxObject.ngOnInit(); //show.Content=false;
     this.searchName = (document.getElementById("x") as HTMLInputElement).value.trim();
     if (this.searchName.length == 0) {
-      this.projectBoxObject.showContent=false;
+      this.projectBoxObject.showContent = false;
       this.showError = true;
       this.showProjectList = false;
-
     }
     else {
       this.showError = false;
-      console.log("Text box value: ", this.searchName)      
+      console.log("getProject searchName: ", this.searchName)
+      //  this.searchName=document.getElementById("nameTextQuery") ///work on this part
       this.projectService.getProjectName(this.searchName).subscribe(
         (response) => {
           console.log(response);
@@ -57,23 +56,25 @@ export class DisplayProjectComponent implements OnInit {
             this.dataSource = new MatTableDataSource<Project>(this.projects);
             this.showProjectList = true;
             this.noMatch = false;
-            
+
           }
           else {
-            this.projectBoxObject.showContent=false;
+            this.projectBoxObject.showContent = false;
             this.showProjectList = false;
             this.noMatch = true;
             console.log("Nothing found")
           }
         },
-        (error) => {console.log(error)
+        (error) => {
+          console.log(error)
+          this.projectBoxObject.serviceError=true;
           this.showProjectList = false;
-        this.projectBoxObject.serviceError=true;
-        this.projectBoxObject.showContent=false;
-        
-      },
-        ()=>{console.log("Finished")}
-       
+          this.projectBoxObject.serviceError = true;
+          this.projectBoxObject.showContent = false;
+
+        },
+        () => { console.log("Finished") }
+
       );
     }
 
@@ -82,7 +83,6 @@ export class DisplayProjectComponent implements OnInit {
   //Initial Values
   selectedProjectName;
   selectedProjectId;
-  
   selectProject(project: Project) {
     var searchProject = project.projectName;
     index = 0;
@@ -90,19 +90,18 @@ export class DisplayProjectComponent implements OnInit {
     console.log("Project Selected: ", project.projectName, "ID: ", project._id, "Index:", index)
     this.selectedProjectName = this.projects[index].projectName;
     this.selectedProjectId = this.projects[index]._id;
-    //projectService SharedId populated   
     console.log("Clicked Project: ", this.selectedProjectName);
     this.showClickedProject();
   }
-  
+
   showClickedProject() {
-    
-    this.projectService.sharedId=this.selectedProjectId;
+
+    this.projectService.sharedId = this.selectedProjectId;
     this.projectBoxObject.populate();
     //console.log("SHaredId",this.projectService.sharedId)
-    }
+  }
 
-  
+
 
 
 }

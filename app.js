@@ -12,16 +12,18 @@ const sessions = require('./controllers/sessions-controlller');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('./certificates/private.key', 'utf8');
-var certificate = fs.readFileSync('./certificates/cacert.pem', 'utf8');
+var privateKey  = fs.readFileSync('./certificates/server.key', 'utf8');
+var certificate = fs.readFileSync('./certificates/server.crt', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 
 // initialize app variable
 let app = express();
 
+
 // declare port
-const port = 3000;
+const restPort = 3000;
+const frontEndPort = 3001;
 
 // connect to database
 mongo.connect(config.dbHost);
@@ -43,9 +45,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type:'application/json'}));
 app.use(bodyParser.text());
-
-// declare public folder
-app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/', (req,res) => {
    res.send("Welcome to Projects Portal!");
@@ -87,11 +86,24 @@ app.route("/user/delete/").post(users.deleteUserByName);
 app.route('/session/userId').post(sessions.getSessionByUserId);
 app.route('/session/getUserBySession').post(sessions.getUserBySession);
 
-var httpsServer = https.createServer(credentials, app);
+var restServer = https.createServer(credentials, app);
+
+// Front End
+let appFrontEnd = express();
+appFrontEnd.use(express.static('static'));
+appFrontEnd.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/index.html'));
+  });
+var frontEndServer = https.createServer(credentials, appFrontEnd);
 
 // start server
-httpsServer.listen(port, () => {
-   console.log(`Starting the server at port ${port}.`);
+restServer.listen(restPort, () => {
+   console.log(`Starting the server at port ${restPort}.`);
 });
 
-module.exports = app; // for teting purposes
+// start server
+frontEndServer.listen(frontEndPort, () => {
+    console.log(`Starting the server at port ${frontEndPort}`);
+ });
+
+//module.exports = app; // for teting purposes

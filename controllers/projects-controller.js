@@ -55,7 +55,7 @@ getProjectsByOwner = ( request, response) => {
 getProjectByProjectName = (request, response) => {
   let projectName = request.body.projectName;
   let projectNameRegEx = new RegExp('.*' + projectName + '.*','i');
-  console.log(projectNameRegEx);
+  // console.log(projectNameRegEx);
   Project.find({ projectName: projectNameRegEx },{projectName})
          .exec((error,project) => {
     if (error) { 

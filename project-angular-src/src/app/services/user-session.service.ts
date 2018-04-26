@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class UserSessionService {
   session: Session;
+  //baseURL = 'https://67.207.83.83:3000';
   baseURL = 'https://localhost:3000';
   user: User = {
     _id: '',
@@ -80,7 +81,7 @@ export class UserSessionService {
 
   
 public getUserById(userId: String): Observable<User>{
-console.log("(Service)This user Id is sent: ",userId)
+  // console.log("This user Id is sent: ",userId)
   var id={
     id: userId
   }

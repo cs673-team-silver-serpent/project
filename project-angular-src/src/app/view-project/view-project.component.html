@@ -2,103 +2,81 @@
 
 <mat-grid-list cols="12" rowHeight="200px">
   <mat-grid-tile [colspan]="3" [rowspan]="3">
-    <app-add-project (projectAdded)="onNewProjectAddedRefreshList()"></app-add-project>
+    <app-add-project (projectAdded)="onNewProjectAddedRefreshList($event)"></app-add-project>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="6" [rowspan]="3">
+  <mat-grid-tile [colspan]="9" [rowspan]="3">
+    <mat-card>
+      <mat-card-title>All Projects</mat-card-title>
+      <mat-table #table [dataSource]="dataSource">
 
+        <!-- dateCreated -->
+        <ng-container matColumnDef="dateCreated">
+          <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.dateCreated | date:'medium' }} </mat-cell>
+        </ng-container>
 
-    <div class="example-container mat-elevation-z8">
+        <!-- dateModified -->
+        <ng-container matColumnDef="dateModified">
+            <mat-header-cell *matHeaderCellDef> Date Modified </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateModified | date:'medium'}} </mat-cell>
+        </ng-container>
 
-      <mat-card>
-        <mat-card-title>All Projects</mat-card-title>
-        <mat-table #table [dataSource]="dataSource">
+        <!-- projectName -->
+        <ng-container matColumnDef="projectName">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+        </ng-container>
 
-          <!-- dateCreated -->
-          <ng-container matColumnDef="dateCreated">
-            <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.dateCreated | date:'medium' }} </mat-cell>
-          </ng-container>
+        <!-- projectDescription -->
+        <ng-container matColumnDef="projectDescription">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
+        </ng-container>
 
-          <!-- dateModified -->
-          <ng-container matColumnDef="dateModified">
-              <mat-header-cell *matHeaderCellDef> Date Modified </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.dateModified | date:'medium'}} </mat-cell>
-          </ng-container>
+        <!-- projectMembers -->
+        <ng-container matColumnDef="projectMembers">
+            <mat-header-cell *matHeaderCellDef> Project Members </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.projectMembers}} </mat-cell>
+        </ng-container>
 
-          <!-- projectName -->
-          <ng-container matColumnDef="projectName">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
-          </ng-container>
+        <!-- techStack -->
+        <ng-container matColumnDef="techStack">
+            <mat-header-cell *matHeaderCellDef> Tech Stack </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.techStack}} </mat-cell>
+        </ng-container>
 
-          <!-- projectDescription -->
-          <ng-container matColumnDef="projectDescription">
-            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
-          </ng-container>
+        <!-- repositoryLink -->
+        <ng-container matColumnDef="repositoryLink">
+            <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.repositoryLink}} </mat-cell>
+        </ng-container>
 
-          <!-- projectMembers -->
-          <ng-container matColumnDef="projectMembers">
-              <mat-header-cell *matHeaderCellDef> Project Members </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.projectMembers}} </mat-cell>
-          </ng-container>
+        <!-- projectDemo -->
+        <ng-container matColumnDef="projectDemo">
+            <mat-header-cell *matHeaderCellDef> Demo </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.projectDemo}} </mat-cell>
+        </ng-container>
 
-          <!-- techStack -->
-          <ng-container matColumnDef="techStack">
-              <mat-header-cell *matHeaderCellDef> Tech Stack </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.techStack}} </mat-cell>
-          </ng-container>
+        <!-- labels -->
+        <ng-container matColumnDef="labels">
+            <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
+        </ng-container>
 
-          <!-- repositoryLink -->
-          <ng-container matColumnDef="repositoryLink">
-              <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.repositoryLink}} </mat-cell>
-          </ng-container>
+        <!-- delete -->
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="deleteProject(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
 
-          <!-- projectDemo -->
-          <ng-container matColumnDef="projectDemo">
-              <mat-header-cell *matHeaderCellDef> Demo </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.projectDemo}} </mat-cell>
-          </ng-container>
-
-          <!-- labels -->
-          <ng-container matColumnDef="labels">
-              <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
-          </ng-container>
-
-          <!-- delete -->
-          <ng-container matColumnDef="delete">
-              <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
-              <mat-cell *matCellDef="let element">
-                  <button mat-raised-button color="warn" (click)="deleteProject(element)">
-                      <mat-icon>delete</mat-icon>
-                  </button>
-              </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-      </mat-card>
-    </div>
-  </mat-grid-tile>
-
-  <!-- dummy -->
-  <mat-grid-tile [colspan]="3" [rowspan]="3">
-    <mat-card class="example-container mat-elevation-z8" style="height:500px;width:400px">
-
-      <mat-card-title>My Favorite Projects</mat-card-title>
-
-      <mat-card>Project 1</mat-card>
-      <mat-card>Project 2</mat-card>
-      <mat-card>Project 3</mat-card>
-      <mat-card>Project 4</mat-card>
-      <mat-card>Project 5</mat-card>
-      <mat-card>Project 6</mat-card>
-
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </mat-card>
   </mat-grid-tile>
-  <!-- dummy -->
 
 </mat-grid-list>

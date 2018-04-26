@@ -23,7 +23,7 @@ export class LoginPageComponent {
               private router: Router) { }
 
   ngOnInit() {
-    console.log("login-page.component User: ", this.userSessionService.user);
+    // console.log("login-page.component User: ", this.userSessionService.user);
   }
   
   authenticateUser() {
