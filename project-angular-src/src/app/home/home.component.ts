@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.projectService.getProjectsByOwner().subscribe(
       (response) => {
-        console.log("----------------------", response);
+        // console.log("----------------------", response);
         this.projects = response;
         this.dataSource = new MatTableDataSource<Project>(this.projects);
       },
