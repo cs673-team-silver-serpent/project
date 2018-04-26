@@ -23,7 +23,7 @@ let app = express();
 
 // declare port
 const restPort = 3000;
-const frontEndPort = 3001;
+const frontEndPort = 443;
 
 // connect to database
 mongo.connect(config.dbHost);

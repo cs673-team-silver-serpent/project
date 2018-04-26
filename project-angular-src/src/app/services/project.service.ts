@@ -16,8 +16,8 @@ const httpOptions = {
 @Injectable()
 export class ProjectService {
 
-  //baseURL = 'https://67.207.83.83:3000';
-  baseURL = 'https://localhost:3000';
+  baseURL = 'https://67.207.83.83:3000';
+  //baseURL = 'https://localhost:3000';
 
   constructor(private http: HttpClient,
               private userSessionService: UserSessionService) {}
