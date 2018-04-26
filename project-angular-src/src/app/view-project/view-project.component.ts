@@ -44,7 +44,7 @@ export class ViewProjectComponent implements OnInit {
   }
   
   deleteProject(project: Project) {
-    console.log("Deleting Project: ", project.projectName, "ID: ", project._id);
+    // console.log("Deleting Project: ", project.projectName, "ID: ", project._id);
     this.projectService.deleteProject(project).subscribe(
       (response) => {
         this.projects = this.projects.filter(projects => projects !== project)

@@ -30,18 +30,18 @@ getUserBySession = (request, response) => {
             if (error) {
                 response.send(error);
             } else if (answer) {
-                console.log("Anser from Session find: ", answer);
+                // console.log("Anser from Session find: ", answer);
                 if (answer.length == 0) {
                     response.json({ success: false});
                 } else {
                     userId = answer[0].userId;
-                    console.log("UserID: ", userId);
+                    // console.log("UserID: ", userId);
                     Users.find({_id: userId})
                         .exec((error, user) => {
                             if (error) {
                                 response.send(error);
                             } else if (user) {
-                                console.log("User: ", user)
+                                // console.log("User: ", user)
                                 delete(user[0].password);
                                 response.json(user[0]);
                             } else {

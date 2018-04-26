@@ -20,7 +20,7 @@ export class ProjectSearchComponent implements OnInit {
   }
 
   onSearch() {
-    console.log("SUBMITTED", this.search);
+    // console.log("SUBMITTED", this.search);
   }
 
 }
