@@ -43,7 +43,7 @@ export class AddProjectComponent implements OnInit {
       labels: this.parseString(this.newProject.labels),
       _id: ''
     }
-    console.log("add-project -- onCreate New Project(): project: ", proj);
+    // console.log("add-project -- onCreate New Project(): project: ", proj);
 
     this.projectService.addProject(proj).subscribe(
       response => {

@@ -81,7 +81,7 @@ export class UserSessionService {
 
   
 public getUserById(userId: String): Observable<User>{
-console.log("This user Id is sent: ",userId)
+  // console.log("This user Id is sent: ",userId)
   var id={
     id: userId
   }

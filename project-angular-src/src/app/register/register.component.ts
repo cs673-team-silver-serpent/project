@@ -82,12 +82,12 @@ export class RegisterComponent implements OnInit {
     this.showEmailError();
     this.validForm = this.formValidation();
     if (this.allCool != true && this.validForm == 1) {
-      console.log(this.newUser);
+      // console.log(this.newUser);
 
 
       this.userSessionService.addUser(this.newUser).subscribe(
         response => {
-          console.log(response);
+          // console.log(response);
           this.userAdded.emit(this.newUser);
           this.success = true;
           this.redirect = true;

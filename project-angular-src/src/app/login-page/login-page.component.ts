@@ -23,7 +23,7 @@ export class LoginPageComponent {
               private router: Router) { }
 
   ngOnInit() {
-    console.log("login-page.component User: ", this.userSessionService.user);
+    // console.log("login-page.component User: ", this.userSessionService.user);
   }
   
   authenticateUser() {
@@ -43,7 +43,7 @@ export class LoginPageComponent {
               console.log("login-page  userSessionService.getUserBySessionToken:", error);
           });
         } else {
-          console.log("Wrong Password");
+          // console.log("Wrong Password");
           this.loginError = true;
         }
       },

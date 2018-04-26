@@ -38,7 +38,7 @@ export class ProjectService {
   var projectObj={
     projectName : projectName
   } 
-  console.log(projectName);
+   // console.log(projectName);
 
     const url = `${this.baseURL}/project/projectName`
     return this.http.post<Project[]>(url,projectObj);  //pass the data to controller
@@ -46,7 +46,7 @@ export class ProjectService {
   }
 
   public getProjectById(projectId: String): Observable<Project>{
-    console.log("We are in service | Id: ",projectId);
+    // console.log("We are in service | Id: ",projectId);
     var id={
       id : projectId
     } 
@@ -65,7 +65,7 @@ export class ProjectService {
     var body = {
       owner: this.userSessionService.user._id
     }
-    console.log(body);
+    // console.log(body);
     const url = `${this.baseURL}/project/projectsByOwner`
     return this.http.post<Project[]>(url, body);
   }
