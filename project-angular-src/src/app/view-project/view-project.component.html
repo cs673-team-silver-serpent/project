@@ -2,13 +2,10 @@
 
 <mat-grid-list cols="12" rowHeight="200px">
   <mat-grid-tile [colspan]="3" [rowspan]="3">
-    <div style="height:auto;width:auto;margin:auto">
       <app-add-project (projectAdded)="onNewProjectAddedRefreshList($event)"></app-add-project>
-    </div>
   </mat-grid-tile>
 
-  <mat-grid-tile [colspan]="6" [rowspan]="3">
-    <div class="example-container mat-elevation-z8" style="overflow:scroll;margin-top:30px;margin-left:50px">
+  <mat-grid-tile [colspan]="9" [rowspan]="3">
       <mat-card>
         <mat-card-title>All Projects</mat-card-title>
         <mat-table #table [dataSource]="dataSource">
@@ -80,6 +77,5 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
       </mat-card>
-    </div>
   </mat-grid-tile>
 </mat-grid-list>

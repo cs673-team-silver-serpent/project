@@ -9,5 +9,6 @@ app-add-project {
 }
 
 mat-grid-tile {
-  background-color: lightblue;
+  height:100%;
+  width: 95%;
 }
