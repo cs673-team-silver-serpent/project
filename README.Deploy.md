@@ -2,11 +2,10 @@
 
 #### Procure a Digital Ocean "Droplet"
 
-Project Portal is hosted on a Ubuntu 14.04 "Droplet" on Digital Ocean.
+Project Portal is hosted on a Ubuntu 14.04 "Droplet" on [Digital Ocean]: (https://www.digitalocean.com/products/droplets/).
 
 #### Building the MEAN stack
-Once the service is procured, you must build the MEAN stack on the droplet. Follow the steps on How to Install a MEAN.JS Stack on an Ubuntu 14.04 Server.
-Install MongoDB and Node, meaning follow the instructions up to the point of the section "Install the Rest of the Components with NPM, Git, and Bower." DO NOT install the sample project described in "Install the Rest . . . "; proceed to "Clone Project Portal 'Prod'" Branch below.
+Once the service is procured, you must build the MEAN stack on the droplet. Follow the steps on [How to Install a MEAN.JS Stack on an Ubuntu 14.04 Server]: (https://www.digitalocean.com/community/tutorials/how-to-install-a-mean-js-stack-on-an-ubuntu-14-04-server). Install MongoDB and Node, meaning follow the instructions up to the point of the section "Install the Rest of the Components with NPM, Git, and Bower." DO NOT install the sample project described in "Install the Rest . . . "; proceed to "Clone Project Portal 'Prod'" Branch below.
 
 #### Clone Project Portal "Prod" Branch
 
@@ -83,8 +82,4 @@ MongoDB is no ready to run with user authenticationDatabase
 
 ### Start the server
 
-From within `\opt\project`, run `npm start.` The server is now up and running.
-
-<!-- links -->
-[Digital Ocean]: (https://www.digitalocean.com/products/droplets/)
-[How to Install a MEAN.JS Stack on an Ubuntu 14.04 Server]: (https://www.digitalocean.com/community/tutorials/how-to-install-a-mean-js-stack-on-an-ubuntu-14-04-server)
+From within `\opt\project`, run `nohup npm start &`. The server is now up and running, and the `nohup` command will keep it running even when you log out of the shell.
