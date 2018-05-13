@@ -50,7 +50,7 @@ db.createUser(
    `mongo --port 27017 -u "userAdministrator" -p "abc123" --authenticationDatabase "admin"`
 7. Create projects admin user:
   ```
-  use projects
+  use project-portal-test
   db.createUser(
     {
       user: "projectsAdmin",
