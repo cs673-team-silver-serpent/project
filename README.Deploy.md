@@ -86,5 +86,5 @@ MongoDB is no ready to run with user authenticationDatabase
 From within `\opt\project`, run `npm start.` The server is now up and running.
 
 <!-- links -->
-[Digital Ocean]: https://www.digitalocean.com/products/droplets/
-[How to Install a MEAN.JS Stack on an Ubuntu 14.04 Server]: https://www.digitalocean.com/community/tutorials/how-to-install-a-mean-js-stack-on-an-ubuntu-14-04-server
+[Digital Ocean]: (https://www.digitalocean.com/products/droplets/)
+[How to Install a MEAN.JS Stack on an Ubuntu 14.04 Server]: (https://www.digitalocean.com/community/tutorials/how-to-install-a-mean-js-stack-on-an-ubuntu-14-04-server)
