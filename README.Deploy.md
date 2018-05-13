@@ -75,7 +75,8 @@ MongoDB is no ready to run with user authenticationDatabase
 
 ##### Restart Mongo with user authenticationDatabase
 
-1. Kill the current instance of MongoDB, just to be safe.
+1. Kill the current instance of MongoDB.
+2. Switch user, in order not to run Mongo DB as as root: `su bob`
 2. Start Mongo with user authentication:
 `mongod --auth --port 27017 --dbpath /data/db`
 
