@@ -91,9 +91,9 @@ project-angular-src
    See [MongoDB]. Use all defaults, including port 27017.
    After starting the mongo server, load the test data by typing:
       ```
-         a. mongoimport --db project-portal-test --collection projects -file project-portal-projects.json 
-         b. mongoimport --db project-portal-test --collection sessions -file project-portal-sessions.json
-         c. mongoimport --db project-portal-test --collection users -file project-portal-users.json
+         mongoimport --db project-portal-test --collection projects -file project-portal-projects.json 
+         mongoimport --db project-portal-test --collection sessions -file project-portal-sessions.json
+         mongoimport --db project-portal-test --collection users -file project-portal-users.json
       ```
 4. ### Install Git
    See [Atlassian Git Tutorial].
