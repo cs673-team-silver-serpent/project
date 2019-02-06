@@ -90,9 +90,11 @@ project-angular-src
    Requires MongoDB ^3.6.0. (_^_ means  "_at least_ version 3.6.0.")
    See [MongoDB]. Use all defaults, including port 27017.
    After starting the mongo server, load the test data by typing:
-   a. `mongoimport --db project-portal-test --collection projects -file project-portal-projects.json`.
-   b. `mongoimport --db project-portal-test --collection sessions -file project-portal-sessions.json`.
-   c. `mongoimport --db project-portal-test --collection users -file project-portal-users.json`.
+      ```
+         a. mongoimport --db project-portal-test --collection projects -file project-portal-projects.json 
+         b. mongoimport --db project-portal-test --collection sessions -file project-portal-sessions.json
+         c. mongoimport --db project-portal-test --collection users -file project-portal-users.json
+      ```
 4. ### Install Git
    See [Atlassian Git Tutorial].
 5. ### Change directory into your project folder from the command line.
