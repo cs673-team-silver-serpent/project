@@ -103,11 +103,6 @@ getProjectId=(request, response)=>{
 }
 //------------------------------
 
-
-
-
-
-
 addProject = (request, response) => {
   let dateCreated = new Date(Date.now());
   new Project(

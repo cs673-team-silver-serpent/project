@@ -38,7 +38,13 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
 }
 
 // middleware
-app.use(cors());
+app.use(cors()); // comment out for development purposes
+app.use(function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
+ });
 
 // middleware for bodypasrsing using json and urlencoding
 app.use(bodyParser.urlencoded({extended:true}));
@@ -106,4 +112,4 @@ frontEndServer.listen(frontEndPort, () => {
     console.log(`Starting the server at port ${frontEndPort}`);
  });
 
-//module.exports = app; // for teting purposes
+module.exports = app; // for teting purposes

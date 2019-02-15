@@ -6,3 +6,12 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
+
+.project-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.project-description {
+  font-style: italic;
+}

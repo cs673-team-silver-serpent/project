@@ -62,7 +62,7 @@ createSession = (userId) => {
     expirationDate.setDate(now.getDate() + 2);
     // generate a token
     const token = hash.sha256().update(randomWord()).digest('hex').toUpperCase();
-    
+
     return new Session(
         {
         userId: userId,
