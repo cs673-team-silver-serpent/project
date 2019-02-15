@@ -1,10 +1,15 @@
+// import external libraries
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../services/project.service';
-import { Project } from '../models/Project';
 import { MatTableDataSource } from '@angular/material';
-import { UserSessionService } from '../services/user-session.service';
-import { User } from '../models/User';
 import { Router } from '@angular/router';
+// import project services
+import { ProjectService } from '../services/project.service';
+import { UserSessionService } from '../services/user-session.service';
+// import project models
+import { Project } from '../models/Project';
+import { User } from '../models/User';
+// import project styles
+import '../../styles.css';
 
 @Component({
   selector: 'app-view-project',
@@ -15,7 +20,7 @@ export class ViewProjectComponent implements OnInit {
 
  // an array of projects
  projects: Project[] = [];
- displayedColumns: String[] = ['projectName', 'projectDescription', 'delete'];
+ displayedColumns: String[] = ['projectNameDescription', 'delete', 'edit'];
  dataSource = new MatTableDataSource<Project>(this.projects);
 
 
@@ -24,10 +29,10 @@ export class ViewProjectComponent implements OnInit {
              private router: Router) { }
   user: User;
   enableDelete=false;  //toggle the delete button
-  
+
   ngOnInit() {
     if (this.userSessionService.user.firstName == 'Guest') {
-      this.displayedColumns.pop();
+      this.displayedColumns.splice(2,2);
     }
 
     this.projectService.getAllProjects().subscribe(
@@ -42,10 +47,10 @@ export class ViewProjectComponent implements OnInit {
       this.enableDelete=true;
     } else this.enableDelete=false;
   }
-  
+
   deleteProject(project: Project) {
     // console.log("Deleting Project: ", project.projectName, "ID: ", project._id);
-    this.projectService.deleteProject(project).subscribe(
+    this.projectService.deleteProject(project).subscribe (
       (response) => {
         this.projects = this.projects.filter(projects => projects !== project)
         this.projectService.getAllProjects().subscribe(
@@ -69,5 +74,18 @@ export class ViewProjectComponent implements OnInit {
       (error) => {
         console.log(error);
     });
+  }
+
+  editProject(project: Project) {
+    let projectId = project._id;
+    this.projectService.getProjectById(projectId).subscribe (
+        (response) => {
+          this.projects.push(response);
+          this.dataSource = new MatTableDataSource<Project>(this.projects);
+        },
+        (error) => {
+          console.log(error);
+        }
+    );
   }
 }

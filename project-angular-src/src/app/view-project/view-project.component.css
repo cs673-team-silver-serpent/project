@@ -1,6 +1,12 @@
 mat-card {
+  margin: auto;
   height: 100%;
   width: 97%;
+}
+
+mat-card-title {
+  font-size: 22px;
+  font-weight: bold;
 }
 
 app-add-project {
@@ -10,4 +16,16 @@ app-add-project {
 
 mat-grid-tile {
   background-color: lightblue;
+}
+
+.mat-column-projectNameDescription {
+  flex: 0 0 70%;
+}
+
+.mat-column-delete {
+  flex: 0 0 15%;
+}
+
+.mat-column-edit {
+  flex: 0 0 15%;
 }

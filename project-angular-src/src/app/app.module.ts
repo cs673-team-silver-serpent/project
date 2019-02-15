@@ -5,16 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 
 
-//Services
+// SERVICES
 import { ProjectService } from './services/project.service';
 import { UserSessionService } from './services/user-session.service';
 
-//COMPONENTS
+// COMPONENTS
 import { AddProjectComponent } from './add-project/add-project.component';
 import { ViewProjectComponent } from './view-project/view-project.component';
-
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -60,14 +60,6 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
-
-
-
-
-
-
-
-
 @NgModule({
   exports: [
     CdkTableModule,
@@ -103,17 +95,9 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ],
-  
-  
-  
-  
-  
- 
-  
+  ]
 })
 export class DemoMaterialModule {}
-
 
 @NgModule({
   declarations: [
@@ -126,7 +110,8 @@ export class DemoMaterialModule {}
     ProfileComponent,
     RegisterComponent,
     DisplayProjectComponent,
-    ProjectBoxComponent
+    ProjectBoxComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

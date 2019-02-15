@@ -1,77 +1,96 @@
 <app-toolbar></app-toolbar>
 
-<mat-grid-list cols="12" rowHeight="200px">
-  <mat-grid-tile [colspan]="3" [rowspan]="3">
+<mat-grid-list cols="6" rowHeight="200px">
+  <mat-grid-tile [colspan]="2" [rowspan]="3">
     <app-add-project (projectAdded)="onNewProjectAddedRefreshList($event)"></app-add-project>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="9" [rowspan]="3">
+
+  <mat-grid-tile [colspan]="4" [rowspan]="3">
     <mat-card>
       <mat-card-title>All Projects</mat-card-title>
       <mat-table #table [dataSource]="dataSource">
 
         <!-- dateCreated -->
-        <ng-container matColumnDef="dateCreated">
+        <!-- <ng-container matColumnDef="dateCreated">
           <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.dateCreated | date:'medium' }} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- dateModified -->
-        <ng-container matColumnDef="dateModified">
+        <!-- <ng-container matColumnDef="dateModified">
             <mat-header-cell *matHeaderCellDef> Date Modified </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.dateModified | date:'medium'}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- projectName -->
-        <ng-container matColumnDef="projectName">
+        <ng-container matColumnDef="projectNameDescription">
           <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.projectName}} </mat-cell>
+          <mat-cell *matCellDef="let element">
+            <span class="projectName">{{element.projectName}}</span>
+            <br />
+            <span class="projectDescription">{{element.projectDescription}}</span>
+          </mat-cell>
         </ng-container>
 
         <!-- projectDescription -->
-        <ng-container matColumnDef="projectDescription">
+        <!-- <ng-container matColumnDef="projectDescription">
           <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- projectMembers -->
-        <ng-container matColumnDef="projectMembers">
+        <!-- <ng-container matColumnDef="projectMembers">
             <mat-header-cell *matHeaderCellDef> Project Members </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.projectMembers}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- techStack -->
-        <ng-container matColumnDef="techStack">
+        <!-- <ng-container matColumnDef="techStack">
             <mat-header-cell *matHeaderCellDef> Tech Stack </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.techStack}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- repositoryLink -->
-        <ng-container matColumnDef="repositoryLink">
+        <!-- <ng-container matColumnDef="repositoryLink">
             <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.repositoryLink}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- projectDemo -->
-        <ng-container matColumnDef="projectDemo">
+        <!-- <ng-container matColumnDef="projectDemo">
             <mat-header-cell *matHeaderCellDef> Demo </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.projectDemo}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- labels -->
-        <ng-container matColumnDef="labels">
+        <!-- <ng-container matColumnDef="labels">
             <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- delete -->
         <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <button mat-raised-button color="warn" (click)="deleteProject(element)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-cell>
         </ng-container>
+
+    <!-- edit -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <button mat-raised-button
+                  color="primary"
+                  [routerLink] = "['/editProject']"
+                  [queryParams] = "{id: element._id}">
+              <mat-icon>edit</mat-icon>
+          </button>
+      </mat-cell>
+  </ng-container>
+
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

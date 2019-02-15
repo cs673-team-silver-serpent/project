@@ -30,7 +30,7 @@ getUserBySession = (request, response) => {
             if (error) {
                 response.send(error);
             } else if (answer) {
-                // console.log("Anser from Session find: ", answer);
+                // console.log("Answer from Session find: ", answer);
                 if (answer.length == 0) {
                     response.json({ success: false});
                 } else {
@@ -42,7 +42,7 @@ getUserBySession = (request, response) => {
                                 response.send(error);
                             } else if (user) {
                                 // console.log("User: ", user)
-                                delete(user[0].password);
+                                delete(user[0].password); // BUG: Json payload seems to be delivering password. Fix this.
                                 response.json(user[0]);
                             } else {
                                 response.json({ success: false});

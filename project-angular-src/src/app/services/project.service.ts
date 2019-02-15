@@ -16,59 +16,55 @@ const httpOptions = {
 @Injectable()
 export class ProjectService {
 
-  //baseURL = 'https://67.207.83.83:3000';
-  baseURL = 'https://localhost:3000';
+  // baseURL = 'https://67.207.83.83:3000';
+  baseURL: String = 'https://localhost:3000';
+  sharedId: String = '000';
 
   constructor(private http: HttpClient,
               private userSessionService: UserSessionService) {}
-               
+
   getAllProjects(): Observable<Project[]> {
     const url = `${this.baseURL}/projects`;
     return this.http.post<Project[]>(url, undefined);
   }
 
-  deleteProject(project: Project): Observable<any>{
-    const url = `${this.baseURL}/project/delete`
+  deleteProject(project: Project): Observable<any> {
+    const url = `${this.baseURL}/project/delete`;
     return this.http.post(url, project);
   }
-  
 
-  //----NEW---------------------------------------------
- public getProjectName(projectName: String): Observable<Project[]>{
-  var projectObj={
+ public getProjectName(projectName: String): Observable<Project[]> {
+  const projectObj = {
     projectName : projectName
-  } 
+  };
     // console.log(projectName);
 
-    const url = `${this.baseURL}/project/projectName`
-    return this.http.post<Project[]>(url,projectObj);  //pass the data to controller
-    
+    const url = `${this.baseURL}/project/projectName`;
+    return this.http.post<Project[]>(url, projectObj);  // pass the data to controller
   }
-sharedId:String="000";
 
 
-  public getProjectById(projectId: String): Observable<Project>{
-    console.log("We are in service | Id: ",projectId);
-    this.sharedId=projectId;
-    var id={
+  public getProjectById(projectId: String): Observable<Project> {
+    // console.log("We are in service | Id: ", projectId);
+    this.sharedId = projectId;
+    const id = {
       id : projectId
-    } 
-      const url = `${this.baseURL}/project/id`
-      return this.http.post<Project>(url,id);  //pass the data to controller    
+    };
+      const url = `${this.baseURL}/project/id`;
+      return this.http.post<Project>(url, id);  // pass the data to controller
     }
-//------------FINISH NEW-----------------------------------------
 
   addProject(project: Project): Observable<NewProject> {
-    const url = `${this.baseURL}/project`
+    const url = `${this.baseURL}/project`;
     return this.http.post<NewProject>(url, project);
   }
 
   getProjectsByOwner() {
-    var body = {
+    const body = {
       owner: this.userSessionService.user._id
-    }
+    };
     // console.log(body);
-    const url = `${this.baseURL}/project/projectsByOwner`
+    const url = `${this.baseURL}/project/projectsByOwner`;
     return this.http.post<Project[]>(url, body);
   }
 

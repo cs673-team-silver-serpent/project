@@ -21,9 +21,9 @@ export class ToolbarComponent implements OnInit {
       this.viewLogin=false;
       this.user = this.userSessionService.user;
     }
-    
+
     else{
-      
+
      this.user = {
         _id: '',
       firstName: 'Guest',
@@ -35,7 +35,7 @@ export class ToolbarComponent implements OnInit {
         }
     }
   }
-  
+
 
   onLogout() {
     this.userSessionService.logOutUser();

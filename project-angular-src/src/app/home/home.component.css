@@ -1,3 +1,9 @@
+h1 {
+  margin: 10px 0px 0px 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
 mat-grid-tile {
     background-color: lightblue;
 }
