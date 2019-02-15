@@ -1,3 +1,64 @@
-<p>
-  edit-project works!
-</p>
+<app-toolbar></app-toolbar>
+<div style="height: 600px">
+    <mat-card>
+        <mat-card-title>Edit Project</mat-card-title>
+        <form
+            *ngIf="userIsAuthorized"
+            #newProjectForm>
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="Project Name"
+                    [(ngModel)]="editProject.projectName"
+                    name="projectName"
+                    required>
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="Description"
+                    [(ngModel)]="editProject.projectDescription"
+                    name="projectDescription"
+                    required>
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="Repository Link"
+                    [(ngModel)]="editProject.repositoryLink"
+                    name="repositoryLink">
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="Demo"
+                    [(ngModel)]="editProject.projectDemo"
+                    name="projectDemo">
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="Tech Stack"
+                    [(ngModel)]="editProject.techStack"
+                    name="techStack">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input
+                    matInput
+                    placeholder="Labels"
+                    [(ngModel)]="editProject.labels"
+                    name="labels">
+            </mat-form-field>
+
+            <!--<button
+                [disabled]="!formIsValid"
+                mat-raised-button
+                color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>-->
+        </form>
+
+        <p *ngIf="!userIsAuthorized">Please Login to edit a project!</p>
+    </mat-card>
+</div>

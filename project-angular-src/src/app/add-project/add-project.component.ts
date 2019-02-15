@@ -17,14 +17,14 @@ export class AddProjectComponent implements OnInit {
   newProject: NewProject;
   formIsValid: Boolean = false;
   userIsAuthorized: Boolean = false;
-  
+
   constructor(private projectService: ProjectService,
               private userSessionService: UserSessionService,
               private router: Router) { }
-  
+
   ngOnInit() {
     this.createEmptyProject();
-    if ( this.userSessionService.user.firstName != 'Guest') {
+    if ( this.userSessionService.user.firstName !== 'Guest') {
       this.userIsAuthorized = true;
     }
   }

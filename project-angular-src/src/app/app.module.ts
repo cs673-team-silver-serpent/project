@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 
-
 // SERVICES
 import { ProjectService } from './services/project.service';
 import { UserSessionService } from './services/user-session.service';
