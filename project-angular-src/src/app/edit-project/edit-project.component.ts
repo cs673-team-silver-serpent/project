@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 // import project services
 import { UserSessionService } from '../services/user-session.service';
 import { ProjectService } from '../services/project.service';
@@ -19,7 +20,8 @@ export class EditProjectComponent implements OnInit {
 
   constructor(
     private userSessionService: UserSessionService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute
     ) {
   }
 
@@ -27,6 +29,9 @@ export class EditProjectComponent implements OnInit {
     if (this.userSessionService.user.firstName !== 'Guest') {
       this.userIsAuthorized = true;
     }
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+   });
 
   }
 
