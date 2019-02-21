@@ -12,9 +12,9 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class HomeComponent implements OnInit {
   projects: Project[];
-  displayedColumns: String[] = ['dateCreated', 'projectName', 'projectDescription', 'techStack', 'repositoryLink', 'projectDemo', 'labels'];
+  displayedColumns: String[] = ['projectName', 'projectDescription', 'techStack', 'repositoryLink', 'projectDemo', 'labels'];
   dataSource = new MatTableDataSource<Project>(this.projects);
-  
+
 
   constructor(private projectService: ProjectService,
               private userSessionService: UserSessionService) { }

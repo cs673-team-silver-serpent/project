@@ -5,18 +5,6 @@
 <div style="height: 600px">
     <mat-table #table [dataSource]="dataSource">
 
-        <!-- dateCreated -->
-        <ng-container matColumnDef="dateCreated">
-            <mat-header-cell *matHeaderCellDef> Date Created </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.dateCreated | date:'medium' }} </mat-cell>
-            </ng-container>
-
-            <!-- dateModified -->
-            <ng-container matColumnDef="dateModified">
-                <mat-header-cell *matHeaderCellDef> Date Modified </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.dateModified | date:'medium'}} </mat-cell>
-            </ng-container>
-
             <!-- projectName -->
             <ng-container matColumnDef="projectName">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -29,12 +17,6 @@
             <mat-cell *matCellDef="let element"> {{element.projectDescription}} </mat-cell>
             </ng-container>
 
-            <!-- projectMembers -->
-            <ng-container matColumnDef="projectMembers">
-                <mat-header-cell *matHeaderCellDef> Project Members </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.projectMembers}} </mat-cell>
-            </ng-container>
-
             <!-- techStack -->
             <ng-container matColumnDef="techStack">
                 <mat-header-cell *matHeaderCellDef> Tech Stack </mat-header-cell>
@@ -44,13 +26,21 @@
             <!-- repositoryLink -->
             <ng-container matColumnDef="repositoryLink">
                 <mat-header-cell *matHeaderCellDef> Repository </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.repositoryLink}} </mat-cell>
+                <mat-cell *matCellDef="let element">
+                  <a href="{{element.repositoryLink}}">
+                      Link to {{element.projectName}} Repository
+                  </a>
+                </mat-cell>
             </ng-container>
 
             <!-- projectDemo -->
             <ng-container matColumnDef="projectDemo">
                 <mat-header-cell *matHeaderCellDef> Demo </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.projectDemo}} </mat-cell>
+                <mat-cell *matCellDef="let element">
+                  <a href="{{element.projectDemo}}">
+                    Link to {{element.projectName}} Website
+                  </a>
+                </mat-cell>
             </ng-container>
 
             <!-- labels -->
@@ -58,8 +48,6 @@
                 <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
             </ng-container>
-
-
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
