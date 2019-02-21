@@ -20,9 +20,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'displayProject', component: DisplayProjectComponent},
   { path: 'viewProject', component: ViewProjectComponent},
-  {path:'projectBox', component:ProjectBoxComponent},
+  {path: 'projectBox', component: ProjectBoxComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-]
+];
 
 @NgModule({
   exports: [ RouterModule ],

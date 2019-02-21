@@ -68,10 +68,19 @@ export class ProjectService {
     return this.http.post<Project[]>(url, body);
   }
 
-  // updateProject(projectId: String): Observable<Project> {
-  //   const body = {
-  //     id = projectId;
-  //   }
-  // }
+  updateProject(project: Project): Observable<Project> {
+    const body = {
+      'id': project._id,
+      'projectName': project.projectName,
+      'projectDescription': project.projectDescription,
+      'repositoryLink': project.repositoryLink,
+      'techStack': project.techStack,
+      'projectDemo': project.projectDemo,
+      'labels': project.labels
+    };
+    const url = `${this.baseURL}/project/updateProject`;
+    console.log('url: ' + url);
+    return this.http.post<Project>(url, body);
+  }
 
 }

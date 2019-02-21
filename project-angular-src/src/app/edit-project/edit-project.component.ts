@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 // import project services
 import { UserSessionService } from '../services/user-session.service';
 import { ProjectService } from '../services/project.service';
@@ -24,7 +24,8 @@ export class EditProjectComponent implements OnInit {
   constructor(
     private userSessionService: UserSessionService,
     private projectService: ProjectService,
-    private route: ActivatedRoute,
+    private activeRoute: ActivatedRoute,
+    private route: Router
     ) {
   }
 
@@ -34,7 +35,7 @@ export class EditProjectComponent implements OnInit {
       this.userIsAuthorized = true;
     }
 
-    this.route.queryParams.subscribe(
+    this.activeRoute.queryParams.subscribe(
       (params) => {
         this.projectId = params['id'];
       });
@@ -43,15 +44,23 @@ export class EditProjectComponent implements OnInit {
       (response) => {
         this.myProject = response[0];
         this.myProject._id = this.projectId;
-        console.log('projectName: ', this.myProject);
       },
       (error) => console.log(error)
     );
 
   }
 
-  // updateProject() {
-  //   this.projectService.
-  // }
+   updateProject() {
+    this.projectService.updateProject(this.myProject).subscribe (
+      (response) => {
+        this.myProject = response;
+        alert('Your project has been updated.');
+        this.route.navigate(['viewProject']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+   }
 
 }

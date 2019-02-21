@@ -134,78 +134,59 @@ updateProject = (request, response) => {
   let id = request.body.id;
   let projectName = request.body.projectName;
   let projectDescription = request.body.projectDescription;
-  let projectMembers = request.body.projectMembers;
   let repositoryLink = request.body.repositoryLink;
   let techStack = request.body.techStack;
   let projectDemo = request.body.projectDemo;
   let labels = request.body.labels;
-  let updatedProjectName, updatedProjectDescription, updatedProjectMembers = null;
-  let updatedRepositoryLink, updatedTechStack, updatedProjectDemo, updatedLabels = null;
 
   // update with a query by id
   let queryById = {_id: id};
+  // return the updated object
+  let options = {new: true};
+  // instantiate updated project object
+  let updatedProject = {};
   
   // update only if fields aren't empty
   // TODO implement logic to compare if non-null field has changed or not
   if ( projectName !== null) {
-    this.updatedProjectName = updateProjectInfo(queryById, {'projectName': projectName}, 'name');
+    updatedProject["projectName"] = projectName;
   }
 
   if (projectDescription !== null) {
-    updateProjectInfo(queryById, {'projectDescription': projectDescription}, 'description');
-  }
-
-  if (projectMembers !== null) {
-    this.updatedProjectMembers = updateProjectInfo(queryById, {'projectMembers': projectMembers}, 'members');
+    updatedProject["projectDescription"] = projectDescription;
   }
 
   if (repositoryLink !== null) {
-    updateProjectInfo(queryById, {'repositoryLink': repositoryLink}, 'repository url');
+    updatedProject["repositoryLink"] = repositoryLink;
   }
 
   if (techStack !== null) {
-    updateProjectInfo(queryById, {'techStack': techStack}, 'tech stack');
+    updatedProject["techStack"] = techStack;
   }
 
   if (projectDemo !== null) {
-    updateProjectInfo(queryById, {'projectDemo': projectDemo}, 'demo site url');
+    updatedProject["projectDemo"] = projectDemo;
   }
 
   if (labels !== null) {
-    updateProjectInfo(queryById, {'labels': labels}, 'labels');
+    updatedProject["labels"] = labels;
   }
 
-  let updatedProject = {
-    projectName: updatedProjectName,
-    projectMembers: updatedProjectMembers,
-    // repositoryLink: request.body.repositoryLink,
-    // techStack: request.body.techStack,
-    // projectDemo: request.body.projectDemo,
-    // labels: request.body.labels
-  };
+  // update date modified
+  if ( Object.keys(updatedProject).length > 0 ) {
+    updatedProject["dateModified"] = new Date();
+  }
 
-  let options = {new: true};
-
-  Project.update(queryById, updatedProject, options, (error, updatedProject) => {
+  Project.update(queryById, updatedProject, options, (error, revisedProject) => {
     if (error) {
       response.json({success: false, message: `Failed to update the project. Error: ${error}`});
-    } else if (updatedProject.n == 1) {
+    } else if (revisedProject.n == 1) {
       response.json({success: true, message: `Project updated.`});
     } else {
-      response.json({success: false});
+      response.json(revisedProject);
     }
   });
 
-}
-
-updateProjectInfo = (query, update, label) => {
-  Project.update(query, update, {new: true}, (error, updatedValue) => {
-    if (error) {
-      console.log(`Failed to update project ${label}. Error: ${error}`);
-    } else {
-      return 'yadda yadda yadda';
-    } 
-  });
 }
 
 deleteProjectById = (request,response) => {
