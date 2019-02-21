@@ -69,6 +69,7 @@ app.route("/project/id").post(projects.getProjectById);
 app.route('/project/projectsByOwner').post(projects.getProjectsByOwner);
 // delete routes 
 app.route('/project/delete').post(projects.deleteProjectById);
+app.route('/project/updateProject').post(projects.updateProject);
 
 ///////////////
 // User Routes

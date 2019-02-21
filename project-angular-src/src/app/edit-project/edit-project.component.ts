@@ -7,6 +7,7 @@ import { ProjectService } from '../services/project.service';
 import { Project } from '../models/Project';
 import { User } from '../models/User';
 import { MatTableDataSource } from '@angular/material';
+import { projectionDef } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-edit-project',
@@ -14,42 +15,43 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./edit-project.component.css']
 })
 export class EditProjectComponent implements OnInit {
-  @Output() projectToEdit: EventEmitter<Project> = new EventEmitter<Project>();
   myProject: Project;
   userIsAuthorized: Boolean = false;
   formIsValid: Boolean = false;
   projectId: String = '';
 
+
   constructor(
     private userSessionService: UserSessionService,
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
     ) {
   }
 
   ngOnInit() {
+
     if (this.userSessionService.user.firstName !== 'Guest') {
       this.userIsAuthorized = true;
     }
+
     this.route.queryParams.subscribe(
       (params) => {
-      this.projectId = params['id'];
-      console.log('the project id is', params['id']);
+        this.projectId = params['id'];
       });
 
     this.projectService.getProjectById(this.projectId).subscribe(
       (response) => {
         this.myProject = response[0];
-        console.log('projectName: ', this.myProject.projectName);
+        this.myProject._id = this.projectId;
+        console.log('projectName: ', this.myProject);
       },
       (error) => console.log(error)
     );
 
   }
 
-  updateProject() {
-    console.log('this is the projectId: ');
-  }
-
+  // updateProject() {
+  //   this.projectService.
+  // }
 
 }

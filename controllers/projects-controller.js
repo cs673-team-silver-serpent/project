@@ -86,7 +86,7 @@ getProjectByProjectDescription = (request, response) => {
 
 //----------NEW------return project Ids-----------
 getProjectId=(request, response)=>{
-  var projectNameS = request.body.projectName;
+  var projectName = request.body.projectName;
   let searchName = new RegExp('.*' + projectName + '.*','i');
   Project.find({projectName: projectNameS},{_id, projectName}).exec((error,project)=>{
     if(error){
@@ -129,6 +129,85 @@ addProject = (request, response) => {
   // return unauth
 }
 
+updateProject = (request, response) => {
+  // get form data
+  let id = request.body.id;
+  let projectName = request.body.projectName;
+  let projectDescription = request.body.projectDescription;
+  let projectMembers = request.body.projectMembers;
+  let repositoryLink = request.body.repositoryLink;
+  let techStack = request.body.techStack;
+  let projectDemo = request.body.projectDemo;
+  let labels = request.body.labels;
+  let updatedProjectName, updatedProjectDescription, updatedProjectMembers = null;
+  let updatedRepositoryLink, updatedTechStack, updatedProjectDemo, updatedLabels = null;
+
+  // update with a query by id
+  let queryById = {_id: id};
+  
+  // update only if fields aren't empty
+  // TODO implement logic to compare if non-null field has changed or not
+  if ( projectName !== null) {
+    this.updatedProjectName = updateProjectInfo(queryById, {'projectName': projectName}, 'name');
+  }
+
+  if (projectDescription !== null) {
+    updateProjectInfo(queryById, {'projectDescription': projectDescription}, 'description');
+  }
+
+  if (projectMembers !== null) {
+    this.updatedProjectMembers = updateProjectInfo(queryById, {'projectMembers': projectMembers}, 'members');
+  }
+
+  if (repositoryLink !== null) {
+    updateProjectInfo(queryById, {'repositoryLink': repositoryLink}, 'repository url');
+  }
+
+  if (techStack !== null) {
+    updateProjectInfo(queryById, {'techStack': techStack}, 'tech stack');
+  }
+
+  if (projectDemo !== null) {
+    updateProjectInfo(queryById, {'projectDemo': projectDemo}, 'demo site url');
+  }
+
+  if (labels !== null) {
+    updateProjectInfo(queryById, {'labels': labels}, 'labels');
+  }
+
+  let updatedProject = {
+    projectName: updatedProjectName,
+    projectMembers: updatedProjectMembers,
+    // repositoryLink: request.body.repositoryLink,
+    // techStack: request.body.techStack,
+    // projectDemo: request.body.projectDemo,
+    // labels: request.body.labels
+  };
+
+  let options = {new: true};
+
+  Project.update(queryById, updatedProject, options, (error, updatedProject) => {
+    if (error) {
+      response.json({success: false, message: `Failed to update the project. Error: ${error}`});
+    } else if (updatedProject.n == 1) {
+      response.json({success: true, message: `Project updated.`});
+    } else {
+      response.json({success: false});
+    }
+  });
+
+}
+
+updateProjectInfo = (query, update, label) => {
+  Project.update(query, update, {new: true}, (error, updatedValue) => {
+    if (error) {
+      console.log(`Failed to update project ${label}. Error: ${error}`);
+    } else {
+      return 'yadda yadda yadda';
+    } 
+  });
+}
+
 deleteProjectById = (request,response) => {
   let id = request.body._id;
   let query = {_id: id};
@@ -150,5 +229,6 @@ module.exports = {
   getProjectById,
   getProjectByProjectName,
   getProjectByProjectDescription,
-  getProjectsByOwner
+  getProjectsByOwner,
+  updateProject
 };
