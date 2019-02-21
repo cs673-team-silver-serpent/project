@@ -6,6 +6,7 @@ import { ProjectService } from '../services/project.service';
 // import project models
 import { Project } from '../models/Project';
 import { User } from '../models/User';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-edit-project',
@@ -14,9 +15,10 @@ import { User } from '../models/User';
 })
 export class EditProjectComponent implements OnInit {
   @Output() projectToEdit: EventEmitter<Project> = new EventEmitter<Project>();
-  editProject: Project;
+  myProject: Project;
   userIsAuthorized: Boolean = false;
   formIsValid: Boolean = false;
+  projectId: String = '';
 
   constructor(
     private userSessionService: UserSessionService,
@@ -29,10 +31,25 @@ export class EditProjectComponent implements OnInit {
     if (this.userSessionService.user.firstName !== 'Guest') {
       this.userIsAuthorized = true;
     }
-    this.route.queryParams.subscribe(params => {
-      console.log(params);
-   });
+    this.route.queryParams.subscribe(
+      (params) => {
+      this.projectId = params['id'];
+      console.log('the project id is', params['id']);
+      });
+
+    this.projectService.getProjectById(this.projectId).subscribe(
+      (response) => {
+        this.myProject = response[0];
+        console.log('projectName: ', this.myProject.projectName);
+      },
+      (error) => console.log(error)
+    );
 
   }
+
+  updateProject() {
+    console.log('this is the projectId: ');
+  }
+
 
 }
