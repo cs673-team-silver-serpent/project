@@ -3,9 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/app-routing.module';
-import { EditProjectComponent } from './edit-project/edit-project.component';
+import { CdkTableModule } from '@angular/cdk/table';
 
 // SERVICES
 import { ProjectService } from './services/project.service';
@@ -19,10 +17,11 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
-import { CdkTableModule } from '@angular/cdk/table';
 import { DisplayProjectComponent } from './display-project/display-project.component';
 import { ProjectBoxComponent } from './project-box/project-box.component';
-
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 
 import {
   MatAutocompleteModule,

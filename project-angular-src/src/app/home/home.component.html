@@ -45,9 +45,17 @@
 
             <!-- labels -->
             <ng-container matColumnDef="labels">
-                <mat-header-cell *matHeaderCellDef> Labels </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.labels}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef>Labels</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.labels}}</mat-cell>
             </ng-container>
+
+               <!-- favorite -->
+               <ng-container matColumnDef="favorite">
+                  <mat-header-cell *matHeaderCellDef>Favorite</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <mat-icon>favorite</mat-icon>
+                  </mat-cell>
+              </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

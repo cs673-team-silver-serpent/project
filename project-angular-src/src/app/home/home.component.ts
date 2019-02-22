@@ -12,22 +12,36 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class HomeComponent implements OnInit {
   projects: Project[];
-  displayedColumns: String[] = ['projectName', 'projectDescription', 'techStack', 'repositoryLink', 'projectDemo', 'labels'];
+  displayedColumns: String[] = ['projectName', 'projectDescription', 'techStack', 'repositoryLink', 'projectDemo', 'labels', 'favorite'];
   dataSource = new MatTableDataSource<Project>(this.projects);
-
+  user: User;
 
   constructor(private projectService: ProjectService,
               private userSessionService: UserSessionService) { }
 
   ngOnInit() {
-    this.projectService.getProjectsByOwner().subscribe(
-      (response) => {
-        // console.log("----------------------", response);
-        this.projects = response;
-        this.dataSource = new MatTableDataSource<Project>(this.projects);
-      },
-      (error) => {
-        console.log(error);
-    });
+
+    if (this.userSessionService.user.firstName === 'Guest') {
+      this.projectService.getAllProjects().subscribe(
+        (response) => {
+          this.projects = response;
+          this.dataSource = new MatTableDataSource<Project>(this.projects);
+          this.displayedColumns.pop(); // pop off the favorites column for guests
+        },
+        (error) => {
+          console.log(error);
+      });
+    } else {
+      const owner = this.userSessionService.user._id;
+      // new controller here getProjectsForUser
+      this.projectService.getProjectsByOwner().subscribe(
+        (response) => {
+          this.projects = response;
+          this.dataSource = new MatTableDataSource<Project>(this.projects);
+        },
+        (error) => {
+          console.log(error);
+      });
+    }
   }
 }

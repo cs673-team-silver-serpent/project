@@ -28,11 +28,11 @@ export class ViewProjectComponent implements OnInit {
              private userSessionService: UserSessionService,
              private router: Router) { }
   user: User;
-  enableDelete=false;  //toggle the delete button
+  enableDelete: Boolean = false;  //toggle the delete button
 
   ngOnInit() {
-    if (this.userSessionService.user.firstName == 'Guest') {
-      this.displayedColumns.splice(2,2);
+    if (this.userSessionService.user.firstName === 'Guest') {
+      this.displayedColumns.splice(2,2); // splice out the delete and edit columns for guests
     }
 
     this.projectService.getAllProjects().subscribe(
