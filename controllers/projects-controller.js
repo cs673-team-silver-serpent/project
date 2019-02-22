@@ -1,5 +1,6 @@
 let express = require('express');
 let Project = require('../models/projects-model');
+let User = require('../models/users-model');
 var ObjectId = require('mongodb').ObjectId;
 
 getAllProjects = (request, response) => {
@@ -36,7 +37,7 @@ getProjectsByOwner = ( request, response) => {
   // Check to make sure the string is a proper object id
   if (owner.length != 24) {
     response.json([]);
-    return
+    return;
   }
 
   Project.find({owner: owner})
@@ -49,6 +50,28 @@ getProjectsByOwner = ( request, response) => {
         response.json({success: false });
       }
   });
+}
+
+getProjectsForUser = (request, response) => {
+  const userId1 = request.body.userId;
+
+  // if not a valid user return empty json array
+  if (userId.length != 24) {
+    return response.json([]);
+  }
+  Project.find( 
+            { $or: [ {'owner': userId}, { projectMembers: { "$in" : [userId]}} ]}
+          ).exec( (error, projects) => {
+        if (error) {
+          response.send(error);
+        } else if (projects) {
+          response.json(projects);
+        } else {
+          response.json({'success': false});
+        }
+      }
+    );
+
 }
 
 // Temporary functions for Iteration 2 Presentation
@@ -84,8 +107,7 @@ getProjectByProjectDescription = (request, response) => {
   });
 }
 
-//----------NEW------return project Ids-----------
-getProjectId=(request, response)=>{
+getProjectId = (request, response)=>{
   var projectName = request.body.projectName;
   let searchName = new RegExp('.*' + projectName + '.*','i');
   Project.find({projectName: projectNameS},{_id, projectName}).exec((error,project)=>{
@@ -101,7 +123,6 @@ getProjectId=(request, response)=>{
   })
 
 }
-//------------------------------
 
 addProject = (request, response) => {
   let dateCreated = new Date(Date.now());
@@ -211,5 +232,6 @@ module.exports = {
   getProjectByProjectName,
   getProjectByProjectDescription,
   getProjectsByOwner,
-  updateProject
+  getProjectsForUser,
+  updateProject,
 };
