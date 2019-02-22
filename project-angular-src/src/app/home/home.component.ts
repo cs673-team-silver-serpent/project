@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     } else {
       const owner = this.userSessionService.user._id;
       // new controller here getProjectsForUser
-      this.projectService.getProjectsByOwner().subscribe(
+      this.projectService.getProjectsByUser().subscribe(
         (response) => {
           this.projects = response;
           this.dataSource = new MatTableDataSource<Project>(this.projects);

@@ -3,7 +3,6 @@
   "version": "1.0.0-beta",
   "description": "A portal app to manage software development projects",
   "main": "app.js",
-  "start": "./project-angular-src/ng serve && node app",
   "dependencies": {
     "@angular/cdk": "^5.2.5",
     "@angular/common": "^5.2.11",

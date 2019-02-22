@@ -30,12 +30,6 @@ const UsersSchema = mongo.Schema({
       ref: 'Project'
     }
   ],
-  favorites: [ //********************* */
-    {
-      type: ObjectId,
-      ref: 'Project'
-    }
-  ],
   role: {
     type: String,
     enum: ["admin", "user", "visitor"]

@@ -66,11 +66,11 @@ export class ProjectService {
     return this.http.post<Project[]>(url, body);
   }
 
-  getProjectsForUser() {
+  getProjectsByUser() {
     const body = {
       userId: this.userSessionService.user._id
     };
-    const url = `${this.baseURL}/project/projectsForUser`;
+    const url = `${this.baseURL}/project/projectsByUser`;
     return this.http.post<Project[]>(url, body);
   }
 

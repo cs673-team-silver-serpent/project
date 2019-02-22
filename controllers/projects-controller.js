@@ -52,16 +52,19 @@ getProjectsByOwner = ( request, response) => {
   });
 }
 
-getProjectsForUser = (request, response) => {
-  const userId1 = request.body.userId;
+getProjectsByUser = (request, response) => {
+  const userId = request.body.userId;
 
   // if not a valid user return empty json array
   if (userId.length != 24) {
     return response.json([]);
   }
   Project.find( 
-            { $or: [ {'owner': userId}, { projectMembers: { "$in" : [userId]}} ]}
-          ).exec( (error, projects) => {
+            { $or: [  { 'owner': userId}, 
+                      { 'projectMembers': { "$in": [userId]}},
+                      { 'favorites': {"$in": [userId]}} 
+                   ]
+            }).exec( (error, projects) => {
         if (error) {
           response.send(error);
         } else if (projects) {
@@ -90,7 +93,6 @@ getProjectByProjectName = (request, response) => {
     }
   });
 }
-
 
 getProjectByProjectDescription = (request, response) => {
   let projectDescription = request.body.projectDescription;
@@ -172,27 +174,21 @@ updateProject = (request, response) => {
   if ( projectName !== null) {
     updatedProject["projectName"] = projectName;
   }
-
   if (projectDescription !== null) {
     updatedProject["projectDescription"] = projectDescription;
   }
-
   if (repositoryLink !== null) {
     updatedProject["repositoryLink"] = repositoryLink;
   }
-
   if (techStack !== null) {
     updatedProject["techStack"] = techStack;
   }
-
   if (projectDemo !== null) {
     updatedProject["projectDemo"] = projectDemo;
   }
-
   if (labels !== null) {
     updatedProject["labels"] = labels;
   }
-
   // update date modified
   if ( Object.keys(updatedProject).length > 0 ) {
     updatedProject["dateModified"] = new Date();
@@ -232,6 +228,6 @@ module.exports = {
   getProjectByProjectName,
   getProjectByProjectDescription,
   getProjectsByOwner,
-  getProjectsForUser,
+  getProjectsByUser,
   updateProject,
 };

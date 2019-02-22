@@ -37,9 +37,15 @@ const ProjectsSchema = mongo.Schema({
     },
     projectMembers:  [  
         {
-            type:ObjectId, 
-            ref: 'User'
+          type:ObjectId, 
+          ref: 'User'
         }
+    ],
+    favorites: [
+      {
+        type: ObjectId,
+        ref: 'User'
+      }
     ],
     techStack: [String],
     repositoryLink: String,

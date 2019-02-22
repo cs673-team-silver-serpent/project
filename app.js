@@ -67,7 +67,7 @@ app.route('/project/projectName').post(projects.getProjectByProjectName);
 app.route('/project/projectDescription').post(projects.getProjectByProjectDescription);
 app.route("/project/id").post(projects.getProjectById);
 app.route('/project/projectsByOwner').post(projects.getProjectsByOwner);
-app.route('/project/projectsForUser').post(projects.getProjectsForUser);
+app.route('/project/projectsByUser').post(projects.getProjectsByUser);
 // delete routes 
 app.route('/project/delete').post(projects.deleteProjectById);
 app.route('/project/updateProject').post(projects.updateProject);
@@ -104,12 +104,12 @@ appFrontEnd.get('*', (req, res) => {
   });
 var frontEndServer = https.createServer(credentials, appFrontEnd);
 
-// start server
+// start backend server
 restServer.listen(restPort, () => {
    console.log(`Starting the server at port ${restPort}.`);
 });
 
-// start server
+// start front server
 frontEndServer.listen(frontEndPort, () => {
     console.log(`Starting the server at port ${frontEndPort}`);
  });
