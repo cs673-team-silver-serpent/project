@@ -22,9 +22,6 @@ getAllUsers = (request, response) => {
   });
 }
 
-
-
-
 getUserById = (request, response) => {
   let id = request.body.id;
   User.find( { _id: id}, { _id: 0, password: 0 } )
@@ -119,6 +116,41 @@ deleteUserByName = (request,response) => {
         response.json({ success: false }); 
       }
   });
+}
+
+updateUser = (request, response) => {
+  // get form data
+  let id = request.body.id;
+  let firstName = request.body.firstName;
+  let lastName = request.body.lastName;
+  let email = request.body.email;
+  let title = request.body.title;
+
+  // update with a query by id
+  let queryById = {'_id': id};
+  // return the updated object
+  let options = {'new': true};
+  // instantiate updated user object
+  let updatedUser = {};
+
+  if (firstName !== null) {
+    updatedUser['firstName'] = firstName;
+  }
+  if (lastName !== null) {
+    updatedUser['lastName'] = lastName;
+  }
+  if (email !== null) {
+    updatedUser['email'] = email;
+  }
+
+  User.update(queryById, updatedUser, options (error, revisedUser) => {
+    if (error) {
+      response.json({success: false, message: `Failed to update user. Error: ${error}`});
+    } else if (revisedUser.n == 1) {
+      response.json({success: true, message})
+    }
+  });
+
 }
 
 authenticateUser = (request, response) => {

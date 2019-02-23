@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   displayedColumns: String[] = ['projectName', 'projectDescription', 'techStack', 'repositoryLink', 'projectDemo', 'labels', 'favorite'];
   dataSource = new MatTableDataSource<Project>(this.projects);
   user: User;
+  isAFavorite: Boolean = false;
 
   constructor(private projectService: ProjectService,
               private userSessionService: UserSessionService) { }

@@ -22,6 +22,7 @@ import { ProjectBoxComponent } from './project-box/project-box.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 import {
   MatAutocompleteModule,
@@ -109,7 +110,8 @@ export class DemoMaterialModule {}
     RegisterComponent,
     DisplayProjectComponent,
     ProjectBoxComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NewProject, Project } from '../models/Project';
 import { UserSessionService } from './user-session.service';
-import {Subject} from 'rxjs/Subject'
+import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 
 
@@ -14,6 +14,7 @@ const httpOptions = {
 };
 
 @Injectable()
+
 export class ProjectService {
 
   baseURL: String = 'https://localhost:3000';
@@ -22,12 +23,12 @@ export class ProjectService {
   constructor(private http: HttpClient,
               private userSessionService: UserSessionService) {}
 
-  getAllProjects(): Observable<Project[]> {
+  public getAllProjects(): Observable<Project[]> {
     const url = `${this.baseURL}/projects`;
     return this.http.post<Project[]>(url, undefined);
   }
 
-  deleteProject(project: Project): Observable<any> {
+  public deleteProject(project: Project): Observable<any> {
     const url = `${this.baseURL}/project/delete`;
     return this.http.post(url, project);
   }
