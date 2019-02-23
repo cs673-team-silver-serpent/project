@@ -3,7 +3,8 @@
     <span class="project-portal-label">Project Portal</span>
     <button mat-button routerLink="/home">Home</button>
     <button mat-button routerLink="/manageProjects">Manage Projects</button>
-    <button mat-button routerLink="/displayProject">Show Project</button>
+    <button mat-button routerLink="/displayProject">Search Projects</button>
+    <button mat-button routerLink="/login">Login</button>
 
     <span class="example-spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
@@ -11,7 +12,8 @@
         <span >{{user.firstName}}</span>
         <mat-icon >account_box</mat-icon>
         <mat-menu #menu="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item routerLink="/profile">Profile</button>
+            <button *ngIf='user.firstName != "Guest"' mat-menu-item routerLink="/profile">Profile</button>
+            <button *ngIf='user.firstName === "Guest"' mat-menu-item routerLink="/register">Register</button>
             <button *ngIf="viewLogin" mat-menu-item routerLink="/login">Login</button>
             <!-- <button mat-menu-item (click)="onLogout()">Logout</button> -->
             <button *ngIf="viewLogout" mat-menu-item (click)="onLogout()">Logout</button>

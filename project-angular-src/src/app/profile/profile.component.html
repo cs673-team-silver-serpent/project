@@ -1,14 +1,13 @@
 <app-toolbar></app-toolbar>
 
-
 <mat-grid-list cols="4" rowHeight="280px" style="background-color:white">
-
-  <mat-grid-tile class="tile" [colspan]="1" [rowspan]="1">
+  <mat-grid-tile class="tile" [colspan]="2" [rowspan]="1">
     <mat-card class="card">
-      <h3> Welcome {{ user.firstName }} {{ user.lastName }}</h3>
-      <h4>{{ user.email }}</h4>
-      
-      <img mat-card-image src="/assets/images/avatar.jpg" style="width:100px;height:100px">
+      <h3> Welcome, {{user.firstName}}</h3>
+        <h4 *ngIf="user.email !== null"><em>Phone:</em> {{user.email}}</h4>
+        <h4 *ngIf="user.title !== null"><em>Nickname:</em> {{user.title}}</h4>
+
+      <img mat-card-image src="/assets/images/avatar.jpg" style="width:50px;height:50px">
 
     </mat-card>
   </mat-grid-tile>
@@ -22,7 +21,7 @@
     <mat-card class="card mat-elevation-z20" style="height:90%">
       <!-- <mat-list> -->
         <!-- <mat-list-item> -->
-            
+
           <!-- Complete USER DETAILS/PROFILE will be shown here with EDIT options.
           In case if guest this will contain random image -->
         <!-- </mat-list-item> -->

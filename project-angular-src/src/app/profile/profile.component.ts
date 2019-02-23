@@ -11,26 +11,24 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: User;
-  
+
 
     constructor(private userSessionService: UserSessionService,
                 private router: Router) { }
 
   ngOnInit() {
-    if(this.userSessionService.user){      //Checking if the user object is not empty
-    this.user = this.userSessionService.user;
-    }
-
-    else{
+    if (this.userSessionService.user) {      // Check that user object is not empty
+      this.user = this.userSessionService.user;
+    } else {
       this.user = {
-        _id: this.userSessionService.user._id,
-      firstName: 'Guest',
-      lastName: '',
-      title: '',
-      email: '',
-      password: '',
-      __v: 0,
-        }
+        '_id': this.userSessionService.user._id,
+        'firstName': 'Guest',
+        'lastName': null,
+        'title': null,
+        'email': null,
+        'password': null,
+        '__v': 0,
+      }
 
     }
   }
@@ -49,8 +47,8 @@ export class ProfileComponent implements OnInit {
 export class ProfileComponent implements OnInit {
 
   user = {
-    firstName: 'John', 
-    lastName: 'Doe', 
+    firstName: 'John',
+    lastName: 'Doe',
     email: 'john.doe@gmail.com',
     joinDate: new Date('2018-01-14')}
 
