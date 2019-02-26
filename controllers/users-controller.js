@@ -127,9 +127,9 @@ updateUser = (request, response) => {
   let title = request.body.title;
 
   // update with a query by id
-  let queryById = {'_id': id};
+  let queryById = {_id: id};
   // return the updated object
-  let options = {'new': true};
+  let options = {new: true};
   // instantiate updated user object
   let updatedUser = {};
 
@@ -142,15 +142,22 @@ updateUser = (request, response) => {
   if (email !== null) {
     updatedUser['email'] = email;
   }
+  if (title !== null) {
+    updatedUser['title'] = title;
+  }
 
-  User.update(queryById, updatedUser, options (error, revisedUser) => {
+  User.update(queryById, updatedUser, options, (error, revisedUser) => {
     if (error) {
+      console.log(error);
       response.json({success: false, message: `Failed to update user. Error: ${error}`});
     } else if (revisedUser.n == 1) {
-      response.json({success: true, message})
+      console.log(revisedUser);
+      response.json({success: true, message: `User updated.`});
+    } else {
+      console.log(revisedUser);
+      response.json(revisedUser);
     }
   });
-
 }
 
 authenticateUser = (request, response) => {
@@ -175,5 +182,5 @@ authenticateUser = (request, response) => {
   });
 }
 
-module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, deleteUserByName,
+module.exports = { addUser, updateUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, deleteUserByName,
   authenticateUser };

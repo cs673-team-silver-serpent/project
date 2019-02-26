@@ -8,6 +8,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 // SERVICES
 import { ProjectService } from './services/project.service';
 import { UserSessionService } from './services/user-session.service';
+import { UserService } from './services/user.service';
 
 // COMPONENTS
 import { AddProjectComponent } from './add-project/add-project.component';
@@ -127,7 +128,8 @@ export class DemoMaterialModule {}
   ],
   providers: [
     ProjectService,
-    UserSessionService
+    UserSessionService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

@@ -27,7 +27,7 @@ const frontEndPort = 3001;
 
 // connect to database
 mongo.connect(config.dbHost);
-// error logging
+// error loggingclea
 let db = mongo.connection;
 db.on('error', console.error.bind(console,'connection error:'));
 

@@ -38,7 +38,7 @@ export class UserService {
         'title': this.user.title,
         'password': this.user.password
       };
-      const url = `${this.baseURL}/user/updateUser`;
+      const url = `${this.baseURL}/user/update`;
       alert('updating the user\'s information!');
       return this.http.post<User>(url, body);
     }

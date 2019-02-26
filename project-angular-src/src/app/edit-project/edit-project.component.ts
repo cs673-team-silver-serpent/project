@@ -5,9 +5,6 @@ import { UserSessionService } from '../services/user-session.service';
 import { ProjectService } from '../services/project.service';
 // import project models
 import { Project } from '../models/Project';
-import { User } from '../models/User';
-import { MatTableDataSource } from '@angular/material';
-import { projectionDef } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-edit-project',
@@ -54,7 +51,6 @@ export class EditProjectComponent implements OnInit {
     this.projectService.updateProject(this.myProject).subscribe (
       (response) => {
         this.myProject = response;
-        alert('Your project has been updated.');
         this.route.navigate(['viewProject']);
       },
       (error) => {

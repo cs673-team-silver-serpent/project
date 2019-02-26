@@ -14,7 +14,15 @@ import { projectionDef } from '@angular/core/src/render3/instructions';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  user: User;
+  user: User = {
+    _id: null,
+    __v: null,
+    password: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    title: null
+  };
   userIsAuthorized: Boolean = false;
   formIsValid: Boolean = false;
   userId: String = '';
@@ -47,4 +55,18 @@ export class EditProfileComponent implements OnInit {
     );
 
   }
+
+  updateUser() {
+    this.userService.updateUser(this.userId).subscribe (
+      (response) => {
+        this.user = response;
+        // this.route.navigate(['viewProject']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+   }
+
+
 }

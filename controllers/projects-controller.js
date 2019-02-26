@@ -207,7 +207,6 @@ updateProject = (request, response) => {
       response.json(revisedProject);
     }
   });
-
 }
 
 deleteProjectById = (request,response) => {
