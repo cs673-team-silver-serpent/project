@@ -30,22 +30,27 @@ const ProjectsSchema = mongo.Schema({
         type: String,
         required: true
     },
-    owner: {
-        
+    owner: {     
         type: ObjectId, 
         ref: 'User',
         required: true
     },
     projectMembers:  [  
         {
-            type:ObjectId, 
-            ref: 'User'
+          type:ObjectId, 
+          ref: 'User'
         }
+    ],
+    favorites: [
+      {
+        type: ObjectId,
+        ref: 'User'
+      }
     ],
     techStack: [String],
     repositoryLink: String,
     projectDemo: String,
-    labels: [String],
+    labels: [String]
 });
 
 // convert schema to project model and export

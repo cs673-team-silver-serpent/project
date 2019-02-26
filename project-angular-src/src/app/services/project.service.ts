@@ -16,7 +16,6 @@ const httpOptions = {
 @Injectable()
 export class ProjectService {
 
-  // baseURL = 'https://67.207.83.83:3000';
   baseURL: String = 'https://localhost:3000';
   sharedId: String = '000';
 
@@ -63,8 +62,15 @@ export class ProjectService {
     const body = {
       owner: this.userSessionService.user._id
     };
-    // console.log(body);
     const url = `${this.baseURL}/project/projectsByOwner`;
+    return this.http.post<Project[]>(url, body);
+  }
+
+  getProjectsByUser() {
+    const body = {
+      userId: this.userSessionService.user._id
+    };
+    const url = `${this.baseURL}/project/projectsByUser`;
     return this.http.post<Project[]>(url, body);
   }
 

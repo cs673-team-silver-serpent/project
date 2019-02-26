@@ -3,7 +3,6 @@
   "version": "1.0.0-beta",
   "description": "A portal app to manage software development projects",
   "main": "app.js",
-  "start": "./project-angular-src/ng serve && node app",
   "dependencies": {
     "@angular/cdk": "^5.2.5",
     "@angular/common": "^5.2.11",
@@ -20,6 +19,7 @@
     "hash": "^0.2.1",
     "hash.js": "^1.1.7",
     "lodash": "^4.17.11",
+    "material-design-icons": "^3.0.1",
     "mongoose": "^5.4.13",
     "morgan": "^1.9.1",
     "random-word": "^2.0.0",
