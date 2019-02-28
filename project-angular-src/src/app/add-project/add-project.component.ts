@@ -1,9 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NewProject, Project } from '../models/Project';
 import { ProjectService } from '../services/project.service';
-import { ViewChild } from '@angular/core/src/metadata/di';
 import { UserSessionService } from '../services/user-session.service';
-import { User } from '../models/User';
 import { Router } from '@angular/router';
 
 

@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NewProject, Project } from '../models/Project';
 import { UserSessionService } from './user-session.service';
-import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 
 

@@ -5,8 +5,6 @@ import { UserSessionService } from '../services/user-session.service';
 import { UserService } from '../services/user.service';
 // import project models
 import { User } from '../models/User';
-import { MatTableDataSource } from '@angular/material';
-import { projectionDef } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,15 +12,8 @@ import { projectionDef } from '@angular/core/src/render3/instructions';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  user: User = {
-    _id: null,
-    __v: null,
-    password: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    title: null
-  };
+  @Output() userUpdated: EventEmitter<User> = new EventEmitter<User>();
+  myUser: User;
   userIsAuthorized: Boolean = false;
   formIsValid: Boolean = false;
   userId: String = '';
@@ -46,10 +37,10 @@ export class EditProfileComponent implements OnInit {
         this.userId = params['id'];
       });
 
-    this.userService.updateUser(this.userId).subscribe (
+    this.userService.getUserById(this.userId).subscribe (
       (response) => {
-        this.user = response[0];
-        this.user._id = this.userId;
+        this.myUser = response[0];
+        this.myUser._id = this.userId;
       },
       (error) => console.log(error)
     );
@@ -57,10 +48,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateUser() {
-    this.userService.updateUser(this.userId).subscribe (
+    this.userService.updateUser(this.myUser).subscribe (
       (response) => {
-        this.user = response;
-        // this.route.navigate(['viewProject']);
+        this.myUser = response;
+        this.userUpdated.emit(this.myUser);
+        this.route.navigate(['home']);
       },
       (error) => {
         console.log(error);

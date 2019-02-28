@@ -6,12 +6,13 @@
           <form
               *ngIf="userIsAuthorized"
               #newProjectForm
+              (ngSubmit)="updateUser()"
               >
               <mat-form-field>
                   <input
                       matInput
-                      placeholder="First 1Name"
-                      [(ngModel)]="user.firstName"
+                      placeholder="First Name"
+                      [(ngModel)]="myUser.firstName"
                       name="firsttName"
                       required>
               </mat-form-field>
@@ -19,7 +20,7 @@
                   <input
                       matInput
                       placeholder="Last Name"
-                      [(ngModel)]="user.lastName"
+                      [(ngModel)]="myUser.lastName"
                       name="lastName"
                       required>
               </mat-form-field>
@@ -27,14 +28,14 @@
                   <input
                       matInput
                       placeholder="Email"
-                      [(ngModel)]="user.email"
+                      [(ngModel)]="myUser.email"
                       name="email">
               </mat-form-field>
               <mat-form-field>
                   <input
                       matInput
                       placeholder="Title"
-                      [(ngModel)]="user.title"
+                      [(ngModel)]="myUser.title"
                       name="title">
               </mat-form-field>
               <br />

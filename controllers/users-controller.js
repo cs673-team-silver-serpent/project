@@ -134,17 +134,22 @@ updateUser = (request, response) => {
   let updatedUser = {};
 
   if (firstName !== null) {
-    updatedUser['firstName'] = firstName;
+    updatedUser["firstName"] = firstName;
   }
   if (lastName !== null) {
-    updatedUser['lastName'] = lastName;
+    updatedUser["lastName"] = lastName;
   }
   if (email !== null) {
-    updatedUser['email'] = email;
+    updatedUser["email"] = email;
   }
   if (title !== null) {
-    updatedUser['title'] = title;
+    updatedUser["title"] = title;
   }
+
+    // update date modified
+    if ( Object.keys(updatedUser).length > 0 ) {
+      updatedUser["dateModified"] = new Date();
+    }
 
   User.update(queryById, updatedUser, options, (error, revisedUser) => {
     if (error) {
