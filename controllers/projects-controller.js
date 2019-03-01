@@ -68,6 +68,10 @@ getProjectsByUser = (request, response) => {
         if (error) {
           response.send(error);
         } else if (projects) {
+          // iterate through projects
+          // examine favorites for this.userId
+          // if (this.userId) 
+
           response.json(projects);
         } else {
           response.json({'success': false});
@@ -203,7 +207,6 @@ updateProject = (request, response) => {
       response.json(revisedProject);
     }
   });
-
 }
 
 deleteProjectById = (request,response) => {

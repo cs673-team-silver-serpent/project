@@ -1,0 +1,55 @@
+<app-toolbar></app-toolbar>
+<mat-grid-list cols="1" rowHeight="500px">
+  <mat-grid-tile>
+      <mat-card>
+          <mat-card-title>Edit Profile</mat-card-title>
+          <form
+              *ngIf="userIsAuthorized"
+              #newProjectForm
+              (ngSubmit)="updateUser()"
+              >
+              <mat-form-field>
+                  <input
+                      matInput
+                      placeholder="First Name"
+                      [(ngModel)]="myUser.firstName"
+                      name="firsttName"
+                      required>
+              </mat-form-field>
+              <mat-form-field>
+                  <input
+                      matInput
+                      placeholder="Last Name"
+                      [(ngModel)]="myUser.lastName"
+                      name="lastName"
+                      required>
+              </mat-form-field>
+              <mat-form-field>
+                  <input
+                      matInput
+                      placeholder="Email"
+                      [(ngModel)]="myUser.email"
+                      name="email">
+              </mat-form-field>
+              <mat-form-field>
+                  <input
+                      matInput
+                      placeholder="Title"
+                      [(ngModel)]="myUser.title"
+                      name="title">
+              </mat-form-field>
+              <br />
+              <button
+                [disabled] = false
+                mat-raised-button
+                color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+          </form>
+
+          <p *ngIf="!userIsAuthorized">Please login to edit your profile.</p>
+      </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

@@ -27,7 +27,7 @@ const frontEndPort = 3001;
 
 // connect to database
 mongo.connect(config.dbHost);
-// error logging
+// error loggingclea
 let db = mongo.connection;
 db.on('error', console.error.bind(console,'connection error:'));
 
@@ -83,6 +83,7 @@ app.route("/user/id").post(users.getUserById);
 app.route("/user/firstName").post(users.getUserByFirstName);
 app.route("/user/lastName").post(users.getUserByLastName);
 app.route("/user/auth").post(users.authenticateUser);
+app.route("/user/update").post(users.updateUser);
 // delete routes
 app.route("/user/delete/").post(users.deleteUserByName);
 

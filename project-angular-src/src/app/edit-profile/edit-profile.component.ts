@@ -2,29 +2,29 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 // import project services
 import { UserSessionService } from '../services/user-session.service';
-import { ProjectService } from '../services/project.service';
+import { UserService } from '../services/user.service';
 // import project models
-import { Project } from '../models/Project';
+import { User } from '../models/User';
 
 @Component({
-  selector: 'app-edit-project',
-  templateUrl: './edit-project.component.html',
-  styleUrls: ['./edit-project.component.css']
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.css']
 })
-export class EditProjectComponent implements OnInit {
-  myProject: Project;
+export class EditProfileComponent implements OnInit {
+  @Output() userUpdated: EventEmitter<User> = new EventEmitter<User>();
+  myUser: User;
   userIsAuthorized: Boolean = false;
   formIsValid: Boolean = false;
-  projectId: String = '';
+  userId: String = '';
 
 
   constructor(
     private userSessionService: UserSessionService,
-    private projectService: ProjectService,
+    private userService: UserService,
     private activeRoute: ActivatedRoute,
     private route: Router
-    ) {
-  }
+    ) {}
 
   ngOnInit() {
 
@@ -34,29 +34,31 @@ export class EditProjectComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe(
       (params) => {
-        this.projectId = params['id'];
+        this.userId = params['id'];
       });
 
-    this.projectService.getProjectById(this.projectId).subscribe(
+    this.userService.getUserById(this.userId).subscribe (
       (response) => {
-        this.myProject = response[0];
-        this.myProject._id = this.projectId;
+        this.myUser = response[0];
+        this.myUser._id = this.userId;
       },
       (error) => console.log(error)
     );
 
   }
 
-   updateProject() {
-    this.projectService.updateProject(this.myProject).subscribe (
+  updateUser() {
+    this.userService.updateUser(this.myUser).subscribe (
       (response) => {
-        this.myProject = response;
-        this.route.navigate(['viewProject']);
+        this.myUser = response;
+        this.userUpdated.emit(this.myUser);
+        this.route.navigate(['home']);
       },
       (error) => {
         console.log(error);
       }
     );
    }
+
 
 }

@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { DisplayProjectComponent } from './display-project/display-project.component';
 import { ProjectBoxComponent } from './project-box/project-box.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'displayProject', component: DisplayProjectComponent},
   { path: 'viewProject', component: ViewProjectComponent},
   { path: 'projectBox', component: ProjectBoxComponent},
+  { path: 'editProfile', component: EditProfileComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

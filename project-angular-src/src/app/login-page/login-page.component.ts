@@ -20,19 +20,20 @@ export class LoginPageComponent {
   buttonIcon: string="visibility_off";
 
   constructor(private userSessionService: UserSessionService,
-              private router: Router) { }
+              private router: Router
+              ) { }
 
   ngOnInit() {
     // console.log("login-page.component User: ", this.userSessionService.user);
   }
-  
+
   authenticateUser() {
     this.userSessionService.authenticate(this.authInfo.email, this.authInfo.password).subscribe(
       (session: Session) => {
         if (session.userId) {
           this.userSessionService.setSession(session);
           let sessionToken = this.userSessionService.session.sessionToken;
-          
+
           this.userSessionService.getUserBySessionToken(sessionToken).subscribe(
             (user: User) => {
               this.userSessionService.setUser(user);
@@ -40,7 +41,7 @@ export class LoginPageComponent {
               this.router.navigate(['/home']);
             },
             (error) => {
-              console.log("login-page  userSessionService.getUserBySessionToken:", error);
+              console.log('login-page userSessionService.getUserBySessionToken:', error);
           });
         } else {
           console.log("Wrong Password");

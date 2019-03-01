@@ -1,35 +1,21 @@
 <app-toolbar></app-toolbar>
 
-
 <mat-grid-list cols="4" rowHeight="280px" style="background-color:white">
 
-  <mat-grid-tile class="tile" [colspan]="1" [rowspan]="1">
+  <mat-grid-tile class="tile" [colspan]="2" [rowspan]="1">
     <mat-card class="card">
-      <h3> Welcome {{ user.firstName }} {{ user.lastName }}</h3>
-      <h4>{{ user.email }}</h4>
-      
-      <img mat-card-image src="/assets/images/avatar.jpg" style="width:100px;height:100px">
-
+      <h3> Welcome, {{user.firstName}}</h3>
+      <h5 *ngIf="user.firstName !== 'Guest'"><em>Phone:</em> {{user.email}}</h5>
+      <h5 *ngIf="user.firstName !== 'Guest'"><em>Nickname:</em> {{user.title}}</h5>
+      <button
+        *ngIf="user.firstName !== 'Guest'"
+        mat-raised-button
+        color="primary"
+        [routerLink] = "['/editProfile']"
+        [queryParams] = "{id: user._id}">
+          <mat-icon>edit</mat-icon>
+      </button>
     </mat-card>
   </mat-grid-tile>
 
-  <mat-grid-tile class="tile" [colspan]="3" [rowspan]="3">
-    <mat-card class="card mat-elevation-z20" style="height:93%;width:96%">
-    </mat-card>
-  </mat-grid-tile>
-
-  <mat-grid-tile class="tile" [colspan]="1" [rowspan]="2">
-    <mat-card class="card mat-elevation-z20" style="height:90%">
-      <!-- <mat-list> -->
-        <!-- <mat-list-item> -->
-            
-          <!-- Complete USER DETAILS/PROFILE will be shown here with EDIT options.
-          In case if guest this will contain random image -->
-        <!-- </mat-list-item> -->
-        <!-- <mat-list-item>
-            Join Date: {{ user.joinDate }}
-        </mat-list-item> -->
-      <!-- </mat-list> -->
-    </mat-card>
-  </mat-grid-tile>
 </mat-grid-list>

@@ -8,6 +8,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 // SERVICES
 import { ProjectService } from './services/project.service';
 import { UserSessionService } from './services/user-session.service';
+import { UserService } from './services/user.service';
 
 // COMPONENTS
 import { AddProjectComponent } from './add-project/add-project.component';
@@ -22,6 +23,7 @@ import { ProjectBoxComponent } from './project-box/project-box.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 import {
   MatAutocompleteModule,
@@ -109,7 +111,8 @@ export class DemoMaterialModule {}
     RegisterComponent,
     DisplayProjectComponent,
     ProjectBoxComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +128,8 @@ export class DemoMaterialModule {}
   ],
   providers: [
     ProjectService,
-    UserSessionService
+    UserSessionService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

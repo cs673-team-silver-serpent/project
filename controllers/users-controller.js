@@ -22,9 +22,6 @@ getAllUsers = (request, response) => {
   });
 }
 
-
-
-
 getUserById = (request, response) => {
   let id = request.body.id;
   User.find( { _id: id}, { _id: 0, password: 0 } )
@@ -121,6 +118,53 @@ deleteUserByName = (request,response) => {
   });
 }
 
+updateUser = (request, response) => {
+  // get form data
+  let id = request.body.id;
+  let firstName = request.body.firstName;
+  let lastName = request.body.lastName;
+  let email = request.body.email;
+  let title = request.body.title;
+
+  // update with a query by id
+  let queryById = {_id: id};
+  // return the updated object
+  let options = {new: true};
+  // instantiate updated user object
+  let updatedUser = {};
+
+  if (firstName !== null) {
+    updatedUser["firstName"] = firstName;
+  }
+  if (lastName !== null) {
+    updatedUser["lastName"] = lastName;
+  }
+  if (email !== null) {
+    updatedUser["email"] = email;
+  }
+  if (title !== null) {
+    updatedUser["title"] = title;
+  }
+
+    // update date modified
+    if ( Object.keys(updatedUser).length > 0 ) {
+      updatedUser["dateModified"] = new Date();
+    }
+
+  User.update(queryById, updatedUser, options, (error, revisedUser) => {
+    if (error) {
+      console.log(error);
+      response.json({success: false, message: `Failed to update user. Error: ${error}`});
+    } else if (revisedUser.n == 1) {
+      console.log(revisedUser);
+      response.json({success: true, message: `User updated.`});
+    } else {
+      console.log(revisedUser);
+      response.json(revisedUser);
+    }
+  });
+}
+
 authenticateUser = (request, response) => {
   const _email = request.body.email;
   //FYI This is the HASH in action 
@@ -143,5 +187,5 @@ authenticateUser = (request, response) => {
   });
 }
 
-module.exports = { addUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, deleteUserByName,
+module.exports = { addUser, updateUser, getUserById, getUserByFirstName, getUserByLastName, getAllUsers, deleteUserByName,
   authenticateUser };

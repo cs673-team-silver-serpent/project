@@ -1,0 +1,11 @@
+mat-grid-list {
+  width: 100%;
+}
+
+mat-grid-tile {
+  width: 75%;
+}
+
+mat-form-field {
+  width: 75%;
+}
