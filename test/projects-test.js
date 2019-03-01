@@ -1,5 +1,5 @@
 // during test set env variable to test
-process.env.NODE_ENV = 'test';
+// process.env.NODE_ENV = 'test';
 
 let mongo = require('mongoose');
 let Project = require('../models/projects-model');
