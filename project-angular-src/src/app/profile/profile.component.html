@@ -5,7 +5,7 @@
   <mat-grid-tile class="tile" [colspan]="2" [rowspan]="1">
     <mat-card class="card">
       <h3> Welcome, {{user.firstName}}</h3>
-      <h5 *ngIf="user.firstName !== 'Guest'"><em>Phone:</em> {{user.email}}</h5>
+      <h5 *ngIf="user.firstName !== 'Guest'"><em>Email:</em> {{user.email}}</h5>
       <h5 *ngIf="user.firstName !== 'Guest'"><em>Nickname:</em> {{user.title}}</h5>
       <button
         *ngIf="user.firstName !== 'Guest'"
