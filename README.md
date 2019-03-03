@@ -92,7 +92,7 @@ project-angular-src
    After starting the mongo server, load the test data by typing:
       ```
          mongoimport --db project-portal-test --collection projects --file projects-sample-data.json 
-         mongoimport --db project-portal-test --collection sessions --file users-sample-data.json
+         mongoimport --db project-portal-test --collection users --file users-sample-data.json
       ```
 4. ### Install Git
    See [Atlassian Git Tutorial].

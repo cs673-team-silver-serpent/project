@@ -86,7 +86,7 @@ addUser = (request, response) => {
       title: request.body.title,
       email: request.body.email,
       password: passwordHash,
-      favorites: request.body.favorites,
+      myProjects: request.body.myProjects,
       role: request.body.role,
     });
     
