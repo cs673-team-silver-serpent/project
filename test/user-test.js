@@ -13,6 +13,8 @@ let should = chai.should();
 chai.use(chaiHttp);
 var expect = chai.expect;
 
+
+
 // Users block
 describe('Users Tests', () => {
     
@@ -30,14 +32,30 @@ describe('Users Tests', () => {
     // TEST add user with all required fields
     /************************************/
 
+    // Member variables
+    const user = {
+        firstName: "Thomas",
+        lastName: "Jefferson",
+        email: "tom@bu.edu",
+        myProjects: [],
+        password: "sally@1776",
+        role: "user",
+        title: "Sage of Monticello"
+    }
+
+    const userResponse =    {
+        "__v": 0,
+        "email": "tom@bu.edu",
+        "firstName": "Thomas",
+        "lastName": "Jefferson",
+        myProjects: [],
+        "role": "user",
+        "title": "Sage of Monticello"
+    };
+
+
     describe('Add user, all required fields', () => {
         it('it should POST a new user with all required fields', (done) => {
-            let user = {
-                firstName: "Thomas",
-                lastName: "Jefferson",
-                email: "tom@foundingfathers.com",
-                password: "S@lly#3m!"
-            }
             chai.request(server)
             .post('/user')
             .send(user)
@@ -66,16 +84,9 @@ describe('Users Tests', () => {
             .end((error,response) => {
                 response.should.have.status(200);
                 response.should.be.a('object');
-                response.body.should.be.eql(
+                response.body.should.eql(
                     [
-                        {
-                            "firstName": "Thomas",
-                            "lastName": "Jefferson",
-                            "email": "tom@foundingfathers.com",
-                            "favorites": [],
-                            "myProjects": [],
-                            "__v": 0
-                        }
+                       userResponse
                     ]
                 );
                     done();
@@ -94,14 +105,7 @@ describe('Users Tests', () => {
                 response.should.be.a('object');
                 response.body.should.be.eql(
                     [
-                        {
-                            "firstName": "Thomas",
-                            "lastName": "Jefferson",
-                            "email": "tom@foundingfathers.com",
-                            "favorites":[],
-                            "myProjects":[],
-                            "__v": 0
-                        }
+                        userResponse
                     ]
                 );
                     done();
@@ -135,14 +139,7 @@ describe('Users Tests', () => {
                 response.should.be.a('object');
                 response.body.should.be.eql(
                     [
-                        {
-                            "firstName": "Thomas",
-                            "lastName": "Jefferson",
-                            "email": "tom@foundingfathers.com",
-                            "favorites":[],
-                            "myProjects":[],
-                            "__v": 0
-                        }
+                        userResponse
                     ]
                 );
                     done();
@@ -161,14 +158,7 @@ describe('Users Tests', () => {
                 response.should.be.a('object');
                 response.body.should.be.eql(
                     [
-                        {
-                            "firstName": "Thomas",
-                            "lastName": "Jefferson",
-                            "email": "tom@foundingfathers.com",
-                            "favorites":[],
-                            "myProjects":[],
-                            "__v": 0
-                        }
+                       userResponse
                     ]
                 );
                     done();

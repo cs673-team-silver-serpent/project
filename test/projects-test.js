@@ -1,5 +1,5 @@
 // during test set env variable to test
-process.env.NODE_ENV = 'test';
+// process.env.NODE_ENV = 'test';
 
 let mongo = require('mongoose');
 let Project = require('../models/projects-model');
@@ -15,7 +15,7 @@ var expect = chai.expect;
 
 // Projects parent block
 describe('Project Tests', () => {
-    
+
     /************************************/
     // clear test DB before every test
     /************************************/
@@ -25,6 +25,21 @@ describe('Project Tests', () => {
             done();
         });
     });
+
+    const project = {
+        projectName: "Projects Portal",
+        projectDescription: "A portal app to manage software development projects",
+        owner:"5ac74c2954051815cb0914ef",
+        "_id": "5ac74c2954051815cb0914ef"
+    }
+
+    const projectResponse = {
+        projectName: "Projects Portal",
+        projectDescription: "A portal app to manage software development projects",
+        owner:"5ac74c2954051815cb0914ef"
+    }
+    
+    const userId = '5ac74c2954051815cb0914ef';
 
     /************************************/
     // TEST POST route
@@ -171,6 +186,8 @@ describe('Project Tests', () => {
     /************************************/
     // TEST GET All Projects
     /************************************/
+
+
     describe('GET project', () => {
         it('it should GET all projects', (done) => {
             chai.request(server)
@@ -178,7 +195,6 @@ describe('Project Tests', () => {
             .end((error,response) => {
                 response.should.have.status(200);
                 response.should.be.a('object');
-                  ;
                 done();
             });
         });
@@ -190,32 +206,114 @@ describe('Project Tests', () => {
     /************************************/
 
 
-        describe('GET project', () => {
-            it('it should GET single Project by its ID', (done) => {
-                var id=null
+    describe('GET welcome message', () => {
+        it('it should GET a welcome message', (done) => {
+            chai.request(server)
+            .get('/')
+            .end(function(err, res) 
+            {
+                console.log(res.body)
+                res.should.have.status(200);
+                res.should.be.a('object');
+                done();
+                }
+            );
+    });
+})
+
+    
+    describe('GET all projects by user', () => {
+        it('it should GET all projects by user', (done) => {
+            let project = {
+                projectName: "Projects Portal",
+                projectDescription: "A portal app to manage software development projects",
+                owner:"5ac74c2954051815cb0914ef",
+            }
+        
+            chai.request(server)
+            .post('/project')
+            .send(project)
+            .end(function(err, res) 
+            {
                 chai.request(server)
-                .post('/projects')
-                .end(function(err, res) 
-                {
-                    chai.request(server)
-                    .post('/project/id')
-                    .send({id: res.body[0]._id})
-                    .end((error,response) => 
+                .post('/project/projectsByUser')
+                .send({userId: "5ac74c2954051815cb0914ef"})
+                .end((error,response) => 
                     {
-                        //console.log(response.body)
                         response.should.have.status(200);
                         response.should.be.a('object');
-                        response.body.length.should.be.eql(1);
+                        response.body.length.should.be.eql(4);
                         response.body[0].should.have.property('projectName')
                         response.body[0].should.have
-                          .property("projectDescription")
+                        .property("projectDescription")
                     done();
-                    });                
+                    }
+                );
+            });
+    });
+})
+
+describe('GET project by description', () => {
+    it('it should GET project by description', (done) => {
+        let project = {
+            projectName: "Projects Portal",
+            projectDescription: "A portal app to manage software development projects",
+            owner:"5ac74c2954051815cb0914ef",
+        }
+    
+        chai.request(server)
+        .post('/project')
+        .end(function(err, res) 
+        {
+            chai.request(server)
+            .post('/project/projectDescription')
+            .send({projectDescription: "manage"})
+            .end((error,response) => 
+                {
+                    // console.log(response.body)
+                    response.should.have.status(200);
+                    response.should.be.a('object');
+                    response.body[0].should.have.property('projectName');
+                    response.body[0].should.have
+                    .property("projectDescription");
+                done();
+                }
+            );         
+        });
+    });
+})
+
+describe('GET project by project name', () => {
+    it('it should GET project by project name', (done) => {
+        let project = {
+            projectName: "Projects Portal",
+            projectDescription: "A portal app to manage software development projects",
+            owner:"5ac74c2954051815cb0914ef",
+            _id:"5ac74c2954051815cb0914ef",
+        }
+    
+        chai.request(server)
+        .post('/project')
+        .end(function(err, res) 
+        {
+    
+            chai.request(server)
+            .post('/project/projectName')
+            .send({projectName: 'port'})
+            .end(function(err, res) 
+            {
+                console.log("TESTING: " + JSON.stringify(res.body))
+                res.should.have.status(200);
+                res.should.be.a('object');
+                res.body[0].should.have.property('projectName');
+                done();
                 });
         });
-    })
+    });
+})
 
-        
+
+    
     /************************************/
     // TEST DELETE route
     /************************************/
@@ -272,5 +370,12 @@ describe('Project Tests', () => {
 //         });
 //     });
 //    });
+
+
+    /************************************/
+    // CONTROLLER TESTS
+    /************************************/
+
+
 
  });

@@ -32,7 +32,7 @@ export class ViewProjectComponent implements OnInit {
 
   ngOnInit() {
     if (this.userSessionService.user.firstName === 'Guest') {
-      this.displayedColumns.splice(2,2); // splice out the delete and edit columns for guests
+      this.displayedColumns.splice(1,2); // splice out the delete and edit columns for guests
     }
 
     this.projectService.getAllProjects().subscribe(
