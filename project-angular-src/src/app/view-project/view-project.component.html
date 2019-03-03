@@ -22,22 +22,27 @@
 
         <!-- delete -->
         <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <button mat-raised-button color="warn" (click)="deleteProject(element)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </mat-cell>
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button
+                class="delete-project-button"
+                mat-raised-button color="warn"
+                (click)="deleteProject(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
         </ng-container>
 
     <!-- edit -->
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
       <mat-cell *matCellDef="let element">
-          <button mat-raised-button
-                  color="primary"
-                  [routerLink] = "['/editProject']"
-                  [queryParams] = "{id: element._id}">
+            <button
+                class="edit-project-button"
+                mat-raised-button
+                color="primary"
+                [routerLink] = "['/editProject']"
+                [queryParams] = "{id: element._id}">
               <mat-icon>edit</mat-icon>
           </button>
       </mat-cell>

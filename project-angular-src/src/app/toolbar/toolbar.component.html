@@ -1,10 +1,10 @@
 <mat-toolbar color="primary" >
         <img src="/assets/images/bu3.jpg">
     <span class="project-portal-label">Project Portal</span>
-    <button id="home-button" mat-button routerLink="/home">Home</button>
-    <button id="manage-projects-button" mat-button routerLink="/manageProjects">Manage Projects</button>
-    <button id="search-projects-button" mat-button routerLink="/displayProject">Search Projects</button>
-    <button id="login-button" mat-button routerLink="/login">Login</button>
+    <button class="home-button" mat-button routerLink="/home">Home</button>
+    <button *ngIf="user.firstName !== 'Guest'" class="manage-projects-button" mat-button routerLink="/manageProjects">Manage Projects</button>
+    <button class="search-projects-button" mat-button routerLink="/displayProject">Search Projects</button>
+    <button class="login-button" mat-button routerLink="/login">Login</button>
 
     <span class="example-spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
@@ -12,11 +12,11 @@
         <span >{{user.firstName}}</span>
         <mat-icon >account_box</mat-icon>
         <mat-menu #menu="matMenu" [overlapTrigger]="false">
-            <button *ngIf='user.firstName != "Guest"' mat-menu-item routerLink="/profile">Profile</button>
-            <button *ngIf='user.firstName === "Guest"' mat-menu-item routerLink="/register">Register</button>
-            <button *ngIf="viewLogin" mat-menu-item routerLink="/login">Login</button>
+            <button class="profile-button" *ngIf='user.firstName != "Guest"' mat-menu-item routerLink="/profile">Profile</button>
+            <button class="register-button" *ngIf='user.firstName === "Guest"' mat-menu-item routerLink="/register">Register</button>
+            <button class="login-button" *ngIf="viewLogin" mat-menu-item routerLink="/login">Login</button>
             <!-- <button mat-menu-item (click)="onLogout()">Logout</button> -->
-            <button *ngIf="viewLogout" mat-menu-item (click)="onLogout()">Logout</button>
+            <button class="logout-button" *ngIf="viewLogout" mat-menu-item (click)="onLogout()">Logout</button>
         </mat-menu>
     </button>
 </mat-toolbar>
